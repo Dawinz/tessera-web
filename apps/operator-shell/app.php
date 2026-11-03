@@ -42,8 +42,9 @@ $tessera_page_module = $module === 'accounts' ? 'Accounts' : ($module === 'cargo
 <head>
 	<base id="sr-spa-base" href="<?php echo htmlspecialchars('/' . ($module === 'accounts' ? 'accounts' : $module) . '/', ENT_QUOTES, 'UTF-8'); ?>">
 	<?php
-	$teRoot = dirname(__DIR__, 2);
-	$dashonicHead = $teRoot . '/services/accounting/template/includes/dashonic_head.php';
+	require_once __DIR__ . '/includes/shell_paths.php';
+	$__roots = tessera_operator_module_roots();
+	$dashonicHead = $__roots['accounts'] . '/template/includes/dashonic_head.php';
 	include $dashonicHead;
 	?>
 	<link href="/operator/css/tessera-operator-shell.css?v=<?php echo @filemtime(__DIR__ . '/css/tessera-operator-shell.css') ?: time(); ?>" rel="stylesheet">
@@ -75,7 +76,7 @@ $tessera_page_module = $module === 'accounts' ? 'Accounts' : ($module === 'cargo
 
 <div id="sr-spa-mount" aria-hidden="true"></div>
 
-<?php include $teRoot . '/services/accounting/template/includes/dashonic_foot.php'; ?>
+<?php include $__roots['accounts'] . '/template/includes/dashonic_foot.php'; ?>
 <script id="sr-spa-bootstrap" type="application/json"><?php
 echo json_encode(
 	[

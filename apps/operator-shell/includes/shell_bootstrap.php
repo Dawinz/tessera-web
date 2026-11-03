@@ -4,9 +4,11 @@
  */
 define('TESSERA_OPERATOR_SHELL_APP', true);
 
-$teRoot = dirname(__DIR__, 3);
-require_once $teRoot . '/services/tickets/includes/tessera_staff_boot.php';
-require_once $teRoot . '/services/tickets/includes/tessera_operator_spa.php';
+require_once __DIR__ . '/shell_paths.php';
+$__roots = tessera_operator_module_roots();
+$ticketsRoot = $__roots['tickets'];
+require_once $ticketsRoot . '/includes/tessera_staff_boot.php';
+require_once $ticketsRoot . '/includes/tessera_operator_spa.php';
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
 	session_start();
@@ -17,9 +19,9 @@ if (!isset($_SESSION['username'])) {
 	exit;
 }
 
-require_once $teRoot . '/services/tickets/connect.php';
-require_once $teRoot . '/services/tickets/includes/tessera_tenant.php';
-require_once $teRoot . '/services/tickets/includes/tessera_rbac.php';
+require_once $ticketsRoot . '/connect.php';
+require_once $ticketsRoot . '/includes/tessera_tenant.php';
+require_once $ticketsRoot . '/includes/tessera_rbac.php';
 
 tessera_abort_unknown_tenant();
 tessera_deny_if_tenant_suspended('redirect');

@@ -9,14 +9,16 @@ if (!isset($sr_active_module)) {
 }
 $sr_topnav_html = $sr_topnav_html ?? '';
 
-$teRoot = dirname(__DIR__, 3);
-require_once $teRoot . '/services/tickets/includes/platform_chrome_head.php';
+require_once __DIR__ . '/shell_paths.php';
+$__roots = tessera_operator_module_roots();
+$ticketsRoot = $__roots['tickets'];
+require_once $ticketsRoot . '/includes/platform_chrome_head.php';
 
 $tessera_tour_module = $sr_active_module;
 $tessera_tour_role_label = $level ?? 'Staff';
-include $teRoot . '/services/tickets/includes/tessera_tour_boot.php';
+include $ticketsRoot . '/includes/tessera_tour_boot.php';
 $tessera_states_module = $sr_active_module;
-include $teRoot . '/services/tickets/includes/tessera_states_boot.php';
+include $ticketsRoot . '/includes/tessera_states_boot.php';
 
 echo tessera_brand_css_vars();
 echo tessera_support_banner_html();
@@ -28,7 +30,6 @@ $sr_logout_href = '/' . ($sr_active_module === 'accounts' ? 'accounts' : $sr_act
 $sr_avatar_src = '/tickets/assets/images/users/user.png';
 $img = isset($image) ? trim((string) $image) : '';
 if ($img !== '' && $img !== 'user.png') {
-	$ticketsRoot = $teRoot . '/services/tickets';
 	$candidates = [
 		[$ticketsRoot . '/uploads/' . $img, '/tickets/uploads/' . $img],
 		[$ticketsRoot . '/img/faces/' . $img, '/tickets/img/faces/' . $img],
@@ -57,8 +58,8 @@ if ($img !== '' && $img !== 'user.png') {
 				<i class="bx bx-menu"></i>
 			</button>
 		</div>
-		<?php include $teRoot . '/services/tickets/includes/platform_modules.php'; ?>
-		<?php include $teRoot . '/services/tickets/includes/platform_header_actions.php'; ?>
+		<?php include $ticketsRoot . '/includes/platform_modules.php'; ?>
+		<?php include $ticketsRoot . '/includes/platform_header_actions.php'; ?>
 	</div>
 	<div class="topnav" data-tour="topnav">
 		<div class="container-fluid">
