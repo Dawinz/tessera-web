@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kiosk Page</title>
+</head>
+<body>
+
+  <h1>Welcome to Kiosk Mode</h1>
+
+  <script>
+    function enterKiosk() {
+      const el = document.documentElement;
+      if (el.requestFullscreen) {
+        el.requestFullscreen();
+      } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen(); // Safari
+      }
+    }
+
+    // Browsers require a user gesture before allowing fullscreen.
+    // On first visit, we wait for a single click/tap, then go fullscreen.
+    document.addEventListener('click', function handler() {
+      enterKiosk();
+      document.removeEventListener('click', handler); // only trigger once
+    }, { once: true });
+
+    // If the page was already interacted with (e.g. via link click), try immediately.
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.fullscreenEnabled) {
+        enterKiosk(); // will silently fail if no prior gesture; the click fallback above handles it
+      }
+    });
+  </script>
+</body>
+</html>

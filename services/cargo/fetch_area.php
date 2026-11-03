@@ -1,0 +1,129 @@
+<?php
+require_once __DIR__ . '/includes/tessera_staff_boot.php';
+include 'config2.php';
+## Read value
+$draw = $_POST['draw'];
+$row = $_POST['start'];
+$rowperpage = $_POST['length']; // Rows display per page
+$columnIndex = $_POST['order'][0]['column']; // Column index
+$columnName = $_POST['columns'][$columnIndex]['data']; // Column name
+$columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
+$searchValue = $_POST['search']['value']; // Search value
+$date1_exp = $_POST['date1_exp'];
+$date2_exp = $_POST['date2_exp']; 
+$date3exp = $_POST['date3exp'];
+$searchArray = array();
+
+## Search 
+$searchQuery = " ";
+if($searchValue != ''){
+	$searchQuery = " AND (code LIKE :code or 
+        username  LIKE :username  OR 
+        trip_date LIKE :trip_date or status LIKE :status ) ";
+    $searchArray = array( 
+        'code'=>"%$searchValue%", 
+        'username'=>"%$searchValue%",
+        'trip_date'=>"%$searchValue%",
+		'status'=>"%$searchValue%"
+    );
+}
+
+## Total number of records without filtering
+$stmt = $conn->prepare("SELECT COUNT(*) AS allcount FROM manifest");
+$stmt->execute();
+$records = $stmt->fetch();
+$totalRecords = $records['allcount'];
+
+## Total number of records with filtering
+$stmt = $conn->prepare("SELECT COUNT(*) AS allcount FROM manifest WHERE 1 ".$searchQuery);
+$stmt->execute($searchArray);
+$records = $stmt->fetch();
+$totalRecordwithFilter = $records['allcount'];
+
+## Fetch records
+$stmt = $conn->prepare("SELECT * FROM manifest WHERE trip_date='$date1_exp' and bus='$date3exp' and 1 ".$searchQuery." ORDER BY ".$columnName." ".$columnSortOrder." LIMIT :limit,:offset");
+
+// Bind values
+foreach($searchArray as $key=>$search){
+    $stmt->bindValue(':'.$key, $search,PDO::PARAM_STR);
+}
+
+$stmt->bindValue(':limit', (int)$row, PDO::PARAM_INT);
+$stmt->bindValue(':offset', (int)$rowperpage, PDO::PARAM_INT);
+$stmt->execute();
+$empRecords = $stmt->fetchAll();
+
+$data = array();
+
+
+foreach($empRecords as $row){
+    $data[] = array(
+           	
+			"status"=>$row['status'],
+			"code"=>$row['code'],
+			"id"=>$row['id'],
+			"username"=>$row['username'],
+			"detail"=>base64_decode($row['detail']),
+			
+"left"=>''.$row['q_left'].'/ '.$row['quantity'].'',            
+	        
+		"date"=>$row['trip_date'],
+			"amount"=>number_format($row['amount'],2),
+		
+             "to_be"=>number_format($row['to_be'],2),
+
+			"paid"=>number_format($row['paid'],2),
+			"delete"=>'<button type="button" class="btn btn-soft-danger"id="delete'.$row['id'].'">
+       <i class="uil uil-ban"></i>
+        </button>
+		<div id="id'.$row['id'].'"style="display:none;">'.$row['id'].'</div>
+	<script src="js/vendor/jquery-1.12.4.min.js"></script>
+			<script src="js/sweetalert.js"></script>
+
+	<script>
+	$(document).ready(function(){
+		$("#delete'.$row['id'].'").click(function(){
+			var id=$("#id'.$row['id'].'").text();
+			$("#delete'.$row['id'].'").text("delete...");
+			 $.ajax({
+				url:"delete_manifest.php",
+				method:"POST",
+				data:{id:id},
+				success:function(response){
+		
+					if($.trim(response) == "previous" ){
+	swal("Fail", "You can not delete when the manifest is locked!", "warning");
+	$("#delete'.$row['id'].'").text("not deleted");
+					}else{
+
+						$("#delete'.$row['id'].'").text("deleted");
+							$("#empTable").DataTable().ajax.reload();
+							
+		
+					}
+				
+	
+			$("#empTable").DataTable().ajax.reload();
+		
+	}
+			
+			});
+		})
+		
+	});
+	</script>
+		'
+				
+        );
+
+}
+
+## amount 
+$amount  = array(
+    "draw" => intval($draw),
+    "iTotalRecords" => $totalRecords,
+    "iTotalDisplayRecords" => $totalRecordwithFilter,
+    "aaData" => $data
+);
+
+echo json_encode($amount );

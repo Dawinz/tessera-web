@@ -1,0 +1,60 @@
+<style>
+h2 {
+   width: 100%; 
+   text-align: center; 
+   border-bottom: 1px solid #000; 
+   line-height: 0.1em;
+   margin: 10px 0 20px; 
+} 
+
+h2 span { 
+    background:#fff; 
+    padding:0 10px; 
+}
+</style>
+<h2><span>THIS IS A TEST</span></h2>
+<p>this is some content other</p>
+  
+   <button class="no-print" onclick="window.print();">Print via Browser</button>   
+		<script src="js/vendor/jquery-1.12.4.min.js"></script>
+
+    <script language="JavaScript">
+        function netPrintBillInline() {
+            let dynHtml = "print://escpos.org/escpos/net/print?srcTp=uri&srcObj=html&src='data:text/html,";
+            dynHtml += document.body.innerHTML
+            dynHtml += "'";
+            window.location.href = dynHtml;
+        }
+        function btPrintBillInline() {
+            let dynHtml = "print://escpos.org/escpos/bt/print?srcTp=uri&srcObj=html&src='data:text/html,";
+            dynHtml += document.body.innerHTML
+            dynHtml += "'";
+            window.location.href = dynHtml;
+        }
+        function usbPrintBillInline() {
+            let dynHtml = "print://escpos.org/escpos/usb/print?srcTp=uri&srcObj=html&src='data:text/html,";
+            dynHtml += document.body.innerHTML
+            dynHtml += "'";
+            window.location.href = dynHtml;
+        }
+        function netPrintBillUrl() {
+            let dynHtml = "print://escpos.org/escpos/net/print?srcTp=uri&srcObj=html&src='";
+            dynHtml += "https://loopedlabs.com/web-print/bill.html";
+            dynHtml += "'";
+            window.location.href = dynHtml;
+        }
+        function btPrintBillUrl() {
+            let dynHtml = "print://escpos.org/escpos/bt/print?srcTp=uri&srcObj=html&src='";
+            dynHtml += "https://loopedlabs.com/web-print/bill.html";
+            dynHtml += "'";
+            window.location.href = dynHtml;
+        }
+        function usbPrintBillUrl() {
+            let dynHtml = "print://escpos.org/escpos/usb/print?srcTp=uri&srcObj=html&src='";
+            dynHtml += "https://loopedlabs.com/web-print/bill.html";
+            dynHtml += "'";
+            window.location.href = dynHtml;
+        }
+		
+	
+    </script>

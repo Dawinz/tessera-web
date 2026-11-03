@@ -1,0 +1,227 @@
+/* Tessera Control — compact overview dashboard */
+.control-dashboard .control-kpi-card,
+.control-page .control-kpi-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  box-shadow: none;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bs-card-bg, inherit);
+}
+.control-dashboard .control-kpi-card .card-body {
+  padding: 1.15rem 1.25rem;
+}
+/* Flat KPI icons — match Tickets home (no glow / outer shadow) */
+.control-kpi-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  line-height: 1;
+  flex-shrink: 0;
+  box-shadow: none;
+  filter: none;
+}
+.control-kpi-icon--tickets { background: rgba(91, 115, 232, 0.14); color: #5b73e8; }
+.control-kpi-icon--parcels { background: rgba(3, 142, 220, 0.12); color: #038edc; }
+.control-kpi-icon--payments { background: rgba(81, 210, 140, 0.14); color: #51d28c; }
+.control-kpi-icon--operators { background: rgba(247, 204, 83, 0.16); color: #e8b849; }
+.control-kpi-icon i {
+  box-shadow: none;
+  filter: none;
+}
+.control-dashboard .control-kpi-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #74788d;
+  font-weight: 600;
+}
+.control-dashboard .control-kpi-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-top: 0.35rem;
+}
+.control-dashboard .control-kpi-meta {
+  font-size: 0.8rem;
+  color: #74788d;
+  margin-top: 0.35rem;
+}
+.control-dashboard .control-chart-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  box-shadow: none;
+}
+.control-dashboard .control-chart-card .card-header {
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 1rem 1.25rem 0.85rem;
+}
+.control-dashboard .control-chart-card .card-body {
+  padding: 0.75rem 1rem 1rem;
+}
+.control-dashboard .control-chart-host {
+  min-height: 240px;
+  max-height: 260px;
+}
+.control-dashboard .control-chart-host--donut {
+  min-height: 200px;
+  max-height: 220px;
+}
+.control-dashboard .control-panel-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+}
+.control-dashboard .control-mini-list,
+.control-page .control-mini-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.control-dashboard .control-mini-list li,
+.control-page .control-mini-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.control-dashboard .control-mini-list li:last-child,
+.control-page .control-mini-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.control-dashboard .control-mini-list a,
+.control-page .control-mini-list a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+}
+.control-dashboard .control-mini-list a:hover,
+.control-page .control-mini-list a:hover {
+  color: #556ee6;
+}
+.control-dashboard .control-empty,
+.control-page .control-empty {
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+  color: #74788d;
+  font-size: 0.9rem;
+}
+[data-layout-mode="dark"] .control-dashboard .control-kpi-value {
+  color: #f0f4f8;
+}
+[data-layout-mode="dark"] .control-dashboard .control-chart-card {
+  box-shadow: none;
+}
+[data-layout-mode="light"] .control-dashboard .control-kpi-card,
+[data-layout-mode="light"] .control-dashboard .control-chart-card,
+[data-layout-mode="light"] .control-page .control-kpi-card,
+[data-layout-mode="light"] .control-page .control-chart-card,
+[data-layout-mode="light"] .control-page .control-table-panel {
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 2px rgba(12, 31, 46, 0.04);
+}
+[data-layout-mode="dark"] .control-dashboard .control-chart-card .card-header {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Shared compact Control pages */
+.control-dashboard,
+.control-page {
+  --control-card-shadow: 0 4px 20px rgba(12, 31, 46, 0.06);
+}
+.control-page .control-kpi-card,
+.control-page .control-chart-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  box-shadow: none;
+}
+.control-page .control-kpi-card .card-body {
+  padding: 1.15rem 1.25rem;
+}
+.control-page .control-kpi-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #74788d;
+  font-weight: 600;
+}
+.control-page .control-kpi-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-top: 0.35rem;
+}
+.control-page .control-kpi-meta {
+  font-size: 0.8rem;
+  color: #74788d;
+  margin-top: 0.35rem;
+}
+.control-page .control-chart-card .card-header {
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 1rem 1.25rem 0.85rem;
+}
+.control-page .control-panel-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+}
+.control-page .control-table-panel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  box-shadow: none;
+  overflow: hidden;
+}
+.control-page .control-table-panel .card-footer {
+  background: transparent;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0.75rem 1.25rem;
+}
+.control-page .control-table-scroll {
+  max-height: 420px;
+  overflow: auto;
+}
+.control-page .control-check-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem;
+}
+.control-page .control-check-tile {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 0.65rem;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+.control-page .control-check-tile .title {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.control-page .control-check-tile .detail {
+  font-size: 0.78rem;
+  color: #74788d;
+  margin-top: 0.25rem;
+}
+.control-page .nav-tabs-custom {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.control-page .nav-tabs-custom .nav-link {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.control-pagination .page-link {
+  min-width: 2rem;
+  text-align: center;
+}
+[data-layout-mode="dark"] .control-page .control-kpi-value {
+  color: #f0f4f8;
+}
+[data-layout-mode="dark"] .control-page .control-check-tile {
+  border-color: rgba(255, 255, 255, 0.08);
+}

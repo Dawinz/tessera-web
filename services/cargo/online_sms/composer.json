@@ -1,0 +1,22 @@
+{
+    "name": "mulopwe/orange-sms",
+    "description": "A php library to interact with the orange sms api for MiddleEast and Africa.",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^7.8",
+        "php": "^8.2",
+        "psr/container": "^2.0",
+        "pimple/pimple": "^3.5"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mulopwe\\Orange\\SMS\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mulopwe"
+        }
+    ]
+}

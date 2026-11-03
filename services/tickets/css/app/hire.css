@@ -1,0 +1,591 @@
+.hire-form .form-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6d8190;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 4px;
+}
+
+.hire-form .form-control,
+.hire-form .form-select {
+    min-height: 38px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.hire-form .form-control:focus,
+.hire-form .form-select:focus {
+    border-color: #038edc;
+    box-shadow: 0 0 0 3px rgba(3, 142, 220, 0.12);
+}
+
+.hire-items-card {
+    margin-top: 16px;
+}
+
+.hire-form-section + .hire-form-section {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(3, 142, 220, 0.12);
+}
+
+.hire-form-section-title {
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #038edc;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hire-trip-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid rgba(3, 142, 220, 0.12);
+    border-radius: 12px;
+    background: #fbfdff;
+}
+
+.hire-trip-strip span {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6d8190;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.hire-trip-strip strong {
+    display: block;
+    font-size: 13px;
+    color: #2c3a44;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hire-item-add {
+    height: 28px;
+    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.hire-item-head,
+.hire-item-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 64px 104px 96px 32px;
+    gap: 6px;
+    align-items: start;
+}
+
+.hire-item-head {
+    padding: 0 0 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6d8190;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.hire-item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hire-item-row {
+    padding: 8px;
+    border: 1px solid rgba(3, 142, 220, 0.12);
+    border-radius: 10px;
+    background: #fbfdff;
+}
+
+.hire-item-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.hire-form .hire-item-row .form-control {
+    min-height: 34px;
+    padding: 4px 8px;
+}
+
+.hire-form .hire-item-row .hire-item-detail {
+    min-height: 28px;
+    font-size: 12px;
+    color: #6d8190;
+}
+
+.hire-item-amount {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 34px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #038edc;
+    white-space: nowrap;
+}
+
+.hire-item-remove {
+    width: 32px;
+    height: 34px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.hire-chart-tools {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.hire-chart-tools .btn {
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.booking-seat-panel .vehicle-seat-legend-swatch.is-selected {
+    filter: sepia(0.2) hue-rotate(170deg) saturate(1.6);
+}
+
+.booking-seat-panel .vehicle-seat[data-seat]:focus-visible {
+    outline: 2px solid #038edc;
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+.hire-seat-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 18px 12px;
+    border: 1px dashed rgba(3, 142, 220, 0.25);
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6d8190;
+}
+
+.hire-seat-empty .mdi {
+    font-size: 20px;
+    color: #038edc;
+}
+
+.hire-passenger-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hire-passenger-tools {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hire-ticket-foc {
+    margin-left: 4px;
+    padding: 0 6px;
+    border-radius: 10px;
+    background: rgba(240, 101, 72, 0.12);
+    color: #f06548;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.hire-passenger-remove {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.hire-ticket-seats {
+    margin-top: 12px;
+}
+
+.hire-ticket-seat-list {
+    font-size: 13px;
+    font-weight: 700;
+    color: #038edc;
+    word-break: break-word;
+}
+
+.hire-ticket-passengers {
+    margin: 12px 0 0;
+    font-size: 12px;
+}
+
+.hire-ticket-passengers td {
+    padding: 6px 10px;
+}
+
+.hire-ticket-badge.is-due {
+    background: rgba(241, 180, 76, 0.18);
+    color: #c78a12;
+}
+
+.hire-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.hire-actions .btn {
+    height: 38px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.hire-preview-card .card-body {
+    background: #f4f7f9;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+
+.hire-sheet {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(15, 34, 58, 0.08);
+    color: #2c3a44;
+    font-size: 13px;
+}
+
+.hire-sheet-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #038edc;
+}
+
+.hire-sheet-brand {
+    font-size: 18px;
+    font-weight: 800;
+    color: #038edc;
+}
+
+.hire-sheet-brand small {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #6d8190;
+}
+
+.hire-sheet-title {
+    text-align: right;
+}
+
+.hire-sheet-title h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #2c3a44;
+}
+
+.hire-sheet-title div {
+    font-size: 12px;
+    color: #6d8190;
+}
+
+.hire-sheet-parties {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 18px 0;
+}
+
+.hire-sheet-label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #6d8190;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.hire-sheet-parties strong {
+    display: block;
+    font-size: 14px;
+}
+
+.hire-sheet-table {
+    width: 100%;
+    margin-bottom: 16px;
+    border-collapse: collapse;
+}
+
+.hire-sheet-table th {
+    padding: 8px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #6d8190;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    background: #fbfdff;
+    border-bottom: 1px solid rgba(3, 142, 220, 0.15);
+}
+
+.hire-sheet-table td {
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(3, 142, 220, 0.08);
+}
+
+.hire-sheet-table .is-amount {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.hire-sheet-table .is-index {
+    width: 36px;
+    color: #6d8190;
+}
+
+.hire-sheet-empty {
+    text-align: center;
+    color: #6d8190;
+    font-style: italic;
+}
+
+.hire-sheet-totals {
+    width: 280px;
+    margin-left: auto;
+}
+
+.hire-sheet-totals div {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.hire-sheet-totals .is-grand {
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: 2px solid #038edc;
+    font-size: 15px;
+    font-weight: 800;
+    color: #038edc;
+}
+
+.hire-sheet-notes {
+    margin-top: 18px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #fbfdff;
+    color: #5c6b77;
+    white-space: pre-line;
+}
+
+.hire-sheet-foot {
+    margin-top: 22px;
+    font-size: 11px;
+    text-align: center;
+    color: #6d8190;
+}
+
+.hire-ticket {
+    display: flex;
+    max-width: 720px;
+    margin: 0 auto;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(15, 34, 58, 0.08);
+    overflow: hidden;
+    color: #2c3a44;
+}
+
+.hire-ticket-main {
+    flex: 1;
+    min-width: 0;
+    padding: 20px 22px;
+}
+
+.hire-ticket-stub {
+    position: relative;
+    flex: 0 0 200px;
+    padding: 20px 18px;
+    border-left: 2px dashed rgba(3, 142, 220, 0.3);
+    background: #fbfdff;
+}
+
+.hire-ticket-stub::before,
+.hire-ticket-stub::after {
+    content: "";
+    position: absolute;
+    left: -11px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f4f7f9;
+}
+
+.hire-ticket-stub::before {
+    top: -10px;
+}
+
+.hire-ticket-stub::after {
+    bottom: -10px;
+}
+
+.hire-ticket-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.hire-ticket-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(10, 179, 156, 0.12);
+    color: #0ab39c;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.hire-ticket-route {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.hire-ticket-city {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.hire-ticket-city small {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6d8190;
+}
+
+.hire-ticket-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, #038edc, rgba(3, 142, 220, 0.2));
+}
+
+.hire-ticket-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px 14px;
+}
+
+.hire-ticket-grid strong,
+.hire-ticket-stub strong {
+    display: block;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hire-ticket-stub > div + div {
+    margin-top: 10px;
+}
+
+.hire-ticket-amount {
+    font-size: 18px !important;
+    font-weight: 800;
+    color: #038edc;
+}
+
+.hire-ticket-code {
+    height: 38px;
+    margin-top: 14px;
+    background: repeating-linear-gradient(90deg, #2c3a44 0 2px, transparent 2px 4px, #2c3a44 4px 5px, transparent 5px 8px);
+    border-radius: 2px;
+}
+
+@media (max-width: 767.98px) {
+    .hire-trip-strip,
+    .hire-ticket-grid,
+    .hire-sheet-parties {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hire-ticket {
+        flex-direction: column;
+    }
+
+    .hire-ticket-stub {
+        flex-basis: auto;
+        border-left: 0;
+        border-top: 2px dashed rgba(3, 142, 220, 0.3);
+    }
+}
+
+.hire-print-only {
+    display: none;
+}
+
+@media print {
+    .hire-print-only {
+        display: block;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    .hire-print-area,
+    .hire-print-area * {
+        visibility: visible;
+    }
+
+    .hire-print-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .hire-sheet,
+    .hire-ticket {
+        box-shadow: none;
+        max-width: none;
+    }
+
+    .hire-ticket {
+        border: 1px solid #ced4da;
+    }
+}

@@ -1,0 +1,10 @@
+<?php
+$maxDays=date('t');
+$currentDayOfMonth=date('j');
+
+if($maxDays == $currentDayOfMonth){
+  //Last day of month
+}else{
+  //Not last day of the month
+}
+?>

@@ -1,0 +1,85 @@
+/* Cargo home - operator dashboard */
+.sr-cargo-dashboard .sr-kpi-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  box-shadow: none;
+  overflow: hidden;
+  height: 100%;
+  background: var(--bs-card-bg, inherit);
+}
+.sr-cargo-dashboard .sr-kpi-card .card-body {
+  padding: 1.25rem 1.35rem 1rem;
+}
+.sr-cargo-dashboard .sr-kpi-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  line-height: 1;
+  flex-shrink: 0;
+  box-shadow: none;
+  filter: none;
+}
+.sr-cargo-dashboard .sr-kpi-icon--charge { background: rgba(3, 142, 220, 0.12); color: #038edc; }
+.sr-cargo-dashboard .sr-kpi-icon--paid { background: rgba(81, 210, 140, 0.14); color: #51d28c; }
+.sr-cargo-dashboard .sr-kpi-icon--due { background: rgba(247, 204, 83, 0.18); color: #e8b849; }
+.sr-cargo-dashboard .sr-kpi-icon--receipts { background: rgba(91, 115, 232, 0.14); color: #5b73e8; }
+.sr-cargo-dashboard .sr-kpi-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ts-navy, #03314d);
+  line-height: 1.2;
+  min-height: 2rem;
+}
+[data-layout-mode="dark"] .sr-cargo-dashboard .sr-kpi-value {
+  color: #f0f4f8;
+}
+.sr-cargo-dashboard .sr-kpi-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ts-muted, #5c6b76);
+  font-weight: 600;
+}
+.sr-cargo-dashboard .sr-kpi-meta {
+  font-size: 0.82rem;
+  color: var(--ts-muted, #5c6b76);
+}
+.sr-cargo-dashboard .sr-kpi-currency {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.75;
+  margin-left: 0.15rem;
+}
+.sr-cargo-dashboard .sr-chart-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.75rem;
+  box-shadow: none;
+  background: var(--bs-card-bg, inherit);
+}
+.sr-cargo-dashboard .sr-chart-card .card-header {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem 1.25rem;
+}
+.sr-cargo-dashboard .sr-chart-card .card-body {
+  padding: 0.5rem 1rem 1.25rem;
+}
+.sr-cargo-dashboard .sr-chart-host {
+  min-height: 300px;
+}
+.sr-cargo-dashboard .sr-chart-host--tall {
+  min-height: 340px;
+}
+.sr-cargo-dashboard .sr-route-filter {
+  max-width: 360px;
+}
+.sr-cargo-dashboard .apexcharts-canvas {
+  margin: 0 auto;
+}
+.sr-cargo-dashboard .placeholder {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}

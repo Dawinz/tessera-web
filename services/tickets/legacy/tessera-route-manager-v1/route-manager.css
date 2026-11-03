@@ -1,0 +1,218 @@
+/* Route manager - import-inspired network + weekly board (Dashonic dark) */
+
+.route-manager-page .rm-shell {
+  min-height: 60vh;
+}
+
+.rm-routes-card,
+.rm-schedule-card,
+.rm-side-card,
+.rm-detail-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+.rm-route-list {
+  max-height: min(72vh, 820px);
+  overflow: auto;
+}
+
+.rm-route-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: transparent;
+  color: inherit;
+  padding: 0.85rem 1rem;
+  transition: background 0.15s ease;
+}
+
+.rm-route-item:hover,
+.rm-route-item.is-active {
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.rm-route-item__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.rm-route-item__title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.rm-route-item__path {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 0.15rem;
+}
+
+.rm-route-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.65rem;
+  margin-top: 0.55rem;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.rm-route-item__badge {
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.rm-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 4.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rm-stat__label {
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.rm-week-label {
+  display: inline-flex;
+  align-items: center;
+  min-width: 9rem;
+  justify-content: center;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.rm-schedule-board {
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+}
+
+.rm-schedule-day {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.rm-schedule-day:last-child {
+  border-bottom: 0;
+}
+
+.rm-schedule-day.is-today .rm-schedule-day__rail {
+  background: rgba(59, 130, 246, 0.14);
+  border-right-color: rgba(59, 130, 246, 0.35);
+}
+
+.rm-schedule-day__rail {
+  padding: 0.85rem 0.65rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.rm-schedule-day__name {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.rm-schedule-day__date {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.rm-schedule-day__count {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.rm-schedule-day__body {
+  padding: 0.65rem 0.85rem;
+}
+
+.rm-trip-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.rm-trip {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.55rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.rm-trip__time {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #93c5fd;
+}
+
+.rm-trip__bus {
+  font-weight: 600;
+  font-size: 0.86rem;
+}
+
+.rm-trip__meta {
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.rm-trip__actions .btn {
+  padding: 0.2rem 0.45rem;
+}
+
+.rm-empty-day {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+  padding: 0.35rem 0;
+}
+
+.rm-side-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.rm-side-row__main {
+  min-width: 0;
+}
+
+@media (max-width: 991.98px) {
+  .rm-route-list {
+    max-height: 320px;
+  }
+
+  .rm-trip {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+}

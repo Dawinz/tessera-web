@@ -1,0 +1,867 @@
+/**
+ * Tessera Accounts — Dashonic layout polish
+ * Full-width content, calm status colors, proper action buttons.
+ * Loaded on every Accounts page via dashonic_head.php
+ */
+
+:root {
+  --acc-navy: #03314d;
+  --acc-navy-deep: #022a42;
+  --acc-accent: #5b73e8;
+  --acc-body: #f5f6f8;
+  --acc-surface: #ffffff;
+  --acc-border: #e9ecef;
+  --acc-ink: #495057;
+  --acc-muted: #74788d;
+  --acc-ok-bg: #e8f8ef;
+  --acc-ok-ink: #1b6b34;
+  --acc-ok-edge: #34c38f;
+  --acc-warn-bg: #fff8e6;
+  --acc-warn-ink: #8a6d00;
+  --acc-warn-edge: #f1b44c;
+  --acc-danger-bg: #fdecec;
+  --acc-danger-ink: #9b1c1c;
+}
+
+html, body.sr-platform-body {
+  background: var(--acc-body) !important;
+  overflow-x: auto;
+}
+
+/*
+ * Fixed #page-topbar is out of document flow. Pad the body so EVERY Accounts page
+ * (modern .page-content AND legacy nested rows) clears the chrome — including
+ * Currency / Registration / Cash pages that only used padding-top:10px.
+ */
+body.sr-platform-body {
+  padding-top: var(--sr-chrome-height, 120px) !important;
+  box-sizing: border-box !important;
+}
+
+/* ---- Full-bleed page content (kill huge side margins) ---- */
+body.sr-platform-body .main-content,
+body.sr-platform-body .az-content,
+body.sr-platform-body .az-content-body {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  /* Dashonic sets overflow:hidden on .main-content — that kills sticky side panels */
+  overflow: visible !important;
+}
+
+body.sr-platform-body .page-content {
+  margin: 0 !important;
+  /* Body already clears the chrome — only need content breathing room */
+  padding: 1.25rem 0 1.5rem !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+/* Legacy first content blocks — drop the old 10px hacks */
+body.sr-platform-body > .row,
+body.sr-platform-body > .az-content,
+body.sr-platform-body > div > .row,
+body.sr-platform-body .row[style*="padding-top"] {
+  padding-top: 1.25rem !important;
+}
+
+body.sr-platform-body .page-content > .container,
+body.sr-platform-body .page-content > .container-fluid,
+body.sr-platform-body .az-content .container,
+body.sr-platform-body .container.ht-100p,
+body.sr-platform-body .container.gallery-container,
+body.sr-platform-body .container {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+
+body.sr-platform-body > .row,
+body.sr-platform-body .main-content > .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Generic Accounts page shell */
+.sr-accounts-page,
+.sr-manifest-page {
+  padding: 1rem 1.25rem 1.75rem !important;
+  max-width: 100%;
+}
+
+.sr-accounts-page .row,
+.sr-manifest-page .row {
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  align-items: flex-start;
+}
+
+.sr-accounts-page [class*="col-"],
+.sr-manifest-page [class*="col-"] {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+/* Left route column stays put while the table column scrolls */
+.sr-manifest-page > .row > .col-lg-3,
+.sr-manifest-page > .row > .col-xl-2,
+.sr-accounts-page > .row > .col-lg-3,
+.sr-accounts-page > .row > .col-xl-2,
+.sr-accounts-page > .row > .col-md-2 {
+  position: sticky;
+  top: calc(var(--sr-chrome-height, 120px) + 0.75rem);
+  align-self: flex-start;
+  z-index: 3;
+}
+
+/* ---- Side panels (route filters, etc.) ---- */
+.sr-side-panel,
+.az-content-left-mail,
+.az-content-left-contacts,
+.az-content-left,
+.component-item {
+  background: var(--acc-navy) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+  margin: 0 0 1rem !important;
+  box-shadow: 0 6px 18px rgba(3, 49, 77, 0.14);
+  min-height: auto;
+  position: sticky;
+  top: calc(var(--sr-chrome-height, 120px) + 0.75rem);
+  max-height: calc(100vh - var(--sr-chrome-height, 120px) - 1.5rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.az-content-left-mail,
+.az-content-left-contacts,
+.az-content-left {
+  position: sticky;
+  top: 0.75rem;
+}
+
+.sr-side-panel label,
+.az-content-left-mail label,
+.az-content-left-contacts label,
+.component-item label,
+.cname_route,
+.az-content-label {
+  color: rgba(255, 255, 255, 0.62) !important;
+  font-size: 0.75rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+/* Route labels sitting in the white content area */
+.sr-content-card .cname_route,
+.sr-accounts-page .cname_route {
+  color: var(--acc-muted) !important;
+  position: static !important;
+  top: auto !important;
+  margin-bottom: 0.75rem;
+}
+
+.sr-side-panel .btn,
+.az-content-left-mail .btn,
+.az-content-left-contacts .btn,
+.component-item .btn {
+  width: 100%;
+  margin-bottom: 0.45rem;
+  border-radius: 0.35rem !important;
+  font-weight: 500;
+}
+
+.btn-indigo,
+.btn-indigo.btn-with-icon,
+.change_r.btn-indigo,
+.first_b.btn-indigo {
+  background: var(--acc-accent) !important;
+  border-color: var(--acc-accent) !important;
+  color: #fff !important;
+}
+
+.btn-indigo:hover,
+.change_r.btn-indigo:hover {
+  background: #4a63d6 !important;
+  border-color: #4a63d6 !important;
+}
+
+.az-content-left-mail .btn-dark,
+.component-item .btn-dark,
+.change_r.btn-dark,
+.first_b.btn-dark {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #fff !important;
+}
+
+/* ---- Content card ---- */
+.sr-content-card {
+  background: var(--acc-surface);
+  border: 1px solid var(--acc-border);
+  border-radius: 0.5rem;
+  padding: 1rem 1.15rem 1.25rem;
+  box-shadow: 0 1px 2px rgba(3, 49, 77, 0.04);
+  overflow: visible;
+}
+
+/* Filter bars — horizontal toolbar */
+.sr-filter-bar,
+.sr-filter-bar-horizontal,
+form.form-inline {
+  position: static !important;
+  z-index: 1 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 0.65rem;
+  align-items: center !important;
+  margin: 0 0 1rem !important;
+  padding: 0 !important;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sr-filter-bar .form-control,
+.sr-filter-bar .form-select,
+.sr-filter-bar-horizontal .form-control,
+.sr-filter-bar-horizontal .form-select,
+form.form-inline .form-control,
+form.form-inline .form-select {
+  min-height: 38px;
+  width: auto;
+  min-width: 150px;
+  max-width: 240px;
+  flex: 0 0 auto;
+  border-radius: 0.25rem;
+  border-color: var(--acc-border);
+}
+
+.sr-filter-bar .select2-container,
+.sr-filter-bar-horizontal .select2-container,
+form.form-inline .select2-container {
+  min-width: 180px !important;
+  width: 200px !important;
+  flex: 0 0 auto !important;
+}
+
+.sr-filter-search {
+  flex: 1 1 180px;
+  min-width: 160px;
+  max-width: 280px;
+}
+
+.sr-filter-search .form-control {
+  width: 100% !important;
+  max-width: none;
+  min-width: 160px;
+}
+
+/* DataTables controls stay on one horizontal strip */
+.dataTables_wrapper .dt-buttons,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_length {
+  float: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  margin: 0 !important;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.dataTables_wrapper .sr-dt-toolbar,
+.sr-dt-toolbar {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  overflow-x: auto;
+}
+
+/* ---- Tables: readable + no page-level horizontal scroll ---- */
+.table-responsive,
+.dataTables_wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table.table,
+table.dataTable {
+  width: 100% !important;
+  margin: 0 !important;
+  color: var(--acc-ink);
+  font-size: 0.8125rem;
+  border-collapse: separate !important;
+  border-spacing: 0;
+}
+
+table.table thead th,
+table.dataTable thead th {
+  background: #fafbfc !important;
+  color: var(--acc-muted) !important;
+  font-weight: 500 !important;
+  border-bottom: 1px solid var(--acc-border) !important;
+  white-space: nowrap;
+  vertical-align: middle;
+  padding: 0.7rem 0.75rem !important;
+}
+
+table.table tbody td,
+table.dataTable tbody td {
+  border-color: var(--acc-border) !important;
+  vertical-align: middle !important;
+  padding: 0.55rem 0.75rem !important;
+  background-clip: padding-box;
+  /* Dashonic/Azia dark leftovers were rendering near-white text on white cells */
+  color: var(--acc-ink) !important;
+}
+
+table.table tbody tr:hover > td,
+table.dataTable tbody tr:hover > td {
+  background-color: #f8f9fb !important;
+}
+
+/* Soft status rows (override harsh inline greens/yellows) */
+table.dataTable tbody tr.sr-row-complete > td,
+table.dataTable tbody tr.sr-row-ok > td {
+  background: var(--acc-ok-bg) !important;
+  color: var(--acc-ok-ink) !important;
+  box-shadow: inset 3px 0 0 var(--acc-ok-edge);
+}
+
+table.dataTable tbody tr.sr-row-half > td,
+table.dataTable tbody tr.sr-row-warn > td {
+  background: var(--acc-warn-bg) !important;
+  color: var(--acc-warn-ink) !important;
+  box-shadow: inset 3px 0 0 var(--acc-warn-edge);
+}
+
+/* Kill leftover neon inline cell paints from old JS if class wasn't applied */
+table.dataTable tbody td[style*="background-color: rgb(3, 168, 17)"],
+table.dataTable tbody td[style*="background-color:#03a811"],
+table.dataTable tbody td[style*="background-color: #03a811"] {
+  background: var(--acc-ok-bg) !important;
+  color: var(--acc-ok-ink) !important;
+}
+table.dataTable tbody td[style*="background-color: rgb(250, 213, 50)"],
+table.dataTable tbody td[style*="background-color:#fad532"],
+table.dataTable tbody td[style*="background-color: #fad532"] {
+  background: var(--acc-warn-bg) !important;
+  color: var(--acc-warn-ink) !important;
+}
+
+td.highlight {
+  font-weight: 600 !important;
+  color: var(--acc-danger-ink) !important;
+  background: transparent !important;
+}
+td.highlight_normal {
+  font-weight: 500 !important;
+  color: var(--acc-ink) !important;
+}
+
+/* Soft cell helpers used by vehicle account / reports */
+.sr-cell-ok,
+td.sr-cell-ok {
+  background: var(--acc-ok-bg) !important;
+  color: var(--acc-ok-ink) !important;
+}
+tr.sr-row-ok > td {
+  background: var(--acc-ok-bg) !important;
+  color: var(--acc-ok-ink) !important;
+}
+
+/* ---- Action buttons ---- */
+.sr-act-btn,
+table .btn.btn-sm {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  width: 32px;
+  height: 32px;
+  padding: 0 !important;
+  border-radius: 0.35rem !important;
+  line-height: 1 !important;
+}
+
+table .btn.btn-sm i,
+.sr-act-btn i {
+  font-size: 15px !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
+table td .btn + .btn,
+table td a + a,
+table td a + button,
+table td button + button {
+  margin-left: 0.2rem;
+}
+
+/* DataTables chrome */
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_length select,
+.dt-container .dt-search input,
+.dt-container .dt-length select {
+  border: 1px solid var(--acc-border);
+  border-radius: 0.25rem;
+  min-height: 34px;
+  padding: 0.25rem 0.5rem;
+}
+
+.dataTables_wrapper .dt-buttons,
+.dt-container .dt-buttons {
+  margin-bottom: 0.75rem;
+}
+
+.dataTables_wrapper .dt-button,
+.dataTables_wrapper .btn,
+.dt-container .dt-button {
+  border-radius: 0.25rem !important;
+  font-size: 0.8125rem !important;
+}
+
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate,
+.dt-container .dt-info,
+.dt-container .dt-paging {
+  padding-top: 0.75rem;
+  color: var(--acc-muted);
+}
+
+/* One clean processing overlay — kill stacked FA/text + multi-init leftovers */
+.dataTables_processing,
+div.dt-processing {
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: auto !important;
+  min-width: 7rem;
+  margin: 0 !important;
+  padding: 0.85rem 1.15rem !important;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid var(--acc-border) !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 8px 24px rgba(3, 49, 77, 0.12) !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  z-index: 20 !important;
+}
+
+.dataTables_processing::after,
+div.dt-processing::after {
+  content: '';
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0 auto;
+  border: 2px solid #d7dde3;
+  border-top-color: var(--acc-accent);
+  border-radius: 50%;
+  animation: sr-spin 0.7s linear infinite;
+}
+
+/* Hide DT2 built-in triple dots + any leftover FA spinner text nodes */
+div.dt-processing > div,
+.dataTables_processing > div,
+.dataTables_processing i,
+div.dt-processing i {
+  display: none !important;
+}
+
+@keyframes sr-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Pagination as real buttons */
+.dataTables_paginate .paginate_button,
+.dt-paging .dt-paging-button,
+.dt-paging button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  margin: 0 0.15rem !important;
+  padding: 0 0.55rem !important;
+  border: 1px solid var(--acc-border) !important;
+  border-radius: 0.35rem !important;
+  background: #fff !important;
+  color: var(--acc-ink) !important;
+  cursor: pointer;
+}
+
+.dataTables_paginate .paginate_button.current,
+.dt-paging .dt-paging-button.current,
+.dt-paging button.current {
+  background: var(--acc-navy) !important;
+  border-color: var(--acc-navy) !important;
+  color: #fff !important;
+}
+
+.dataTables_paginate .paginate_button.disabled,
+.dt-paging button.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Date inputs — flatpickr-ready with calendar cue */
+.fc-datepicker,
+input.fc-datepicker.form-control {
+  min-width: 150px;
+  max-width: 180px;
+  padding-right: 2.25rem !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2374788d' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+  background-size: 14px 14px;
+  cursor: pointer;
+}
+
+.flatpickr-calendar {
+  z-index: 10060 !important;
+  box-shadow: 0 12px 32px rgba(3, 49, 77, 0.16);
+  border: 1px solid var(--acc-border);
+}
+
+/* Report page shell */
+.sr-report-page {
+  padding: 1.25rem 1.5rem 2rem !important;
+}
+
+.sr-report-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sr-report-toolbar .form-control,
+.sr-report-toolbar .form-select {
+  width: auto;
+  min-width: 150px;
+}
+
+.sr-report-toolbar .select2-container {
+  min-width: 200px !important;
+  width: 220px !important;
+}
+
+.sr-period-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.sr-period-group .btn {
+  border-radius: 0.35rem !important;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.4rem 0.75rem;
+}
+
+.sr-period-group .btn.active,
+.sr-period-group .btn:disabled {
+  background: var(--acc-navy) !important;
+  border-color: var(--acc-navy) !important;
+  color: #fff !important;
+  opacity: 1 !important;
+}
+
+.sr-report-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.sr-report-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--acc-navy);
+}
+
+.sr-report-range {
+  color: var(--acc-muted);
+  font-size: 0.8125rem;
+}
+
+.sr-currency-pills,
+.sr-report-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.sr-currency-pills .nav-link,
+.sr-report-actions .nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--acc-border);
+  border-radius: 0.35rem;
+  color: var(--acc-ink);
+  text-decoration: none;
+  font-size: 0.8125rem;
+  background: #fff;
+}
+
+.sr-currency-pills .nav-link.active,
+.sr-currency-pills .nav-link:hover,
+.sr-report-actions .nav-link:hover {
+  background: #f3f5f8;
+  border-color: #cfd6de;
+  color: var(--acc-navy);
+}
+
+.sr-report-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+}
+
+.sr-report-body .table thead td,
+.sr-report-body .table thead th {
+  background: var(--acc-navy) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  white-space: nowrap;
+}
+
+#myInputTextField {
+  width: 100% !important;
+  max-width: 320px !important;
+  left: auto !important;
+  position: static !important;
+  display: none;
+  margin-bottom: 0.75rem;
+}
+
+/* Daily expenses month nav */
+.sr-month-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.sr-month-nav .tab-link,
+.sr-month-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.5rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--acc-border);
+  border-radius: 0.35rem;
+  background: #fff;
+  color: var(--acc-ink) !important;
+  text-decoration: none !important;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.sr-month-nav .tab-link.active,
+.sr-month-nav a.active {
+  background: var(--acc-navy) !important;
+  border-color: var(--acc-navy) !important;
+  color: #fff !important;
+}
+
+.sr-total-cell,
+td.sr-total-cell {
+  background: var(--acc-danger-bg) !important;
+  color: var(--acc-danger-ink) !important;
+  font-weight: 600;
+}
+
+/* Forms / selects */
+.form-control,
+.form-select,
+.select2-container--default .select2-selection--single {
+  border-color: var(--acc-border) !important;
+  border-radius: 0.25rem !important;
+  min-height: 38px;
+  font-size: 0.875rem;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 36px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 36px !important;
+}
+
+/* Offcanvas / modal cleanup */
+.offcanvas-backdrop:not(.show) {
+  display: none !important;
+}
+
+body.modal-open {
+  padding-right: 0 !important;
+}
+
+/* Cards from leftover Azia markup */
+.card {
+  border: 1px solid var(--acc-border);
+  border-radius: 0.5rem;
+  box-shadow: none;
+}
+
+/* Prefer wider main column when old col-md-2 / col-md-9 used — desktop only */
+@media (min-width: 992px) {
+  body.sr-platform-body > .row > .col-md-2,
+  body.sr-platform-body .page-content .col-md-2.az-content-left-mail,
+  body.sr-platform-body .col-md-2.az-content-left-mail,
+  body.sr-platform-body .col-md-2.az-content-left-contacts {
+    flex: 0 0 220px;
+    max-width: 220px;
+    width: 220px;
+  }
+
+  body.sr-platform-body > .row > .col-md-9,
+  body.sr-platform-body .col-md-9,
+  body.sr-platform-body .col-md-10 {
+    flex: 1 1 auto;
+    max-width: calc(100% - 220px);
+    width: auto;
+  }
+}
+
+@media (max-width: 991.98px) {
+  body.sr-platform-body > .row > .col-md-2,
+  body.sr-platform-body .col-md-2.az-content-left-mail,
+  body.sr-platform-body .col-md-2.az-content-left-contacts,
+  body.sr-platform-body > .row > .col-md-9,
+  body.sr-platform-body .col-md-9,
+  body.sr-platform-body .col-md-10,
+  .sr-manifest-page > .row > [class*="col-"],
+  .sr-accounts-page > .row > [class*="col-"] {
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .sr-manifest-page > .row > .col-lg-3,
+  .sr-manifest-page > .row > .col-xl-2,
+  .sr-accounts-page > .row > .col-lg-3,
+  .sr-accounts-page > .row > .col-xl-2,
+  .sr-accounts-page > .row > .col-md-2 {
+    position: static;
+  }
+
+  .sr-side-panel,
+  .az-content-left-mail,
+  .az-content-left-contacts,
+  .az-content-left {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .sr-filter-bar,
+  .sr-filter-bar-horizontal,
+  form.form-inline,
+  .sr-dt-toolbar,
+  .sr-report-toolbar {
+    flex-wrap: wrap !important;
+    overflow-x: visible;
+  }
+
+  .sr-filter-bar .form-control,
+  .sr-filter-bar .form-select,
+  .sr-filter-bar-horizontal .form-control,
+  .sr-filter-bar-horizontal .form-select,
+  form.form-inline .form-control,
+  form.form-inline .form-select,
+  .sr-report-toolbar .form-control,
+  .sr-report-toolbar .form-select,
+  .fc-datepicker,
+  input.fc-datepicker.form-control {
+    flex: 1 1 100%;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  .sr-filter-bar .select2-container,
+  .sr-filter-bar-horizontal .select2-container,
+  form.form-inline .select2-container,
+  .sr-report-toolbar .select2-container {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    flex: 1 1 100% !important;
+  }
+
+  .sr-filter-search {
+    flex: 1 1 100%;
+    max-width: none;
+    margin-left: 0 !important;
+  }
+
+  .sr-period-group {
+    width: 100%;
+  }
+
+  .sr-period-group .btn {
+    flex: 1 1 auto;
+  }
+
+  .sr-month-nav .tab-link,
+  .sr-month-nav a {
+    min-width: calc(33.333% - 0.3rem);
+  }
+
+  .sr-accounts-page,
+  .sr-manifest-page,
+  .sr-report-page {
+    padding: 0.75rem 0.75rem 1.25rem !important;
+  }
+
+  .sr-content-card {
+    padding: 0.85rem;
+  }
+
+  body.sr-platform-body .page-content > .container,
+  body.sr-platform-body .page-content > .container-fluid,
+  body.sr-platform-body .container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+}

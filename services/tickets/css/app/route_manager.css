@@ -1,0 +1,2230 @@
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: white !important;
+    border: 1px solid #2980B9 !important;
+    background-color: green !important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2980B9), color-stop(100%, #2980B9)) !important;
+    background: -webkit-linear-gradient(top, #2980B9 0%, #2980B9 100%) !important;
+    background: -moz-linear-gradient(top, #2980B9 0%, #2980B9 100%) !important;
+    background: -ms-linear-gradient(top, #2980B9 0%, #2980B9 100%) !important;
+    background: -o-linear-gradient(top, #2980B9 0%, #2980B9 100%) !important;
+    background: linear-gradient(to bottom, #2980B9 0%, #2980B9 100%) !important;
+}
+
+.dt-button.red {
+    color: #fff;
+
+    background-color: #0379BB;
+    border-radius: 2px;
+    border: none;
+}
+
+.dataTables_filter input {
+    width: 250px;
+    height: 32px;
+    background: #fcfcfc;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+
+    text-indent: 10px;
+}
+
+.dataTables_filter .fa-search {
+    position: absolute;
+    top: 10px;
+    left: auto;
+    right: 10px;
+}
+
+.dataTables_filter {
+    display: none;
+}
+
+#myInputTextField {
+    width: 30%;
+    position: absolute;
+    right: 40px;
+    z-index: 4;
+    margin-bottom: 70px;
+}
+
+.add-route-wizard-tab,
+.add-sub-route-wizard-tab {
+    display: none;
+}
+
+.add-route-wizard-tab.active-step,
+.add-sub-route-wizard-tab.active-step {
+    display: block;
+}
+
+@media (min-width: 992px) {
+    .add-route-modal-dialog {
+        max-width: 2000px;
+        width: 95vw;
+    }
+}
+
+.requirement-check-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 10px 18px;
+    border: 1px solid rgba(3, 142, 220, 0.3);
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    background-color: transparent;
+}
+
+.requirement-check-pill:hover {
+    background-color: rgba(3, 142, 220, 0.08);
+}
+
+.requirement-check-pill input.form-check-input {
+    margin: 0;
+    cursor: pointer;
+    width: 1.25em;
+    height: 1.25em;
+    border: 2px solid #038edc;
+    flex-shrink: 0;
+}
+
+.requirement-check-pill input.form-check-input:checked {
+    background-color: #038edc;
+    border-color: #038edc;
+}
+
+.requirement-check-pill:has(input:checked) {
+    background-color: rgba(3, 142, 220, 0.15);
+    border-color: #038edc;
+    color: #038edc;
+}
+
+#add_route_form .form-control,
+#add_route_form .form-select,
+#add_route_form .form-select option,
+#add_route_form .select2.select2-container .select2-selection .select2-selection__rendered,
+#myModal .select2-results__option,
+#add_sub_route_form .form-control,
+#add_sub_route_form .form-select,
+#add_sub_route_form .form-select option,
+#add_sub_route_form .select2.select2-container .select2-selection .select2-selection__rendered,
+#sub_route_modal .select2-results__option {
+    color: #495057;
+    font-style: normal;
+    font-weight: 400;
+}
+
+#add_route_form .form-select option,
+#add_sub_route_form .form-select option {
+    background-color: #fff;
+}
+
+#myModal .select2.select2-container .select2-selection,
+#myModal .select2.select2-container.select2-container--open .select2-selection.select2-selection--single,
+#sub_route_modal .select2.select2-container .select2-selection,
+#sub_route_modal .select2.select2-container.select2-container--open .select2-selection.select2-selection--single {
+    background: #fff;
+    border-color: #ced4da;
+}
+
+#myModal .select2.select2-container .select2-selection .select2-selection__arrow,
+#sub_route_modal .select2.select2-container .select2-selection .select2-selection__arrow {
+    background: #fff;
+    border-left-color: #ced4da;
+}
+
+#myModal .select2-container .select2-dropdown,
+#sub_route_modal .select2-container .select2-dropdown {
+    background: #fff;
+    border: 1px solid #ced4da;
+}
+
+#myModal .select2-container .select2-dropdown .select2-search input,
+#sub_route_modal .select2-container .select2-dropdown .select2-search input {
+    background: #fff !important;
+    color: #495057 !important;
+    border-color: #ced4da !important;
+}
+
+#myModal .select2-container .select2-dropdown .select2-results ul,
+#sub_route_modal .select2-container .select2-dropdown .select2-results ul {
+    background: #fff;
+    border-color: #ced4da;
+}
+
+#myModal .select2-results__option,
+#sub_route_modal .select2-results__option {
+    color: #495057;
+    background-color: #fff;
+}
+
+/* Mark the current choice so it stands out when a dropdown is reopened.
+   Needs the full ancestor chain to outrank select_css.css. */
+#myModal .select2-container .select2-dropdown .select2-results ul .select2-results__option[aria-selected="true"],
+#sub_route_modal .select2-container .select2-dropdown .select2-results ul .select2-results__option[aria-selected="true"] {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 500;
+}
+
+/* Keyboard/hover focus keeps priority over the "already selected" tint. */
+#myModal .select2-container .select2-dropdown .select2-results ul .select2-results__option--highlighted[aria-selected],
+#sub_route_modal .select2-container .select2-dropdown .select2-results ul .select2-results__option--highlighted[aria-selected] {
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+#add_route_form .form-select option:checked,
+#add_sub_route_form .form-select option:checked {
+    background-color: #e9ecef;
+    color: #038edc;
+    font-weight: 500;
+}
+
+.vehicle-class-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vehicle-class-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.vehicle-class-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: auto;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.vehicle-class-star {
+    position: relative;
+    display: block;
+    width: 12px;
+    height: 12px;
+}
+
+.vehicle-class-star img {
+    display: block;
+    width: 12px;
+    height: 12px;
+    max-width: none;
+}
+
+.vehicle-class-star-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.vehicle-class-rating-value {
+    flex-shrink: 0;
+    font-size: 11px;
+    opacity: 0.75;
+}
+
+/* The routes card sits in a narrow column, so the header wraps rather than
+   squeezing the search box against the Add Route button. */
+.routes-header {
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.routes-header .card-title {
+    flex: 1 1 180px;
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.routes-search {
+    width: 100%;
+    max-width: 240px;
+}
+
+/* ---------------------------------------------------------------------------
+   Route explorer (left panel on route_manager.php)
+   --------------------------------------------------------------------------- */
+
+.route-explorer-card {
+    position: sticky;
+    top: 90px;
+}
+
+.route-explorer-header {
+    border-bottom: 1px solid rgba(3, 142, 220, 0.15);
+}
+
+.route-explorer-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+}
+
+.route-explorer-count {
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #038edc;
+    background-color: rgba(3, 142, 220, 0.15);
+}
+
+.route-explorer-add {
+    padding: 0.2rem 0.5rem;
+    line-height: 1.2;
+}
+
+/* The list scrolls on its own so the routes table on the right stays put. */
+.route-explorer {
+    max-height: calc(100vh - 260px);
+    min-height: 320px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.route-explorer::-webkit-scrollbar {
+    width: 6px;
+}
+
+.route-explorer::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: rgba(134, 150, 160, 0.35);
+}
+
+.route-node {
+    position: relative;
+    display: block;
+    padding: 12px 12px 12px 14px;
+    border: 1px solid rgba(3, 142, 220, 0.14);
+    border-radius: 10px;
+    background-color: rgba(3, 142, 220, 0.03);
+    transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+    overflow: hidden;
+}
+
+.route-node+.route-node {
+    margin-top: 10px;
+}
+
+/* Accent rail marking the route that is currently opened. */
+.route-node::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background-color: #038edc;
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.route-node:hover {
+    border-color: rgba(3, 142, 220, 0.35);
+    background-color: rgba(3, 142, 220, 0.07);
+}
+
+.route-node[open] {
+    border-color: rgba(3, 142, 220, 0.45);
+    background-color: rgba(3, 142, 220, 0.09);
+}
+
+.route-node[open]::before {
+    opacity: 1;
+}
+
+.route-node.is-inactive .route-node-badge {
+    background-image: linear-gradient(135deg, #6d8190, #4a5a66);
+}
+
+/* Everything that stays visible while the route is collapsed lives in the
+   summary, which is also what makes the toggle work without any script. */
+.route-node-head {
+    display: block;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+
+.route-node-head::-webkit-details-marker {
+    display: none;
+}
+
+.route-node-head-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.route-node-head:focus-visible {
+    outline: 2px solid rgba(3, 142, 220, 0.6);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* Route acronym, the quickest way to recognise a route in a long list. */
+.route-node-badge {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #fff;
+    background-image: linear-gradient(135deg, #038edc, #0257a8);
+    box-shadow: 0 4px 10px rgba(3, 142, 220, 0.25);
+}
+
+.route-node-title {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.route-node-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--bs-heading-color, #eff0f2);
+}
+
+/* Start and end point joined by a short connector, so the pair reads as one
+   journey instead of two separate labels. */
+.route-node-path {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 3px;
+    font-size: 12px;
+    color: #6d8190;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.route-node-dot {
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1.5px solid #038edc;
+}
+
+.route-node-line {
+    flex-shrink: 0;
+    width: 16px;
+    height: 1px;
+    background-image: linear-gradient(to right, #038edc 60%, transparent 60%);
+    background-size: 5px 1px;
+    background-repeat: repeat-x;
+}
+
+.route-node-caret {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    color: #038edc;
+    background-color: rgba(3, 142, 220, 0.12);
+    transition: transform 0.2s ease-in-out;
+}
+
+.route-node[open] .route-node-caret {
+    transform: rotate(180deg);
+}
+
+.route-node-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+    padding-left: 48px;
+}
+
+.route-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #6d8190;
+    background-color: rgba(134, 150, 160, 0.12);
+}
+
+.route-stat i {
+    font-size: 12px;
+}
+
+.route-stat-fare {
+    color: #038edc;
+    background-color: rgba(3, 142, 220, 0.14);
+    font-weight: 600;
+}
+
+/* Shown and hidden by the details element itself. */
+.route-node-legs-inner {
+    overflow: hidden;
+}
+
+.route-node-legs-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 12px 0 8px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(3, 142, 220, 0.2);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    color: #038edc;
+}
+
+.route-node-legs-count {
+    padding: 0 6px;
+    border-radius: 8px;
+    font-size: 10px;
+    letter-spacing: 0;
+    background-color: rgba(3, 142, 220, 0.15);
+}
+
+/* Pushed to the end of the sub routes header row. */
+.route-node-add-leg {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-left: auto;
+    padding: 1px 7px;
+    border: 1px solid rgba(3, 142, 220, 0.3);
+    border-radius: 6px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 10px;
+    font-weight: 600;
+    color: #038edc;
+    background-color: rgba(3, 142, 220, 0.1);
+    transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.route-node-add-leg:hover {
+    border-color: rgba(3, 142, 220, 0.55);
+    background-color: rgba(3, 142, 220, 0.2);
+}
+
+.route-node-add-leg:focus-visible {
+    outline: 2px solid rgba(3, 142, 220, 0.6);
+    outline-offset: 2px;
+}
+
+.route-node-add-leg i {
+    font-size: 12px;
+}
+
+.route-leg-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.route-leg {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    padding: 6px 8px 6px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+}
+
+/* Timeline spine linking one leg to the next; trimmed at both ends so it does
+   not overshoot the first and last markers. */
+.route-leg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    width: 1px;
+    background-color: rgba(3, 142, 220, 0.28);
+}
+
+.route-leg.is-first::before {
+    top: 16px;
+}
+
+.route-leg.is-last::before {
+    bottom: auto;
+    height: 16px;
+}
+
+.route-leg:hover {
+    background-color: rgba(3, 142, 220, 0.08);
+}
+
+.route-leg-marker {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 21px;
+    height: 21px;
+    margin-top: 5px;
+    border-radius: 50%;
+    border: 1px solid rgba(3, 142, 220, 0.45);
+    background-color: #1b2431;
+}
+
+/* Light layout has no dark panel behind the marker, so the spine would show
+   through the transparent circle. */
+[data-layout-mode="light"] .route-leg-marker {
+    background-color: #fff;
+}
+
+.route-leg-index {
+    font-size: 10px;
+    font-weight: 700;
+    color: #038edc;
+}
+
+.route-leg-body {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.route-leg-head {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.route-leg-name {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--bs-heading-color, #eff0f2);
+}
+
+.route-leg-fare {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: #038edc;
+}
+
+.route-leg-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+    font-size: 11px;
+    color: #6d8190;
+}
+
+.route-leg-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.route-leg-distance::before {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin-right: 6px;
+    border-radius: 50%;
+    background-color: currentColor;
+    vertical-align: middle;
+}
+
+.route-leg-flag {
+    padding: 0 6px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #f34e4e;
+    background-color: rgba(243, 78, 78, 0.15);
+}
+
+.route-leg.is-inactive .route-leg-marker {
+    border-color: rgba(243, 78, 78, 0.45);
+}
+
+.route-leg.is-inactive .route-leg-index {
+    color: #f34e4e;
+}
+
+@media (max-width: 991.98px) {
+    .route-explorer-card {
+        position: static;
+    }
+
+    .route-explorer {
+        max-height: 420px;
+    }
+}
+
+/* Skeleton shown in the route explorer while routes.js fetches the panel. */
+.route-skeleton-shimmer {
+    display: block;
+    background-color: rgba(134, 150, 160, 0.18);
+    background-image: linear-gradient(90deg, transparent, rgba(134, 150, 160, 0.32), transparent);
+    background-repeat: no-repeat;
+    background-size: 280px 100%;
+    animation: routeDetailsSkeletonShimmer 1.3s ease-in-out infinite;
+}
+
+.route-node.is-skeleton {
+    pointer-events: none;
+}
+
+.route-node.is-skeleton:hover {
+    border-color: rgba(3, 142, 220, 0.14);
+    background-color: rgba(3, 142, 220, 0.03);
+}
+
+.route-node.is-skeleton-open {
+    border-color: rgba(3, 142, 220, 0.45);
+    background-color: rgba(3, 142, 220, 0.09);
+}
+
+.route-node.is-skeleton-open::before {
+    opacity: 1;
+}
+
+.route-node.is-skeleton-open:hover {
+    border-color: rgba(3, 142, 220, 0.45);
+    background-color: rgba(3, 142, 220, 0.09);
+}
+
+.route-explorer-count.route-explorer-skeleton-count {
+    width: 22px;
+    height: 16px;
+    padding: 0;
+    border-radius: 10px;
+    color: transparent;
+    background-color: transparent;
+}
+
+.route-explorer-skeleton-badge {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+}
+
+.route-explorer-skeleton-name {
+    height: 14px;
+    max-width: 220px;
+    border-radius: 6px;
+}
+
+.route-explorer-skeleton-path {
+    height: 10px;
+    max-width: 150px;
+    margin-top: 8px;
+    border-radius: 5px;
+}
+
+.route-explorer-skeleton-caret {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.route-explorer-skeleton-stat {
+    height: 20px;
+    border-radius: 6px;
+}
+
+.route-explorer-skeleton-fare {
+    background-color: rgba(3, 142, 220, 0.16);
+}
+
+.route-explorer-skeleton-legs-label {
+    width: 78px;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.route-explorer-skeleton-legs-count {
+    width: 22px;
+    height: 16px;
+    border-radius: 8px;
+}
+
+.route-explorer-skeleton-add-leg {
+    width: 78px;
+    height: 18px;
+    margin-left: auto;
+    border-radius: 6px;
+}
+
+.route-explorer-skeleton-leg-index {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+}
+
+.route-explorer-skeleton-leg-name {
+    height: 12px;
+    border-radius: 5px;
+}
+
+.route-explorer-skeleton-leg-fare {
+    flex-shrink: 0;
+    width: 64px;
+    height: 11px;
+    border-radius: 5px;
+}
+
+.route-explorer-skeleton-leg-meta {
+    height: 10px;
+    border-radius: 5px;
+}
+
+.route-leg.is-skeleton-leg {
+    pointer-events: none;
+}
+
+.route-leg.is-skeleton-leg:hover {
+    background-color: transparent;
+}
+
+.route-node.is-skeleton:nth-of-type(1) .route-skeleton-shimmer {
+    animation-delay: 0s;
+}
+
+.route-node.is-skeleton:nth-of-type(2) .route-skeleton-shimmer {
+    animation-delay: 0.08s;
+}
+
+.route-node.is-skeleton:nth-of-type(3) .route-skeleton-shimmer {
+    animation-delay: 0.16s;
+}
+
+.route-node.is-skeleton:nth-of-type(4) .route-skeleton-shimmer {
+    animation-delay: 0.24s;
+}
+
+.route-node.is-skeleton:nth-of-type(5) .route-skeleton-shimmer {
+    animation-delay: 0.32s;
+}
+
+.route-node.is-skeleton:nth-of-type(6) .route-skeleton-shimmer {
+    animation-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .route-skeleton-shimmer {
+        animation: none;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   Route schedule calendar (centre panel on route_manager.php)
+   --------------------------------------------------------------------------- */
+
+.route-schedule-card {
+    position: sticky;
+    top: 90px;
+}
+
+.route-schedule-header {
+    border-bottom: 1px solid rgba(3, 142, 220, 0.15);
+}
+
+.route-schedule-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+}
+
+.route-schedule-count {
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #038edc;
+    background-color: rgba(3, 142, 220, 0.15);
+}
+
+.route-schedule-subhead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.route-schedule-route {
+    min-width: 0;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--bs-heading-color, #eff0f2);
+}
+
+.route-schedule-range {
+    flex-shrink: 0;
+    font-size: 11px;
+    color: #6d8190;
+}
+
+.route-schedule-filters {
+    --schedule-filter-height: 32px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+    align-items: stretch;
+}
+
+.route-schedule-filters .form-select,
+.route-schedule-filters .form-control,
+.route-schedule-filters .flatpickr-wrapper,
+.route-schedule-filters .select2.select2-container {
+    width: 100%;
+    height: var(--schedule-filter-height);
+    min-height: var(--schedule-filter-height);
+    margin-bottom: 0;
+    box-sizing: border-box;
+}
+
+.route-schedule-filters .form-select,
+.route-schedule-filters .form-control {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 12px;
+    line-height: calc(var(--schedule-filter-height) - 2px);
+}
+
+.route-schedule-filters .select2.select2-container .select2-selection,
+.route-schedule-filters .select2.select2-container.select2-container--open .select2-selection.select2-selection--single {
+    height: var(--schedule-filter-height) !important;
+    min-height: var(--schedule-filter-height);
+    margin-bottom: 0;
+    background: #fff;
+    border-color: #ced4da;
+    border-radius: 0.2rem;
+}
+
+.route-schedule-filters .select2.select2-container .select2-selection .select2-selection__rendered {
+    line-height: calc(var(--schedule-filter-height) - 2px);
+    padding-left: 10px;
+    font-size: 12px;
+    color: #495057;
+}
+
+.route-schedule-filters .select2.select2-container .select2-selection .select2-selection__arrow {
+    height: calc(var(--schedule-filter-height) - 2px);
+    top: 0;
+    background: #fff;
+    border-left-color: #ced4da;
+}
+
+.route-schedule-filters .select2.select2-container .select2-selection .select2-selection__clear {
+    margin-top: 0;
+    height: calc(var(--schedule-filter-height) - 2px);
+    line-height: calc(var(--schedule-filter-height) - 2px);
+}
+
+.route-schedule-filters .form-select option {
+    background-color: #fff;
+    color: #495057;
+}
+
+.select2-container .select2-dropdown.schedule-filter-select2 {
+    background: #fff;
+    border: 1px solid #ced4da;
+    z-index: 20;
+}
+
+.select2-container .select2-dropdown.schedule-filter-select2 .select2-search input {
+    background: #fff !important;
+    color: #495057 !important;
+    border-color: #ced4da !important;
+}
+
+.select2-container .select2-dropdown.schedule-filter-select2 .select2-results ul {
+    background: #fff;
+    border-color: #ced4da;
+}
+
+.select2-container .select2-dropdown.schedule-filter-select2 .select2-results__option,
+.select2-container .select2-dropdown.schedule-filter-select2 .select2-results ul .select2-results__option {
+    color: #495057;
+    background-color: #fff;
+}
+
+.select2-container .select2-dropdown.schedule-filter-select2 .select2-results ul .select2-results__option[aria-selected="true"] {
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+.select2-container .select2-dropdown.schedule-filter-select2 .select2-results ul .select2-results__option--highlighted[aria-selected] {
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+@media (max-width: 575.98px) {
+    .route-schedule-filters {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Scrolls on its own so the routes table beside it stays put. */
+.route-schedule {
+    max-height: calc(100vh - 330px);
+    min-height: 320px;
+    overflow-y: auto;
+    padding: 4px 10px 10px;
+}
+
+.route-schedule::-webkit-scrollbar {
+    width: 6px;
+}
+
+.route-schedule::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: rgba(134, 150, 160, 0.35);
+}
+
+/* One row per weekday: fixed date rail on the left, departures on the right. */
+.schedule-day {
+    position: relative;
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+}
+
+.schedule-day+.schedule-day {
+    border-top: 1px solid rgba(3, 142, 220, 0.12);
+}
+
+.schedule-day-rail {
+    position: relative;
+    flex: 0 0 46px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Continuous line joining the days into one vertical calendar. */
+.schedule-day-rail::after {
+    content: "";
+    position: absolute;
+    top: 46px;
+    bottom: -24px;
+    width: 1px;
+    background-color: rgba(3, 142, 220, 0.18);
+}
+
+.schedule-day:last-child .schedule-day-rail::after {
+    display: none;
+}
+
+.schedule-day-name {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #6d8190;
+}
+
+.schedule-day-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-top: 2px;
+    border: 1px solid rgba(3, 142, 220, 0.25);
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bs-heading-color, #eff0f2);
+}
+
+.schedule-day-count {
+    margin-top: 6px;
+    font-size: 10px;
+    color: #6d8190;
+}
+
+.schedule-day.is-today .schedule-day-date {
+    color: #fff;
+    border-color: transparent;
+    background-image: linear-gradient(135deg, #038edc, #0b5ed7);
+}
+
+.schedule-day.is-today .schedule-day-name {
+    color: #038edc;
+}
+
+.schedule-day.is-empty .schedule-day-rail {
+    opacity: 0.55;
+}
+
+.schedule-day-body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.schedule-day-empty {
+    margin: 8px 0 0;
+    font-size: 11px;
+    font-style: italic;
+    color: #6d8190;
+}
+
+.schedule-trip-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.schedule-trip {
+    --trip-accent: #038edc;
+    display: flex;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid rgba(3, 142, 220, 0.14);
+    border-left-width: 3px;
+    border-left-color: var(--trip-accent);
+    border-radius: 8px;
+    background-color: rgba(3, 142, 220, 0.03);
+    cursor: pointer;
+    transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.schedule-trip+.schedule-trip {
+    margin-top: 6px;
+}
+
+.schedule-trip:hover {
+    border-top-color: rgba(3, 142, 220, 0.35);
+    border-right-color: rgba(3, 142, 220, 0.35);
+    border-bottom-color: rgba(3, 142, 220, 0.35);
+    background-color: rgba(3, 142, 220, 0.08);
+}
+
+.schedule-trip.is-cancelled {
+    opacity: 0.6;
+}
+
+.schedule-trip-time {
+    flex: 0 0 46px;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--bs-heading-color, #eff0f2);
+}
+
+.schedule-trip-time small {
+    font-size: 10px;
+    font-weight: 500;
+    color: #6d8190;
+}
+
+/* Arrival sits under the departure, so mark it as the second half of a leg. */
+.schedule-trip-time small::before {
+    content: "\2193";
+    margin-right: 2px;
+}
+
+.schedule-trip-body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.schedule-trip-head {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.schedule-trip-bus {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--bs-heading-color, #eff0f2);
+}
+
+.schedule-trip-status {
+    flex-shrink: 0;
+    padding: 0 6px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.schedule-trip.is-open .schedule-trip-status {
+    color: #0fbc8c;
+    background-color: rgba(15, 188, 140, 0.15);
+}
+
+.schedule-trip.is-filling .schedule-trip-status {
+    color: #f7cc53;
+    background-color: rgba(247, 204, 83, 0.15);
+}
+
+.schedule-trip.is-full .schedule-trip-status {
+    color: #038edc;
+    background-color: rgba(3, 142, 220, 0.15);
+}
+
+.schedule-trip.is-cancelled .schedule-trip-status {
+    color: #f34e4e;
+    background-color: rgba(243, 78, 78, 0.15);
+}
+
+.schedule-trip-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1px;
+    font-size: 11px;
+    color: #6d8190;
+}
+
+.schedule-trip-seats::before {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin-right: 6px;
+    border-radius: 50%;
+    background-color: currentColor;
+    vertical-align: middle;
+}
+
+.schedule-trip-meta .schedule-trip-seats:first-child::before {
+    display: none;
+}
+
+.schedule-trip-bar {
+    display: block;
+    height: 3px;
+    margin-top: 6px;
+    border-radius: 2px;
+    overflow: hidden;
+    background-color: rgba(134, 150, 160, 0.2);
+}
+
+.schedule-trip-bar>span {
+    display: block;
+    height: 100%;
+    border-radius: 2px;
+    background-color: #038edc;
+}
+
+.schedule-trip.is-full .schedule-trip-bar>span {
+    background-image: linear-gradient(90deg, #038edc, #0b5ed7);
+}
+
+.schedule-trip.is-cancelled .schedule-trip-bar>span {
+    background-color: #f34e4e;
+}
+
+/* Skeleton shown while schedules.js fetches the weekly board. */
+.schedule-day.is-skeleton {
+    pointer-events: none;
+}
+
+.schedule-day.is-skeleton .schedule-trip {
+    cursor: default;
+}
+
+.schedule-day.is-skeleton .schedule-trip:hover {
+    border-color: rgba(3, 142, 220, 0.14);
+    background-color: rgba(3, 142, 220, 0.03);
+}
+
+.route-schedule-skeleton-count {
+    width: 28px;
+    height: 16px;
+    border-radius: 10px;
+}
+
+.route-schedule-skeleton-route {
+    width: 46%;
+    height: 11px;
+    border-radius: 5px;
+}
+
+.route-schedule-skeleton-day-count {
+    width: 34px;
+    height: 8px;
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
+.route-schedule-skeleton-time {
+    flex: 0 0 46px;
+    height: 28px;
+    border-radius: 6px;
+}
+
+.route-schedule-skeleton-bus {
+    flex: 1 1 auto;
+    height: 12px;
+    max-width: 58%;
+    border-radius: 5px;
+}
+
+.route-schedule-skeleton-status {
+    flex-shrink: 0;
+    width: 42px;
+    height: 14px;
+    border-radius: 6px;
+}
+
+.route-schedule-skeleton-bar {
+    height: 3px;
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+@media (max-width: 1399.98px) {
+    .route-schedule-card {
+        position: static;
+    }
+
+    .route-schedule {
+        max-height: 520px;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   Departure / arrival points (right panel on route_manager.php)
+   --------------------------------------------------------------------------- */
+
+.route-points-header {
+    border-bottom: 1px solid rgba(3, 142, 220, 0.15);
+}
+
+.route-points-heading {
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+}
+
+.route-points-route {
+    display: block;
+    font-size: 11px;
+    color: #6d8190;
+}
+
+.route-points {
+    padding: 10px;
+}
+
+/* The two groups share a layout but never a colour, so boarding points and
+   drop-off points stay tellable apart at a glance. */
+.point-group {
+    padding: 10px 12px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+}
+
+.point-group+.point-group {
+    margin-top: 10px;
+}
+
+.point-group.is-departure {
+    border-color: rgba(15, 188, 140, 0.25);
+    background-color: rgba(15, 188, 140, 0.06);
+}
+
+.point-group.is-arrival {
+    border-color: rgba(101, 89, 204, 0.25);
+    background-color: rgba(101, 89, 204, 0.06);
+}
+
+.point-group-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.point-group-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    font-size: 13px;
+    color: #fff;
+}
+
+.point-group.is-departure .point-group-icon {
+    background-image: linear-gradient(135deg, #0fbc8c, #0a8f6a);
+}
+
+.point-group.is-arrival .point-group-icon {
+    background-image: linear-gradient(135deg, #6559cc, #4a3fa8);
+}
+
+.point-group-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.point-group.is-departure .point-group-title {
+    color: #0fbc8c;
+}
+
+.point-group.is-arrival .point-group-title {
+    color: #8d83e0;
+}
+
+.point-group-count {
+    flex-shrink: 0;
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.point-group.is-departure .point-group-count {
+    color: #0fbc8c;
+    background-color: rgba(15, 188, 140, 0.15);
+}
+
+.point-group.is-arrival .point-group-count {
+    color: #8d83e0;
+    background-color: rgba(101, 89, 204, 0.18);
+}
+
+.point-group-empty {
+    margin: 8px 0 0;
+    font-size: 11px;
+    font-style: italic;
+    color: #6d8190;
+}
+
+.point-list {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.point-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0 5px 4px;
+}
+
+/* Line threading the markers together, so each group reads as one sequence. */
+.point-item+.point-item::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    bottom: 50%;
+    height: 100%;
+    border-left: 1px dashed rgba(134, 150, 160, 0.4);
+}
+
+.point-item-marker {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 2px solid;
+    background-color: var(--bs-body-bg, #262b3c);
+}
+
+.point-group.is-departure .point-item-marker {
+    border-color: #0fbc8c;
+}
+
+/* Arrival markers are filled squares, so the two groups differ by shape as
+   well as colour. */
+.point-group.is-arrival .point-item-marker {
+    border-radius: 2px;
+    border-color: #8d83e0;
+    background-color: #8d83e0;
+}
+
+.point-item-body {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.point-item-name {
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--bs-heading-color, #eff0f2);
+}
+
+.point-item-location {
+    font-size: 10px;
+    color: #6d8190;
+}
+
+/* Reporting time is advice for the passenger, so it stays quieter than the
+   departure time pill it sits under. */
+.point-item-report {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 3px;
+    margin-top: 3px;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #854d0e;
+    background-color: rgba(245, 158, 11, 0.28);
+}
+
+.point-item-report i {
+    font-size: 11px;
+}
+
+.point-item-time {
+    flex-shrink: 0;
+    padding: 1px 7px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.point-group.is-departure .point-item-time {
+    color: #0fbc8c;
+    background-color: rgba(15, 188, 140, 0.13);
+}
+
+.point-group.is-arrival .point-item-time {
+    color: #8d83e0;
+    background-color: rgba(101, 89, 204, 0.16);
+}
+
+.point-item-set-time {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: 1px solid rgba(3, 142, 220, 0.3);
+    border-radius: 6px;
+    color: #038edc;
+    background-color: rgba(3, 142, 220, 0.1);
+    transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.point-item-set-time:hover {
+    border-color: rgba(3, 142, 220, 0.55);
+    background-color: rgba(3, 142, 220, 0.2);
+}
+
+.point-item-set-time i {
+    font-size: 12px;
+}
+
+.alertify-notifier {
+    z-index: 20000;
+}
+
+.point-time-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+}
+
+.point-time-editor label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.point-time-editor input[type="time"] {
+    padding: 6px 8px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+}
+
+.point-time-24 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.point-time-24 select {
+    min-width: 64px;
+    padding: 6px 8px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-variant-numeric: tabular-nums;
+    background-color: #fff;
+}
+
+.point-time-colon {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.point-time-hint {
+    margin-left: 2px;
+    color: #6c757d;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Skeleton shown while route_points.js fetches the panel. */
+.point-group.is-skeleton {
+    pointer-events: none;
+}
+
+.route-points-skeleton-route {
+    width: 58%;
+    height: 11px;
+    margin-top: 4px;
+    border-radius: 5px;
+}
+
+.route-points-skeleton-title {
+    flex: 1 1 auto;
+    height: 11px;
+    max-width: 130px;
+    border-radius: 5px;
+}
+
+.route-points-skeleton-count {
+    width: 22px;
+    height: 16px;
+    border-radius: 8px;
+}
+
+.route-points-skeleton-name {
+    height: 12px;
+    border-radius: 5px;
+}
+
+.route-points-skeleton-location {
+    height: 9px;
+    margin-top: 6px;
+    border-radius: 4px;
+}
+
+.route-points-skeleton-time {
+    flex-shrink: 0;
+    width: 42px;
+    height: 18px;
+    border-radius: 6px;
+}
+
+.routes-table thead th {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.4px;
+    font-weight: 600;
+    color: #6d8190;
+    background-color: rgba(3, 142, 220, 0.06);
+    border-bottom: 1px solid rgba(3, 142, 220, 0.15);
+    white-space: nowrap;
+}
+
+.routes-table tbody tr {
+    transition: background-color 0.15s ease-in-out;
+}
+
+.routes-table tbody tr:hover {
+    background-color: rgba(3, 142, 220, 0.06);
+}
+
+.routes-table tbody td {
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.routes-table .btn-sm {
+    padding: 0.25rem 0.5rem;
+    line-height: 1.2;
+}
+
+.route-details-modal .modal-dialog {
+    max-width: 1140px;
+    width: 95vw;
+}
+
+.route-details-modal .modal-body {
+    padding-top: 0;
+    font-size: 14px;
+}
+
+.route-details-head {
+    padding-top: 16px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(3, 142, 220, 0.15);
+}
+
+.route-details-head h5 {
+    font-size: 20px;
+}
+
+.route-details-head small {
+    font-size: 13px;
+}
+
+.route-details-route-id {
+    font-family: monospace;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    margin-right: 6px;
+}
+
+/* Label/value pairs that fit as many columns as the modal width allows,
+   down to a single column on a phone. */
+.route-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+    padding: 18px 0;
+}
+
+/* Each pair is boxed so its heading reads as the label for that value and
+   not as a line of the value above it. */
+.route-details-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid rgba(3, 142, 220, 0.15);
+    border-radius: 6px;
+    background-color: rgba(3, 142, 220, 0.04);
+}
+
+.route-details-label {
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    color: #038edc;
+}
+
+.route-details-value {
+    font-size: 15px;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.route-details-section {
+    padding-top: 18px;
+    margin-top: 18px;
+    border-top: 1px solid rgba(3, 142, 220, 0.15);
+}
+
+.route-details-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* Accent bar so a section heading is never mistaken for a field label. */
+.route-details-section-title::before {
+    content: "";
+    flex-shrink: 0;
+    width: 3px;
+    height: 15px;
+    border-radius: 2px;
+    background-color: #038edc;
+}
+
+/* Covers the description as well as the per-section empty states. */
+.route-details-section p {
+    font-size: 15px;
+}
+
+.route-details-section-title .badge {
+    font-size: 12px;
+}
+
+.route-details-pills .badge {
+    font-size: 13px;
+    padding: 6px 12px;
+}
+
+.route-details-list {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 15px;
+}
+
+.route-details-list li+li {
+    margin-top: 6px;
+}
+
+.route-details-table {
+    font-size: 15px;
+}
+
+.route-details-table thead th {
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: #038edc;
+    white-space: nowrap;
+}
+
+/* Placeholder bars shown while the route details are still loading. The grey
+   is picked to stay visible on both the light and the dark layout. */
+@keyframes routeDetailsSkeletonShimmer {
+    0% {
+        background-position: -280px 0;
+    }
+
+    100% {
+        background-position: 280px 0;
+    }
+}
+
+.route-details-skeleton-bar {
+    height: 12px;
+    border-radius: 6px;
+    background-color: rgba(134, 150, 160, 0.18);
+    background-image: linear-gradient(90deg, transparent, rgba(134, 150, 160, 0.32), transparent);
+    background-repeat: no-repeat;
+    background-size: 280px 100%;
+    animation: routeDetailsSkeletonShimmer 1.3s ease-in-out infinite;
+}
+
+.route-details-skeleton-bar+.route-details-skeleton-bar {
+    margin-top: 8px;
+}
+
+.route-details-skeleton-title {
+    height: 20px;
+    border-radius: 4px;
+}
+
+.route-details-skeleton-badge {
+    height: 20px;
+    border-radius: 10px;
+}
+
+.route-details-skeleton-badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+/* The badges sit side by side, so the sibling spacing above must not apply. */
+.route-details-skeleton-badges .route-details-skeleton-bar+.route-details-skeleton-bar {
+    margin-top: 0;
+}
+
+/* Inside a boxed field the grid gap already separates the two bars. */
+.route-details-skeleton .route-details-field .route-details-skeleton-bar+.route-details-skeleton-bar {
+    margin-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .route-details-skeleton-bar,
+    .route-skeleton-shimmer {
+        animation: none;
+    }
+}
+
+#add_route_form .form-control::-webkit-input-placeholder {
+    color: #6d8190 !important;
+    opacity: 1;
+    font-style: normal;
+    font-weight: 400;
+}
+
+#add_route_form .form-control::-moz-placeholder {
+    color: #6d8190 !important;
+    opacity: 1;
+    font-style: normal;
+    font-weight: 400;
+}
+
+#add_route_form .form-control:-ms-input-placeholder {
+    color: #6d8190 !important;
+    opacity: 1;
+    font-style: normal;
+    font-weight: 400;
+}
+
+#add_route_form .form-control::placeholder {
+    color: #6d8190 !important;
+    opacity: 1;
+    font-style: normal;
+    font-weight: 400;
+}
+
+/* ---------------------------------------------------------------------------
+   Light theme polish (route_manager.php was switched from dark to light)
+   --------------------------------------------------------------------------- */
+
+.route-explorer-card,
+.route-schedule-card,
+.route-points-card,
+.routes-card {
+    border: 1px solid rgba(3, 142, 220, 0.1);
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(15, 34, 58, 0.06);
+}
+
+.route-explorer-card .card-header,
+.route-schedule-card .card-header,
+.route-points-card .card-header,
+.routes-card .card-header {
+    background-color: #fbfdff;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+.route-node,
+.schedule-trip {
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(15, 34, 58, 0.04);
+}
+
+.route-node:hover,
+.schedule-trip:hover {
+    box-shadow: 0 4px 12px rgba(3, 142, 220, 0.12);
+}
+
+.point-group {
+    box-shadow: 0 1px 3px rgba(15, 34, 58, 0.04);
+}
+
+.route-details-field {
+    background-color: #fbfdff;
+    box-shadow: 0 1px 2px rgba(15, 34, 58, 0.04);
+}
+
+.route-explorer::-webkit-scrollbar-thumb,
+.route-schedule::-webkit-scrollbar-thumb {
+    background-color: rgba(3, 142, 220, 0.25);
+}
+
+.route-schedule-add {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+}
+
+#schedule_modal:has(#schedule_repeat_once:checked) .schedule-daily-fields {
+    display: none;
+}
+
+#schedule_modal .select2.select2-container .select2-selection,
+#schedule_modal .select2.select2-container.select2-container--open .select2-selection.select2-selection--single {
+    background: #fff;
+    border-color: #ced4da;
+}
+
+#schedule_modal .select2.select2-container .select2-selection .select2-selection__rendered {
+    color: #495057;
+}
+
+#schedule_modal .select2.select2-container .select2-selection .select2-selection__arrow {
+    background: #fff;
+    border-left-color: #ced4da;
+}
+
+#schedule_modal .select2-container .select2-dropdown {
+    background: #fff;
+    border: 1px solid #ced4da;
+}
+
+#schedule_modal .select2-container .select2-dropdown .select2-search input {
+    background: #fff !important;
+    color: #495057 !important;
+    border-color: #ced4da !important;
+}
+
+#schedule_modal .select2-container .select2-dropdown .select2-results ul {
+    background: #fff;
+    border-color: #ced4da;
+}
+
+#schedule_modal .select2-results__option {
+    color: #495057;
+    background-color: #fff;
+}
+
+#schedule_modal .select2-container .select2-dropdown .select2-results ul .select2-results__option[aria-selected="true"] {
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+#schedule_modal .select2-container .select2-dropdown .select2-results ul .select2-results__option--highlighted[aria-selected] {
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+#schedule_modal .schedule-time-24 {
+    display: flex;
+    align-items: center;
+    height: 38px;
+    padding-right: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    background: #fff;
+}
+
+#schedule_modal .schedule-time-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 36px;
+    margin-right: 6px;
+    border-right: 1px solid #e6edf2;
+    color: #6d8190;
+    font-size: 16px;
+}
+
+#schedule_modal .schedule-time-24 select {
+    width: 58px;
+    min-width: 58px;
+    height: 36px;
+    padding: 0 4px;
+    border: 0;
+    background: transparent;
+    color: #1b2431;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    box-shadow: none;
+    appearance: auto;
+}
+
+#schedule_modal .schedule-time-24 select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#schedule_modal .schedule-time-colon {
+    padding: 0 2px;
+    color: #1b2431;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+#schedule_modal .schedule-time-hint {
+    margin-left: auto;
+    padding-left: 8px;
+    color: #6d8190;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.schedule-flatpickr.flatpickr-calendar {
+    z-index: 20000 !important;
+    width: 320px;
+    padding: 12px 12px 14px;
+    border: 1px solid #e6edf2;
+    border-radius: 16px;
+    background: #fff !important;
+    box-shadow: 0 18px 40px rgba(15, 34, 58, 0.16) !important;
+}
+
+.schedule-flatpickr.flatpickr-calendar:before,
+.schedule-flatpickr.flatpickr-calendar:after {
+    display: none;
+}
+
+.schedule-flatpickr .flatpickr-months,
+.schedule-flatpickr .flatpickr-weekdays {
+    background-color: #fff !important;
+}
+
+.schedule-flatpickr .flatpickr-months {
+    align-items: center;
+    margin-bottom: 6px;
+    border-radius: 0;
+}
+
+.schedule-flatpickr .flatpickr-months .flatpickr-month {
+    height: 40px;
+    background-color: #fff !important;
+    color: #1b2431 !important;
+    fill: #1b2431 !important;
+}
+
+.schedule-flatpickr .flatpickr-current-month {
+    padding-top: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1b2431;
+}
+
+.schedule-flatpickr .flatpickr-current-month .flatpickr-monthDropdown-months,
+.schedule-flatpickr .flatpickr-current-month input.cur-year,
+.schedule-flatpickr .flatpickr-current-month input.cur-year[disabled],
+.schedule-flatpickr .flatpickr-current-month input.cur-year[disabled]:hover {
+    font-weight: 700;
+    color: #1b2431 !important;
+}
+
+.schedule-flatpickr .flatpickr-months .flatpickr-prev-month,
+.schedule-flatpickr .flatpickr-months .flatpickr-next-month {
+    top: 6px;
+    height: 32px;
+    width: 32px;
+    padding: 8px;
+    border-radius: 8px;
+    color: #5c6b77 !important;
+    fill: #5c6b77 !important;
+}
+
+.schedule-flatpickr .flatpickr-months .flatpickr-prev-month:hover,
+.schedule-flatpickr .flatpickr-months .flatpickr-next-month:hover {
+    background: #f4f7f9;
+    color: #1b2431 !important;
+}
+
+.schedule-flatpickr .flatpickr-months .flatpickr-prev-month:hover svg,
+.schedule-flatpickr .flatpickr-months .flatpickr-next-month:hover svg {
+    fill: #1b2431 !important;
+}
+
+.schedule-flatpickr .flatpickr-weekdays {
+    height: 32px !important;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #eef2f5;
+}
+
+.schedule-flatpickr span.flatpickr-weekday {
+    color: #6d8190 !important;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.schedule-flatpickr .flatpickr-days,
+.schedule-flatpickr .dayContainer {
+    width: 296px;
+    min-width: 296px;
+    max-width: 296px;
+}
+
+.schedule-flatpickr .flatpickr-day {
+    max-width: 38px;
+    height: 38px;
+    line-height: 38px;
+    margin: 2px 0;
+    border-radius: 10px;
+    color: #1b2431;
+    font-weight: 600;
+}
+
+.schedule-flatpickr .flatpickr-day:hover,
+.schedule-flatpickr .flatpickr-day:focus {
+    background: rgba(3, 142, 220, 0.1);
+    border-color: transparent;
+    color: #038edc;
+}
+
+.schedule-flatpickr .flatpickr-day.today {
+    border-color: #038edc;
+    color: #038edc;
+}
+
+.schedule-flatpickr .flatpickr-day.today:hover,
+.schedule-flatpickr .flatpickr-day.today:focus {
+    background: rgba(3, 142, 220, 0.12);
+    border-color: #038edc;
+    color: #038edc;
+}
+
+.schedule-flatpickr .flatpickr-day.selected,
+.schedule-flatpickr .flatpickr-day.selected:hover,
+.schedule-flatpickr .flatpickr-day.selected:focus {
+    background: #038edc;
+    border-color: #038edc;
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(3, 142, 220, 0.28);
+}
+
+.schedule-flatpickr .flatpickr-day.flatpickr-disabled,
+.schedule-flatpickr .flatpickr-day.prevMonthDay,
+.schedule-flatpickr .flatpickr-day.nextMonthDay {
+    color: #c5ced6;
+}

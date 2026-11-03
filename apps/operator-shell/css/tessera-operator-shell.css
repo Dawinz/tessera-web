@@ -1,0 +1,222 @@
+/* Platform operator shell - swap module views without full reload */
+
+.sr-operator-shell #sr-spa-viewport {
+  min-height: calc(100vh - var(--sr-chrome-height, 120px) - 2rem);
+  transition: opacity 0.12s ease;
+}
+
+.sr-operator-shell #sr-spa-viewport.sr-spa-loading {
+  opacity: 0.55;
+  pointer-events: none;
+  position: relative;
+}
+
+.sr-operator-shell #sr-spa-viewport.sr-spa-loading::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 4.5rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-left: -0.875rem;
+  border-radius: 50%;
+  border: 2px solid rgba(3, 142, 220, 0.25);
+  border-top-color: #038edc;
+  animation: sr-spa-spin 0.7s linear infinite;
+  z-index: 5;
+  pointer-events: none;
+}
+
+@keyframes sr-spa-spin {
+  to { transform: rotate(360deg); }
+}
+
+/*
+ * Shell body already gets padding-top for the fixed chrome (srSyncChromeHeight).
+ * Legacy pages also set .page-content { padding-top: ~140px } for that same chrome - * together they create a huge empty band under the nav. Neutralize the fragment offset.
+ *
+ * Use a descendant selector (not >): SPA inject often puts <style> nodes ahead of
+ * .page-content, so the child combinator never matched and the gap stayed.
+ */
+body.sr-operator-shell[data-layout="horizontal"] #sr-spa-viewport .page-content,
+body.sr-operator-shell #sr-spa-viewport .page-content {
+  padding-top: 1.25rem !important;
+}
+
+/*
+ * Tickets: dark Dashonic cards -> light ink.
+ * Cargo: status rows are pale green / pink / white -> must use dark ink
+ * (forcing #e8f1f6 made Manifest / Store / Deletes / Checkout unreadable).
+ */
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] .card,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] .table,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] .table > :not(caption) > * > *,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] table.dataTable,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] table.dataTable tbody td,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] table.dataTable tbody th,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] .dataTables_wrapper,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] .dataTables_wrapper .dataTables_info,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] .dt-info,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] .dt-container {
+  color: #e8f1f6 !important;
+}
+
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] .table thead th,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] table.dataTable thead th,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] table.dataTable thead th .dt-column-title {
+  color: #d5e4ee !important;
+}
+
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] table.table tbody tr:hover > td,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] table.dataTable tbody tr:hover > td,
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] .table-hover > tbody > tr:hover > * {
+  --bs-table-hover-bg: rgba(255, 255, 255, 0.08);
+  --bs-table-hover-color: #e8f1f6;
+  --bs-table-bg-state: rgba(255, 255, 255, 0.08);
+  --bs-table-color-state: #e8f1f6;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #e8f1f6 !important;
+  box-shadow: inset 0 0 0 9999px rgba(255, 255, 255, 0.08) !important;
+}
+
+/*
+ * Cargo tables: status tints are pale green / pink / white -> dark ink.
+ * Untinted rows must still sit on a light surface (not the navy shell).
+ */
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.table tbody tr,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.dataTable tbody tr {
+  background-color: #ffffff;
+  color: #1c2430;
+}
+
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.table tbody td,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.table tbody th,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.dataTable tbody td,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.dataTable tbody th,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] .table > :not(caption) > * > * {
+  color: #1c2430 !important;
+  background-color: transparent;
+}
+
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.table thead th,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.dataTable thead th,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.dataTable thead th .dt-column-title {
+  color: #f4f8fb !important;
+}
+
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.table tbody tr:hover > td,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.dataTable tbody tr:hover > td,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] .table-hover > tbody > tr:hover > * {
+  --bs-table-hover-bg: #e8eef3;
+  --bs-table-hover-color: #1c2430;
+  --bs-table-bg-state: #e8eef3;
+  --bs-table-color-state: #1c2430;
+  background-color: #e8eef3 !important;
+  color: #1c2430 !important;
+  box-shadow: inset 0 0 0 9999px #e8eef3 !important;
+}
+
+/* Soft status tints stay readable under Bootstrap hover box-shadow */
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.dataTable tbody tr.sr-row-paid > td,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.dataTable tbody tr.sr-row-due > td,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.dataTable tbody tr.sr-row-open > td {
+  color: #1c2430 !important;
+  box-shadow: none !important;
+}
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.dataTable tbody tr.sr-row-paid:hover > td {
+  background-color: #bbf7d0 !important;
+  box-shadow: none !important;
+}
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] table.dataTable tbody tr.sr-row-due:hover > td {
+  background-color: #fecdd3 !important;
+  box-shadow: none !important;
+}
+
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] .dt-paging button.dt-paging-button,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] .dt-paging button.dt-paging-button:disabled {
+  color: #e8f1f6 !important;
+  background: #045a8d !important;
+  border: 1px solid rgba(183, 201, 212, 0.45) !important;
+  opacity: 1 !important;
+}
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] .dt-paging button.dt-paging-button.current {
+  color: #ffffff !important;
+  background: #038edc !important;
+}
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] .dt-paging button.dt-paging-button.disabled,
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] .dt-paging button.dt-paging-button:disabled {
+  color: #9fb6c4 !important;
+  background: #03314d !important;
+}
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] .dt-info {
+  color: #b7c9d4 !important;
+}
+
+body.sr-operator-shell[data-sr-module="tickets"][data-layout-mode="dark"] .main-content a:not(.btn):not(.nav-link):not(.sr-module-link):not(.page-link):not(.dropdown-item) {
+  color: #9fd4f5;
+}
+
+body.sr-operator-shell[data-sr-module="cargo"][data-layout-mode="dark"] .main-content a:not(.btn):not(.nav-link):not(.sr-module-link):not(.page-link):not(.dropdown-item) {
+  color: #0269a8;
+}
+
+/* Nested Cargo menu links (<a> wrapping .dropdown-item) stay dark on white. */
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li > a:not(.btn),
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li > a:not(.btn) .dropdown-item {
+  color: #1c2430 !important;
+  background-color: transparent !important;
+}
+
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li:hover > a:not(.btn),
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li:focus-within > a:not(.btn),
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li > a:not(.btn):hover,
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li > a:not(.btn):focus,
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li > a:not(.btn).active,
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li:hover > a .dropdown-item,
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li:focus-within > a .dropdown-item,
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li > a:hover .dropdown-item,
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li > a:focus .dropdown-item,
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li > a.active .dropdown-item,
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li > a .dropdown-item:hover,
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li > a .dropdown-item:focus,
+body.sr-operator-shell[data-layout-mode="dark"] .main-content .dropdown-menu > li > a .dropdown-item.active {
+  background-color: #038edc !important;
+  color: #ffffff !important;
+}
+
+/*
+ * SPA reinforcement: Select2 panels append under <body> and were inheriting
+ * dark-mode body ink on white menus (Tickets / Cargo / Accounts filters).
+ */
+body.sr-operator-shell .select2-dropdown,
+body.sr-operator-shell .select2-results,
+body.sr-operator-shell .select2-results__options {
+  background: #ffffff !important;
+  color: #1c2430 !important;
+}
+
+body.sr-operator-shell .select2-results__option,
+body.sr-operator-shell .select2-results__option--selectable {
+  background: #ffffff !important;
+  color: #1c2430 !important;
+}
+
+body.sr-operator-shell .select2-results__option--selected:not(.select2-results__option--highlighted) {
+  background: #e8f1f6 !important;
+  color: #1c2430 !important;
+}
+
+body.sr-operator-shell .select2-results__option--highlighted,
+body.sr-operator-shell .select2-results__option--highlighted.select2-results__option--selectable {
+  background: #038edc !important;
+  color: #ffffff !important;
+}
+
+body.sr-operator-shell .select2-search--dropdown .select2-search__field {
+  background: #ffffff !important;
+  color: #1c2430 !important;
+}
+
+#sr-spa-mount {
+  display: none;
+}

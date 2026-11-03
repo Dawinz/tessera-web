@@ -1,0 +1,369 @@
+.manifest-dashboard {
+    margin-bottom: 4px;
+}
+
+.manifest-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.manifest-stat {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 14px 16px;
+    min-width: 0;
+}
+
+.manifest-stat > div {
+    min-width: 0;
+}
+
+.manifest-stat-icon {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.manifest-stat-icon.is-primary {
+    background: rgba(3, 142, 220, 0.12);
+    color: #038edc;
+}
+
+.manifest-stat-icon.is-info {
+    background: rgba(81, 216, 138, 0.14);
+    color: #2fb56a;
+}
+
+.manifest-stat-icon.is-warning {
+    background: rgba(241, 180, 76, 0.18);
+    color: #c78a12;
+}
+
+.manifest-stat-icon.is-success {
+    background: rgba(10, 179, 156, 0.12);
+    color: #0ab39c;
+}
+
+.manifest-stat-icon.is-secondary {
+    background: rgba(116, 120, 141, 0.12);
+    color: #5c6b77;
+}
+
+.manifest-stat-label {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6d8190;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+}
+
+.manifest-stat-value {
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
+    color: #2c3a44;
+    letter-spacing: -0.3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 1199.98px) {
+    .manifest-stat-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 767.98px) {
+    .manifest-stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.manifest-filter-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.manifest-filter-actions .btn {
+    height: 34px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.manifest-toolbar {
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.manifest-dt-buttons .dt-buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    float: none;
+    margin: 0;
+}
+
+.manifest-dt-buttons .dt-button,
+.manifest-dt-buttons .dt-buttons .btn {
+    height: 30px;
+    margin: 0;
+    padding: 0 12px;
+    border: 1px solid rgba(3, 142, 220, 0.18);
+    border-radius: 8px;
+    background: rgba(3, 142, 220, 0.08);
+    background-image: none;
+    color: #038edc;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 28px;
+    box-shadow: none;
+}
+
+.manifest-dt-buttons .dt-button:hover:not(.disabled) {
+    border-color: #038edc;
+    background: #038edc;
+    background-image: none;
+    color: #fff;
+}
+
+.manifest-table-wrap {
+    position: relative;
+    min-height: 160px;
+}
+
+.manifest-table.dataTable {
+    margin: 0 !important;
+    border-collapse: collapse !important;
+}
+
+.manifest-table.dataTable thead th {
+    border-bottom: 1px solid rgba(3, 142, 220, 0.12) !important;
+    background-image: none;
+}
+
+.manifest-table.dataTable tbody tr {
+    background: #fff;
+}
+
+.manifest-table.dataTable tbody tr:hover {
+    background: rgba(3, 142, 220, 0.05);
+}
+
+.manifest-table.dataTable tbody tr.is-due {
+    background: rgba(240, 101, 72, 0.08);
+}
+
+.manifest-table.dataTable tbody tr.is-paid {
+    background: rgba(10, 179, 156, 0.1);
+}
+
+.manifest-table .booking-table-sub .mdi {
+    font-size: 12px;
+}
+
+.manifest-date-rel {
+    font-weight: 600;
+}
+
+.manifest-date-rel.is-today {
+    padding: 1px 6px;
+    border-radius: 10px;
+    background: rgba(10, 179, 156, 0.14);
+    color: #0ab39c;
+}
+
+.manifest-date-rel.is-upcoming {
+    color: #038edc;
+}
+
+.manifest-remark {
+    display: inline-block;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    color: #5c6b77;
+}
+
+.manifest-remark-flag {
+    color: #f06548;
+    font-size: 15px;
+    line-height: 1;
+    vertical-align: -1px;
+}
+
+.manifest-options-toggle {
+    height: 28px;
+    padding: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.manifest-options-toggle .mdi {
+    font-size: 16px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.manifest-options-toggle[aria-expanded="true"] .mdi {
+    transform: rotate(180deg);
+}
+
+.manifest-options .dropdown-menu {
+    min-width: 190px;
+    padding: 6px;
+    border: 1px solid rgba(3, 142, 220, 0.14);
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(15, 34, 58, 0.14);
+    z-index: 1060;
+}
+
+.manifest-options .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #2c3a44;
+}
+
+.manifest-options .dropdown-item .mdi {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.manifest-options .dropdown-item:hover,
+.manifest-options .dropdown-item:focus {
+    background: rgba(3, 142, 220, 0.08);
+    color: #038edc;
+}
+
+.manifest-options .dropdown-item.text-danger:hover,
+.manifest-options .dropdown-item.text-danger:focus {
+    background: rgba(240, 101, 72, 0.1);
+    color: #f06548 !important;
+}
+
+.manifest-options .dropdown-divider {
+    margin: 4px 0;
+}
+
+.manifest-table-wrap .dataTables_processing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 6px 14px;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(3, 142, 220, 0.16);
+    border-radius: 8px;
+    background: #fff;
+    color: #038edc;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 6px 20px rgba(15, 34, 58, 0.1);
+}
+
+.manifest-pagination .dataTables_info {
+    padding: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6d8190;
+}
+
+.manifest-pagination .dataTables_paginate {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    float: none;
+}
+
+.manifest-pagination .dataTables_paginate > span {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.manifest-pagination .dataTables_paginate .paginate_button {
+    min-width: 32px;
+    height: 32px;
+    margin: 0 !important;
+    padding: 0 8px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    border: 0 !important;
+    border-radius: 8px;
+    background: rgba(3, 142, 220, 0.1) !important;
+    color: #038edc !important;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.manifest-pagination .dataTables_paginate .paginate_button.current,
+.manifest-pagination .dataTables_paginate .paginate_button:hover:not(.disabled) {
+    background: #038edc !important;
+    color: #fff !important;
+}
+
+.manifest-pagination .dataTables_paginate .paginate_button.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.manifest-pagination .dataTables_paginate .ellipsis {
+    padding: 0 4px;
+    color: #6d8190;
+}
+
+.manifest-offcanvas .form-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6d8190;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 4px;
+}
+
+.manifest-offcanvas .form-control,
+.manifest-offcanvas .form-select {
+    min-height: 38px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.manifest-offcanvas .form-control:focus,
+.manifest-offcanvas .form-select:focus {
+    border-color: #038edc;
+    box-shadow: 0 0 0 3px rgba(3, 142, 220, 0.12);
+}
+
+.manifest-offcanvas .offcanvas-header {
+    background-color: #fbfdff;
+    border-bottom: 1px solid rgba(3, 142, 220, 0.15);
+}

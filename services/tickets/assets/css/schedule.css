@@ -1,0 +1,1857 @@
+/* Schedule - calendar hub + book/manage subpages */
+
+body[data-layout="horizontal"] #layout-wrapper > .main-content {
+  overflow: visible !important;
+  margin-right: 0 !important;
+  min-height: calc(100vh - var(--sr-chrome-height, 120px));
+  position: relative;
+  z-index: 1;
+}
+
+body[data-layout="horizontal"] #layout-wrapper > .main-content > .page-content {
+  overflow: visible !important;
+  min-height: 400px;
+}
+
+/* - -  Calendar hub - -  */
+.schedule-calendar-card .card-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+#schedule-calendar {
+  min-height: 680px;
+}
+
+#schedule-calendar .fc-toolbar-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+#schedule-calendar .fc-col-header-cell-cushion,
+#schedule-calendar .fc-daygrid-day-number {
+  font-size: 0.85rem;
+}
+
+#schedule-calendar .fc-event {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin-bottom: 2px;
+}
+
+#schedule-calendar .fc-daygrid-event-harness {
+  margin-top: 1px;
+}
+
+.sr-cal-event {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 3px 6px;
+  line-height: 1.25;
+  font-size: 0.72rem;
+  overflow: hidden;
+}
+
+.sr-cal-event__time {
+  font-weight: 600;
+  opacity: 1;
+  color: #fff;
+}
+
+.sr-cal-event__route {
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sr-cal-event__bus,
+.sr-cal-event__seats {
+  opacity: 1;
+  color: #fff;
+  font-size: 0.68rem;
+}
+
+[data-layout-mode="dark"] #schedule-calendar .fc-col-header-cell,
+[data-layout-mode="dark"] #schedule-calendar .fc-scrollgrid-section-header,
+[data-layout-mode="dark"] #schedule-calendar .fc-scrollgrid-section-header td,
+[data-layout-mode="dark"] #schedule-calendar .fc-col-header {
+  background: #032d46 !important;
+}
+
+[data-layout-mode="dark"] #schedule-calendar .fc-col-header-cell-cushion,
+[data-layout-mode="dark"] #schedule-calendar .fc-daygrid-day-number,
+[data-layout-mode="dark"] #schedule-calendar .fc-day-other,
+[data-layout-mode="dark"] #schedule-calendar .fc-day-other .fc-daygrid-day-number,
+[data-layout-mode="dark"] #schedule-calendar .fc-day-other .fc-daygrid-day-top {
+  opacity: 1 !important;
+  color: #d5e4ee !important;
+}
+
+[data-layout-mode="dark"] #schedule-calendar .fc-day-today .fc-daygrid-day-number {
+  background: #014e80;
+  color: #fff;
+}
+
+[data-layout-mode="dark"] #schedule-calendar .fc-event,
+[data-layout-mode="dark"] #schedule-calendar .fc-daygrid-event,
+[data-layout-mode="dark"] #schedule-calendar .fc-h-event {
+  background: #014e80 !important;
+  border-color: #014e80 !important;
+}
+
+[data-layout-mode="dark"] #schedule-calendar .fc-daygrid-more-link {
+  color: #d7efff;
+  opacity: 1;
+}
+
+#schedule-calendar .fc-list-event-title {
+  font-size: 0.9rem;
+}
+
+/* - -  Trip hero (book page) - -  */
+.schedule-trip-hero {
+  border-left: 3px solid var(--tessera-tenant-accent, #5b73e8);
+}
+
+.schedule-trip-meta {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+body[data-layout-mode="light"] .schedule-trip-meta {
+  color: #5c6b76;
+}
+
+body.schedule-book-page {
+  scroll-padding-top: calc(var(--sr-chrome-height, 120px) + 1rem);
+}
+
+body.schedule-book-page .schedule-trip-hero .card-body {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+
+/* - -  Booking workspace - -  */
+.schedule-booking-panel--page > .row.g-4 {
+  align-items: flex-start;
+}
+
+.schedule-booking-panel--page .schedule-panel-card {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.schedule-booking-panel--page .schedule-panel-card--seats {
+  position: static;
+  top: auto;
+  z-index: auto;
+}
+
+.schedule-booking-panel--page .schedule-panel-card--seats .card-body {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: visible;
+}
+
+.schedule-booking-panel--page > .row > [class*="col-"] {
+  min-width: 0;
+}
+
+.schedule-booking-panel--page .schedule-panel-card--passengers .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  max-height: none;
+  min-height: 0;
+  overflow: visible;
+}
+
+.schedule-booking-panel--page .schedule-panel-card--passengers > .card-body {
+  padding: 0.75rem 1rem !important;
+}
+
+.schedule-booking-panel--page .schedule-panel-card--passengers > .card-header {
+  padding-top: 0.65rem !important;
+  padding-bottom: 0.65rem !important;
+}
+
+.schedule-passenger-tabs-wrap {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.schedule-passenger-tabs-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.schedule-passenger-tabs__meta {
+  min-width: 0;
+}
+
+.schedule-passenger-tabs__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.schedule-passenger-jump {
+  min-width: 8.5rem;
+  max-width: 12rem;
+}
+
+.schedule-passenger-jump + .select2-container {
+  min-width: 8.5rem !important;
+  max-width: 12rem;
+}
+
+.schedule-passenger-jump + .select2-container .select2-selection--single {
+  min-height: 31px;
+  border-radius: 0.25rem;
+}
+
+.schedule-passenger-jump + .select2-container .select2-selection__rendered {
+  font-size: 0.875rem;
+  line-height: 29px;
+}
+
+.select2-dropdown.schedule-passenger-jump-dropdown {
+  border-color: rgba(255, 255, 255, 0.12);
+  z-index: 1065 !important;
+  min-width: 12rem;
+}
+
+.select2-dropdown.schedule-passenger-jump-dropdown .select2-search--dropdown {
+  display: block;
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.select2-dropdown.schedule-passenger-jump-dropdown .select2-search__field {
+  width: 100%;
+  padding: 0.35rem 0.55rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.select2-dropdown.schedule-passenger-jump-dropdown .select2-results__options {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.select2-dropdown.schedule-passenger-jump-dropdown .select2-results__option {
+  font-size: 0.875rem;
+  padding: 0.45rem 0.65rem;
+}
+
+body[data-layout-mode="light"] .select2-dropdown.schedule-passenger-jump-dropdown {
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+body[data-layout-mode="light"] .select2-dropdown.schedule-passenger-jump-dropdown .select2-search--dropdown {
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+.schedule-passenger-tabs__count {
+  font-weight: 500;
+}
+
+.schedule-passenger-tabs-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.15rem;
+  scrollbar-width: thin;
+}
+
+.schedule-passenger-tabs {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+  width: max-content;
+}
+
+.schedule-passenger-tabs .nav-link {
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+}
+
+.schedule-passenger-tabs .nav-link:hover,
+.schedule-passenger-tabs .nav-link:focus {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.schedule-passenger-tabs .nav-link.active {
+  color: #fff;
+  background: var(--tessera-tenant-accent, #5b73e8);
+  border-color: var(--tessera-tenant-accent, #5b73e8);
+}
+
+body[data-layout-mode="light"] .schedule-passenger-tabs .nav-link {
+  color: #495057;
+  border-color: rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+body[data-layout-mode="light"] .schedule-passenger-tabs .nav-link.active {
+  color: #fff;
+}
+
+.schedule-booking-panel--page .schedule-passenger-list {
+  flex: 0 0 auto;
+  min-height: 0;
+  overflow: visible;
+  padding-right: 0;
+}
+
+.schedule-booking-panel--page .schedule-passenger-form {
+  flex: 0 0 auto;
+}
+
+.schedule-booking-panel--page #schedule-passenger-tabs-wrap {
+  margin-bottom: 0.75rem !important;
+}
+
+/* - -  Passenger navigator - -  */
+.schedule-passenger-nav {
+  padding: 0.65rem 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
+  background: transparent;
+}
+
+body[data-layout-mode="light"] .schedule-passenger-nav {
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+  background: transparent;
+}
+
+.schedule-passenger-nav__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.schedule-passenger-nav__identity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.schedule-passenger-nav__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.375rem;
+  background: var(--tessera-tenant-accent, #5b73e8);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.schedule-passenger-nav__count {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.schedule-passenger-nav__position {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+body[data-layout-mode="light"] .schedule-passenger-nav__count {
+  color: #343a40;
+}
+
+body[data-layout-mode="light"] .schedule-passenger-nav__position {
+  color: #74788d;
+}
+
+.schedule-passenger-nav__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.schedule-passenger-nav .schedule-passenger-tabs-scroll {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body[data-layout-mode="light"] .schedule-passenger-nav .schedule-passenger-tabs-scroll {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+/* - -  Professional passenger row (book trip page) - -  */
+.schedule-booking-panel--page .schedule-passenger-row--pro {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+body[data-layout-mode="light"] .schedule-booking-panel--page .schedule-passenger-row--pro {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.schedule-passenger-row--pro::before {
+  display: none !important;
+}
+
+.schedule-passenger-row--pro > td::before {
+  display: none !important;
+  content: none !important;
+}
+
+.schedule-passenger-row--pro > .schedule-field--firstname { grid-column: 1; }
+.schedule-passenger-row--pro > .schedule-field--lastname { grid-column: 2; }
+.schedule-passenger-row--pro > .schedule-field--gender { grid-column: 3; }
+.schedule-passenger-row--pro > .schedule-field--phone { grid-column: 1 / -1; }
+.schedule-passenger-row--pro > .schedule-field--nationality { grid-column: 1; }
+.schedule-passenger-row--pro > .schedule-field--idtype { grid-column: 2; }
+.schedule-passenger-row--pro > .schedule-field--idnumber { grid-column: 3; }
+.schedule-passenger-row--pro > .schedule-passenger-options-cell { grid-column: 1 / -1; }
+
+.schedule-booking-panel--page .schedule-passenger-row--pro > .schedule-field--nationality,
+.schedule-booking-panel--page .schedule-passenger-row--pro > .schedule-field--idtype {
+  padding-right: 0.25rem;
+}
+
+.schedule-booking-panel--page .schedule-passenger-row--pro > .schedule-field--idtype {
+  padding-left: 0.25rem;
+  padding-right: 0;
+}
+
+.schedule-field__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.2;
+}
+
+body[data-layout-mode="light"] .schedule-field__label {
+  color: #495057;
+}
+
+.schedule-passenger-row--pro .form-control,
+.schedule-passenger-row--pro .form-select {
+  padding: 0.45rem 0.65rem;
+  font-size: 0.875rem;
+  min-height: calc(1.5em + 0.85rem);
+  border-radius: 0.375rem;
+}
+
+.schedule-passenger-row--pro .schedule-passenger-gender {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.85rem;
+  min-height: calc(1.5em + 0.85rem);
+  align-items: center;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.375rem;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+body[data-layout-mode="light"] .schedule-passenger-row--pro .schedule-passenger-gender {
+  border-color: #ced4da;
+  background: #fff;
+}
+
+.schedule-passenger-row--pro .schedule-passenger-options-cell {
+  padding-top: 0.25rem;
+  margin-top: 0;
+  border-top: 0;
+}
+
+.schedule-booking-panel--page .schedule-passenger-row--pro .schedule-passenger-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.schedule-booking-panel--page .schedule-passenger-row--pro .schedule-passenger-option {
+  padding: 0.5rem 0;
+  min-height: auto;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.schedule-booking-panel--page .schedule-passenger-row--pro .schedule-passenger-option + .schedule-passenger-option {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: none;
+}
+
+body[data-layout-mode="light"] .schedule-booking-panel--page .schedule-passenger-row--pro .schedule-passenger-option + .schedule-passenger-option {
+  border-top-color: rgba(0, 0, 0, 0.08);
+  border-left: none;
+}
+
+.schedule-booking-panel--page .schedule-passenger-row--pro .schedule-passenger-option__label {
+  font-size: 0.875rem;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.schedule-booking-panel--page .schedule-passenger-form__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+body[data-layout-mode="light"] .schedule-booking-panel--page .schedule-passenger-form__actions {
+  border-color: transparent;
+  background: transparent;
+}
+
+.schedule-passenger-form__hint {
+  max-width: 18rem;
+  line-height: 1.4;
+}
+
+.schedule-passenger-form__submit {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.35rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.schedule-passenger-card-header {
+  padding-top: 0.85rem !important;
+  padding-bottom: 0.85rem !important;
+}
+
+.schedule-panel-card--passengers,
+.schedule-panel-card--passengers .card-body {
+  overflow: visible;
+}
+
+.schedule-booking-panel--page .schedule-panel-card--passengers {
+  overflow-x: hidden;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.schedule-panel-card--passengers {
+  container-type: inline-size;
+  container-name: schedule-passenger-panel;
+}
+
+.schedule-panel-card--passengers > .card-header {
+  row-gap: 0.5rem;
+}
+
+.schedule-passenger-header-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+  max-width: 100%;
+  margin-left: auto;
+}
+
+.schedule-passenger-header-toggle__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.82);
+  white-space: nowrap;
+}
+
+.schedule-passenger-header-toggle__switch {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 0 !important;
+}
+
+.schedule-passenger-header-toggle__switch input[switch] + label {
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+body[data-layout-mode="light"] .schedule-passenger-header-toggle__label {
+  color: #495057;
+}
+
+@media (max-width: 575.98px) {
+  .schedule-passenger-header-toggle {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+}
+
+.schedule-seat-chart {
+  min-height: 0;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.schedule-booking-panel--page .schedule-seat-chart {
+  flex: 0 0 auto;
+}
+
+/* Trip summary lives in schedule_book hero - hide duplicate chrome from AJAX fragment */
+.schedule-booking-panel--page #load_seat_chart > .flex-grow-1,
+.schedule-booking-panel--page #load_seat_chart > hr {
+  display: none !important;
+}
+
+/* Seat grid - flex rows; fix absolute #seat_no labels escaping scroll clip */
+.schedule-booking-panel--page #load_seat_chart #pick {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.schedule-booking-panel--page #load_seat_chart #pick > div,
+.schedule-booking-panel--page #load_seat_chart #pick > .schedule-seat-chart-wrap {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem 0 0;
+}
+
+.schedule-booking-panel--page #load_seat_chart .schedule-seat-chart-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.schedule-booking-panel--page #load_seat_chart .schedule-seat-chart-front img {
+  display: block;
+  opacity: 0.55;
+  width: 1.75rem;
+  height: auto;
+  margin: 0;
+}
+
+.schedule-booking-panel--page #load_seat_chart #seat_array {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto !important;
+  padding: 0;
+  overflow: visible !important;
+  min-height: 3rem;
+}
+
+.schedule-booking-panel--page #load_seat_chart #seat_array:empty,
+.schedule-booking-panel--page #load_seat_chart #seat_array:not(:has(.seat_col)) {
+  display: none !important;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  height: 0;
+}
+
+.schedule-booking-panel--page #load_seat_chart .schedule-seat-chart-front + #seat_array {
+  margin-top: 0 !important;
+}
+
+.schedule-booking-panel--page #load_seat_chart .seat_col {
+  float: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  vertical-align: top;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 2.35rem !important;
+  height: 3rem !important;
+  background-position: center bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.schedule-booking-panel--page #load_seat_chart .available_new_seat {
+  background-image: url('../../images/armchair_white.png');
+  cursor: pointer;
+}
+
+.schedule-booking-panel--page #load_seat_chart .available_new_seat_booked,
+.schedule-booking-panel--page #load_seat_chart .available_new_seat_half_booked {
+  background-image: url('../../images/armchair_booked.png');
+}
+
+.schedule-booking-panel--page #load_seat_chart .available_new_seat_complete {
+  background-image: url('../../images/complete15.png');
+  cursor: not-allowed;
+}
+
+.schedule-booking-panel--page #load_seat_chart .available_new_seat_booked_r {
+  background-image: url('../../images/reserved.png');
+  cursor: not-allowed;
+}
+
+.schedule-booking-panel--page #load_seat_chart .available_new_seat_locked_r {
+  background-image: url('../../images/lock.png');
+  cursor: not-allowed;
+}
+
+.schedule-booking-panel--page #load_seat_chart .available_new_seat_half {
+  background-image: url('../../images/green.png');
+  cursor: pointer;
+}
+
+.schedule-booking-panel--page #load_seat_chart .center_seat {
+  visibility: hidden;
+  width: 2.35rem !important;
+  height: 3rem !important;
+  background: none !important;
+}
+
+.schedule-booking-panel--page #load_seat_chart #seat_no {
+  position: static !important;
+  top: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transform: none !important;
+  font-size: 0.68rem;
+  line-height: 1;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.schedule-booking-panel--page #load_seat_chart .seat_col.translate-middle {
+  transform: none !important;
+}
+
+#load_seat_chart .seat_name,
+#load_seat_chart .seat_col.seat_name {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+#load_seat_chart #seat_no {
+  pointer-events: none;
+}
+
+.schedule-passenger-table-wrap {
+  max-height: none;
+  overflow-x: auto;
+}
+
+/* - -  Route pickers (book page) - -  */
+.schedule-route-pickers {
+  padding: 1rem 1.15rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+body[data-layout-mode="light"] .schedule-route-pickers {
+  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(91, 115, 232, 0.04);
+}
+
+.schedule-route-pickers__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.75rem 1rem;
+  align-items: end;
+}
+
+.schedule-route-pickers__label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.62);
+  margin-bottom: 0.35rem;
+}
+
+body[data-layout-mode="light"] .schedule-route-pickers__label {
+  color: #74788d;
+}
+
+.schedule-route-pickers__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2.375rem;
+  color: var(--tessera-tenant-accent, #5b73e8);
+  font-size: 1.25rem;
+  opacity: 0.85;
+}
+
+.schedule-route-pickers__field .form-select,
+.schedule-route-pickers__field .select2-container {
+  width: 100% !important;
+}
+
+.schedule-passenger-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+  align-self: stretch;
+}
+
+.schedule-passenger-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 0.375rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 1rem;
+}
+
+body[data-layout-mode="light"] .schedule-passenger-empty {
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #74788d;
+}
+
+.schedule-passenger-empty__icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.7;
+}
+
+.schedule-passenger-list {
+  width: 100%;
+  overflow: visible;
+}
+
+.schedule-passenger-table tbody {
+  overflow: visible;
+}
+
+.schedule-passenger-table .schedule-passenger-row {
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}
+
+.schedule-passenger-table .schedule-passenger-row.schedule-passenger-row--dial-open {
+  z-index: 12;
+}
+
+.schedule-passenger-table {
+  width: 100%;
+  margin-bottom: 0 !important;
+  border: none;
+}
+
+.schedule-passenger-table > :not(caption) > * > * {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.schedule-passenger-table tbody {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.schedule-passenger-table .schedule-passenger-row > td {
+  display: block;
+  min-width: 0;
+}
+
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 1rem 1.15rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.03);
+  position: relative;
+}
+
+body[data-layout-mode="light"] .schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) {
+  border-color: rgba(0, 0, 0, 0.08);
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(18, 38, 63, 0.06);
+}
+
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro)::before {
+  content: "Seat " attr(data-seat);
+  grid-column: 1 / -1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--tessera-tenant-accent, #5b73e8);
+  margin-bottom: 0.15rem;
+}
+
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td::before {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.3rem;
+}
+
+body[data-layout-mode="light"] .schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td::before {
+  color: #74788d;
+}
+
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td:nth-child(1)::before { content: "First name"; }
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td:nth-child(2)::before { content: "Surname"; }
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td:nth-child(3)::before { content: "Mobile"; }
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td:nth-child(4)::before { content: "Gender"; }
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td:nth-child(5)::before { content: "Nationality"; }
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td:nth-child(6)::before { content: "ID type"; }
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td:nth-child(7)::before { content: "ID number"; }
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td:nth-child(8)::before { content: "Options"; }
+
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td:nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td:nth-child(8),
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > .schedule-passenger-options-cell {
+  grid-column: 1 / -1;
+  width: 100% !important;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-top: 0.85rem;
+  margin-top: 0.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > .schedule-passenger-options-cell::before {
+  display: block;
+  margin-bottom: 0.65rem;
+  font-size: 0.72rem;
+}
+
+body[data-layout-mode="light"] .schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > td:nth-child(8),
+body[data-layout-mode="light"] .schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) > .schedule-passenger-options-cell {
+  border-top-color: rgba(0, 0, 0, 0.06);
+}
+
+.schedule-passenger-options {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.schedule-passenger-option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 1rem;
+  min-height: 2.375rem;
+  padding: 0.45rem 0;
+}
+
+.schedule-passenger-option + .schedule-passenger-option {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body[data-layout-mode="light"] .schedule-passenger-option + .schedule-passenger-option {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+.schedule-passenger-option__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.schedule-passenger-option__switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  min-width: 3.75rem;
+}
+
+body[data-layout-mode="light"] .schedule-passenger-option__label {
+  color: #495057;
+}
+
+.schedule-passenger-option input[switch] + label {
+  margin-bottom: 0;
+}
+
+@container schedule-passenger-panel (min-width: 560px) {
+  .schedule-passenger-options:not(.schedule-passenger-options--page-stack) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .schedule-passenger-option {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 0.35rem 1rem;
+    min-height: 2.125rem;
+  }
+
+  .schedule-passenger-option + .schedule-passenger-option {
+    border-top: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 0.35rem;
+  }
+
+  body[data-layout-mode="light"] .schedule-passenger-option + .schedule-passenger-option {
+    border-left-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .schedule-passenger-option:first-child {
+    padding-left: 0;
+  }
+
+  .schedule-passenger-option:last-child {
+    padding-right: 0;
+  }
+}
+
+.schedule-passenger-gender {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: center;
+}
+
+.schedule-passenger-gender__choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.schedule-passenger-table .schedule-passenger-row .form-control,
+.schedule-passenger-table .schedule-passenger-row .form-select {
+  width: 100%;
+  min-width: 0;
+  font-size: 0.875rem;
+}
+
+.schedule-passenger-table .schedule-passenger-row .input-group {
+  flex-wrap: nowrap;
+}
+
+.schedule-passenger-phone-cell {
+  position: relative;
+  overflow: visible;
+  z-index: auto;
+}
+
+.schedule-passenger-phone-cell .select2-container--open {
+  z-index: 15;
+}
+
+.schedule-phone-field.input-group {
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+/* Unified native dial + number (book trip page) */
+.schedule-phone-field--native {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.schedule-phone-field--native:focus-within {
+  border-color: var(--tessera-tenant-accent, #5b73e8);
+  box-shadow: 0 0 0 0.15rem rgba(91, 115, 232, 0.2);
+}
+
+.schedule-phone-field--native .schedule-phone-dial-native {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 5.5rem;
+  max-width: 7rem;
+  margin: 0;
+  padding: 0.425rem 1.65rem 0.425rem 0.65rem;
+  border: 0;
+  border-radius: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba(255,255,255,0.55)' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.45rem center;
+  background-size: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.schedule-phone-field--native .schedule-phone-dial-native:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+.schedule-phone-field--native .phone_no {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding-left: 0.75rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: 0.875rem;
+}
+
+.schedule-phone-field--native .phone_no:focus {
+  box-shadow: none;
+}
+
+body[data-layout-mode="light"] .schedule-phone-field--native {
+  border-color: #e2e5e8;
+  background: #fff;
+}
+
+body[data-layout-mode="light"] .schedule-phone-field--native .schedule-phone-dial-native {
+  border-right-color: #e2e5e8;
+  color: #495057;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2374788d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+body[data-layout-mode="light"] .schedule-phone-field--native .phone_no {
+  background: transparent;
+  color: #495057;
+}
+
+.schedule-phone-field__prefix {
+  padding: 0 !important;
+  flex: 0 0 5.25rem;
+  max-width: 5.25rem;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  border-right: 0;
+}
+
+.schedule-phone-field__prefix .select2-container {
+  width: 100% !important;
+}
+
+.schedule-phone-field__prefix .select2-container--default .select2-selection--single {
+  height: calc(1.5em + 0.85rem);
+  min-height: calc(1.5em + 0.85rem);
+  border: 0 !important;
+  background: transparent !important;
+  border-radius: 0.375rem 0 0 0.375rem;
+  box-shadow: none !important;
+}
+
+.schedule-phone-field__prefix .select2-container--default .select2-selection--single .select2-selection__rendered {
+  padding-left: 0.45rem;
+  padding-right: 1.25rem;
+  line-height: calc(1.5em + 0.85rem - 2px);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.schedule-phone-field__prefix .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: calc(1.5em + 0.85rem - 2px);
+  right: 0.2rem;
+}
+
+.schedule-phone-field .phone_no {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: calc(1.5em + 0.85rem);
+  font-size: 0.875rem;
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.schedule-phone-field:focus-within .schedule-phone-field__prefix,
+.schedule-phone-field:focus-within .phone_no {
+  border-color: var(--tessera-tenant-accent, #5b73e8);
+}
+
+.schedule-phone-field:focus-within {
+  box-shadow: 0 0 0 0.15rem rgba(91, 115, 232, 0.2);
+  border-radius: 0.375rem;
+}
+
+body[data-layout-mode="light"] .schedule-phone-field__prefix {
+  background: #fff;
+  border-color: #e2e5e8;
+}
+
+body[data-layout-mode="light"] .schedule-phone-field__prefix .select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #495057;
+}
+
+.schedule-phone-lookup {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.25rem);
+  z-index: 1060;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.schedule-panel-card--passengers .select2-container--default .select2-selection--single {
+  height: 38px;
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.schedule-panel-card--passengers .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 36px;
+  padding-left: 0.65rem;
+  padding-right: 1.75rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.875rem;
+}
+
+.schedule-panel-card--passengers .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 36px;
+}
+
+.schedule-panel-card--passengers .select2-dropdown {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: #032d46;
+  z-index: 1070;
+}
+
+.select2-dropdown.schedule-phone-dial-dropdown {
+  z-index: 1060;
+  min-width: 18rem;
+  max-width: min(22rem, calc(100vw - 2rem));
+  border-color: rgba(255, 255, 255, 0.12);
+  background: #032d46;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+}
+
+.select2-dropdown.schedule-phone-dial-dropdown .select2-search--dropdown {
+  display: block;
+  padding: 0.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #032d46;
+}
+
+.select2-dropdown.schedule-phone-dial-dropdown .select2-search__field {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.88);
+  border-radius: 0.25rem;
+  padding: 0.4rem 0.55rem;
+  width: 100%;
+}
+
+.select2-dropdown.schedule-phone-dial-dropdown .select2-results__options {
+  max-height: min(280px, 45vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.select2-dropdown.schedule-phone-dial-dropdown .select2-results__option {
+  font-size: 0.875rem;
+  padding: 0.45rem 0.75rem;
+}
+
+.select2-dropdown.schedule-phone-dial-dropdown .select2-results__option--highlighted.select2-results__option--selectable {
+  background-color: var(--tessera-tenant-accent, #5b73e8);
+  color: #fff;
+}
+
+body[data-layout-mode="light"] .select2-dropdown.schedule-phone-dial-dropdown {
+  background: #fff;
+  border-color: #e2e5e8;
+  box-shadow: 0 10px 28px rgba(18, 38, 63, 0.14);
+}
+
+body[data-layout-mode="light"] .select2-dropdown.schedule-phone-dial-dropdown .select2-search--dropdown {
+  background: #fff;
+}
+
+body[data-layout-mode="light"] .select2-dropdown.schedule-phone-dial-dropdown .select2-search__field {
+  background: #fff;
+  border-color: #e2e5e8;
+  color: #495057;
+}
+
+.schedule-panel-card--passengers .select2-search--dropdown .select2-search__field {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.schedule-panel-card--passengers .select2-results__option {
+  font-size: 0.875rem;
+  padding: 0.45rem 0.75rem;
+}
+
+.schedule-panel-card--passengers .select2-results__option--highlighted.select2-results__option--selectable {
+  background-color: var(--tessera-tenant-accent, #5b73e8);
+  color: #fff;
+}
+
+body[data-layout-mode="light"] .schedule-panel-card--passengers .select2-container--default .select2-selection--single {
+  background: #fff;
+  border-color: #e2e5e8;
+}
+
+body[data-layout-mode="light"] .schedule-panel-card--passengers .select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #495057;
+}
+
+body[data-layout-mode="light"] .schedule-panel-card--passengers .select2-dropdown {
+  background: #fff;
+  border-color: #e2e5e8;
+}
+
+body[data-layout-mode="light"] .schedule-panel-card--passengers .select2-search--dropdown .select2-search__field {
+  background: #fff;
+  border-color: #e2e5e8;
+  color: #495057;
+}
+
+.schedule-passenger-table .schedule-passenger-row .input-group-text {
+  padding: 0.25rem 0.35rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.schedule-passenger-table .schedule-passenger-row .no_code:not(.schedule-phone-dial) {
+  max-width: 4.5rem;
+  font-size: 0.8rem;
+}
+
+.schedule-passenger-table .schedule-passenger-row > td:nth-child(4) span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  font-size: 0.875rem;
+}
+
+.schedule-passenger-table .schedule-passenger-row > td:nth-child(8) label:not([for]) {
+  margin-right: 0.75rem;
+  margin-bottom: 0;
+}
+
+.schedule-passenger-form__actions {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body[data-layout-mode="light"] .schedule-passenger-form__actions {
+  border-top-color: rgba(0, 0, 0, 0.06);
+}
+
+.schedule-booking-panel--page #item_table {
+  font-size: 0.875rem;
+}
+
+.schedule-booking-panel--page #item_table thead th {
+  white-space: nowrap;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.schedule-booking-panel--page #item_table .form-control,
+.schedule-booking-panel--page #item_table .form-select {
+  min-width: 0;
+  font-size: 0.875rem;
+}
+
+.schedule-booking-panel--page #trip_start,
+.schedule-booking-panel--page #trip_end {
+  width: 100%;
+}
+
+@media (max-width: 575.98px) {
+  .schedule-route-pickers__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-route-pickers__divider {
+    display: none;
+  }
+
+  .schedule-passenger-table .schedule-passenger-row:not(.schedule-passenger-row--pro) {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-booking-panel--page .schedule-passenger-row--pro {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-booking-panel--page .schedule-passenger-row--pro > .schedule-field,
+  .schedule-booking-panel--page .schedule-passenger-row--pro > .schedule-passenger-options-cell {
+    grid-column: 1 / -1 !important;
+  }
+
+  .schedule-booking-panel--page .schedule-passenger-options:not(.schedule-passenger-options--page-stack) {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-booking-panel--page .schedule-passenger-options--page-stack .schedule-passenger-option + .schedule-passenger-option {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-left: 0;
+  }
+
+  .schedule-passenger-form__actions {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .schedule-passenger-form__submit {
+    justify-content: center;
+  }
+}
+
+/* - -  Manage page - -  */
+.schedule-manage-dl dt {
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
+}
+
+body[data-layout-mode="light"] .schedule-manage-dl dt {
+  color: #74788d;
+}
+
+/* - -  Book trip confirmation dialog (SweetAlert2 + Dashonic buttons) - -  */
+.schedule-book-confirm.swal2-popup {
+  width: min(26rem, calc(100vw - 2rem));
+  padding: 1.35rem 1.35rem 1.15rem;
+  border-radius: 0.5rem;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(18, 38, 63, 0.18);
+}
+
+.schedule-book-confirm .schedule-book-confirm__title {
+  margin: 0 0 0.35rem;
+  padding: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #495057;
+  text-align: left;
+}
+
+.schedule-book-confirm .schedule-book-confirm__body {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.schedule-book-confirm__lead {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: #74788d;
+}
+
+.schedule-book-confirm .schedule-book-confirm__icon {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 0 0.85rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(91, 115, 232, 0.12);
+  color: var(--tessera-tenant-accent, #5b73e8);
+}
+
+.schedule-book-confirm .schedule-book-confirm__icon .swal2-icon-content {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.schedule-book-confirm .schedule-book-confirm__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 1.15rem 0 0;
+  padding: 0;
+}
+
+.schedule-book-confirm .schedule-book-confirm__actions .btn {
+  min-width: 6.5rem;
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+@media (max-width: 575.98px) {
+  .schedule-book-confirm .schedule-book-confirm__actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .schedule-book-confirm .schedule-book-confirm__actions .btn {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 991.98px) {
+  #schedule-calendar {
+    min-height: 520px;
+  }
+
+  .schedule-booking-panel--page .row.g-4 > [class*="col-"] + [class*="col-"] {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Trip bookings panel + seat legend (Book trip) */
+.schedule-booking-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.schedule-seat-legend-wrap {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.schedule-seat-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  justify-content: center;
+}
+
+.schedule-seat-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.schedule-seat-legend__count {
+  font-weight: 600;
+  color: #fff;
+  min-width: 1.25rem;
+  text-align: right;
+}
+
+/* Full-width trip bookings footer (Book trip) */
+.schedule-trip-bookings-fullwidth {
+  width: 100%;
+  margin-top: 1.25rem;
+}
+
+.schedule-panel-card--bookings-full {
+  display: flex;
+  flex-direction: column;
+  min-height: min(44vh, 560px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.schedule-trip-bookings-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  padding: 1rem 1.25rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.schedule-trip-bookings-header__main {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.schedule-trip-bookings-header__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59, 130, 246, 0.18);
+  color: #93c5fd;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.schedule-trip-bookings-header__title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.schedule-trip-bookings-header__sub {
+  font-size: 0.82rem;
+}
+
+.schedule-trip-bookings-header__tools {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-left: auto;
+}
+
+.schedule-trip-bookings-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 4.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.schedule-trip-bookings-stat__label {
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.schedule-trip-bookings-stat__value {
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.schedule-panel-card--bookings .schedule-trip-bookings-search {
+  min-width: 14rem;
+  max-width: 20rem;
+  flex: 1 1 14rem;
+}
+
+.schedule-panel-card--bookings .schedule-trip-bookings-search .input-group-text {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.schedule-trip-bookings-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.schedule-trip-bookings-table-wrap {
+  flex: 1;
+  min-height: 280px;
+  max-height: none;
+  overflow: auto;
+}
+
+.schedule-trip-bookings-table-wrap .dataTables_wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 0.85rem 1rem 0.75rem;
+}
+
+.schedule-trip-bookings-table-wrap .dataTables_scroll,
+.schedule-trip-bookings-table-wrap table.dataTable {
+  flex: 1;
+}
+
+.schedule-trip-bookings-table-wrap .dataTables_info,
+.schedule-trip-bookings-table-wrap .dataTables_paginate {
+  font-size: 0.78rem;
+  padding-top: 0.65rem;
+  margin-top: auto;
+}
+
+.schedule-trip-bookings-table-wrap .dataTables_paginate .paginate_button {
+  padding: 0.2rem 0.55rem !important;
+}
+
+.schedule-trip-bookings-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-bottom-width: 1px;
+}
+
+.schedule-trip-bookings-table-wrap #passenger_info .btn {
+  height: 2rem;
+  width: 2rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.schedule-trip-bookings-table-wrap #passenger_info th,
+.schedule-trip-bookings-table-wrap #passenger_info td {
+  font-size: 0.82rem;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+}
+
+.schedule-trip-bookings-table-wrap .dataTables_empty {
+  padding: 3rem 1rem !important;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media (min-width: 1200px) {
+  .schedule-panel-card--bookings-full {
+    min-height: min(48vh, 620px);
+  }
+
+  .schedule-trip-bookings-table-wrap {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .schedule-trip-bookings-header__tools {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .schedule-trip-bookings-stat {
+    align-items: flex-start;
+  }
+
+  .schedule-panel-card--bookings .schedule-trip-bookings-search {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+.schedule-trip-bookings-table-wrap .complete_seat {
+  background: #da1616;
+  border-radius: 999px;
+  padding: 0.15rem 0.45rem;
+  color: #fff;
+}
+
+.schedule-trip-bookings-table-wrap .booked_seat {
+  background: #ffe100;
+  border-radius: 999px;
+  padding: 0.15rem 0.45rem;
+  color: #111;
+}
+
+.schedule-trip-bookings-table-wrap .half_complete_seat {
+  background: #28a745;
+  border-radius: 999px;
+  padding: 0.15rem 0.45rem;
+  color: #fff;
+}

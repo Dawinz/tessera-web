@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Receipt Print Example</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+
+    button {
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .receipt-preview {
+      width: 300px;
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Receipt Print Demo</h2>
+
+  <button onclick="printReceipt()">Print Receipt</button>
+
+  <div class="receipt-preview">
+    <h3>My Shop</h3>
+    <p>Receipt No: #1001</p>
+    <p>Date: 2026-06-20</p>
+    <hr>
+
+    <p>Rice x 2 - $10.00</p>
+    <p>Beans x 1 - $5.00</p>
+    <p>Juice x 3 - $6.00</p>
+
+    <hr>
+    <strong>Total: $21.00</strong>
+
+    <p>Thank you for shopping with us!</p>
+  </div>
+
+  <script>
+    function printReceipt() {
+      
+      const receiptHtml = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Receipt</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              width: 280px;
+              padding: 10px;
+              font-size: 13px;
+            }
+
+            h3 {
+              text-align: center;
+              margin: 0 0 10px;
+            }
+
+            p {
+              margin: 4px 0;
+            }
+
+            .line {
+              border-top: 1px dashed #000;
+              margin: 8px 0;
+            }
+
+            .total {
+              font-weight: bold;
+              font-size: 15px;
+            }
+
+            .center {
+              text-align: center;
+            }
+
+            @media print {
+              body {
+                margin: 0;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          <h3>My Shop</h3>
+
+          <p>Receipt No: #1001</p>
+          <p>Date: 2026-06-20</p>
+
+          <div class="line"></div>
+
+          <p>Rice x 2 - $10.00</p>
+          <p>Beans x 1 - $5.00</p>
+          <p>Juice x 3 - $6.00</p>
+
+          <div class="line"></div>
+
+          <p class="total">Total: $21.00</p>
+
+          <div class="line"></div>
+
+          <p class="center">Thank you for shopping with us!</p>
+
+          <script>
+            window.onload = function () {
+              window.print();
+
+              window.onafterprint = function () {
+                window.close();
+              };
+            };
+          <\/script>
+        </body>
+        </html>
+      `;
+
+      const printWindow = window.open("", "_blank", "width=400,height=600");
+
+      printWindow.document.open();
+      printWindow.document.write(receiptHtml);
+      printWindow.document.close();
+    }
+  </script>
+
+</body>
+</html>

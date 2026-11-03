@@ -1,0 +1,168 @@
+</head>
+<style>
+input, button{
+	border: none;
+	background: none;
+	outline: none;
+	
+}
+button{
+	cursor: pointer;
+	
+}
+.search-box{
+	display: flex;
+
+	border-radius: 4em;
+
+}
+.search-box-input{
+	width: 0px;
+	font-size: 1em;
+	color: #fff;
+	transition: .5s;
+}
+.search-box-btn{
+	display: flex;
+	border-radius: 50%;
+	width: 3em;
+	height: 3em;
+	background:#EA4040;
+	transition: .3s;
+	
+	
+}
+.search-box-icon{
+	margin: auto;
+	color: black;
+}
+.search-box-input::placeholder{
+	color: white;
+	opacity: .7;
+}
+.search-box:hover .search-box-input{
+	padding-left: 2em;
+	padding-right: 1em;
+	width: 500px;
+}
+.search-box-btn:active{
+	transform: scale(.75);
+}
+@media (max-width: 900px) {
+		
+}
+</style>
+           <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="slider/swiper.min.css">
+<link rel="stylesheet" href="slider/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Bree+Serif|IBM+Plex+Sans|Lobster+Two:400,700i|Vollkorn+SC:900&display=swap" rel="stylesheet">
+<body id="body">
+
+
+	 
+	  <div class="swiper-container">
+   
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" >
+	  <div class ="footername">
+	  <h4>Abdulaziz Gossage</h4>
+	  </div>
+	  <div class="imgBx">
+	  <img src ="slider/1.png"/>
+	  </div>
+	  <div class="details">
+	  <h3>John Doe<br/><span>Webdeveloper</span></h3>
+	  </div>
+    </div> 
+	<div class="swiper-slide" >
+	  <div class ="footername">
+	  <h4>Abdulaziz Gossage</h4>
+	  </div>
+	  <div class="imgBx">
+	  <img src ="slider/1.png"/>
+	  </div>
+	  <div class="details">
+	  <h3>John Doe<br/><span>Webdeveloper</span></h3>
+	  </div>
+    </div>
+	<div class="swiper-slide" >
+	  <div class ="footername">
+	  <h4>Abdulaziz Gossage</h4>
+	  </div>
+	  <div class="imgBx">
+	  <img src ="slider/1.png"/>
+	  </div>
+	  <div class="details">
+	  <h3>John Doe<br/><span>Webdeveloper</span></h3>
+	  </div>
+    </div> 
+
+    </div>
+    <!-- Add Pagination -->
+    	
+
+  </div>
+
+	
+	<script src="slider/swiper.min.js">
+</script>
+<script>
+$(document).ready(function(){
+	load_data();
+	function load_data(query)
+	{
+		$.ajax({
+			url:"fetch_search.php",
+			method:"post",
+			data:{query:query},
+			success:function(data)
+			{
+				$('#result_search').html(data);
+			}
+		});
+	}
+	
+	$('#search_text').keyup(function(){
+
+		$("#result_search").show();
+		var search = $(this).val();
+		if(search != '')
+		{
+			load_data(search);
+		}
+		else
+		{
+			load_data();			
+		}
+	});
+});
+$( "#body" ).click(function() {
+ $( "#result_search" ).hide();
+});
+</script>
+ <script>
+    var swiper = new Swiper('.swiper-container', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows : true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+      },
+    });
+   $(".navbar-toggle2").click(function () {
+     $(".navbar-collapse collapse2").toggle()
+  });
+
+  </script>
+  <!-- start Gist JS code--><script>    (function(d,h,w){var gist=w.gist=w.gist||[];gist.methods=['trackPageView','identify','track','setAppId'];gist.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);gist.push(e);return gist;}};for(var i=0;i<gist.methods.length;i++){var c=gist.methods[i];gist[c]=gist.factory(c)}s=d.createElement('script'),s.src="https://widget.getgist.com",s.async=!0,e=d.getElementsByTagName(h)[0],e.appendChild(s),s.addEventListener('load',function(e){},!1),gist.setAppId("ocoir4ci"),gist.trackPageView()})(document,'head',window);</script><!-- end Gist JS code-->

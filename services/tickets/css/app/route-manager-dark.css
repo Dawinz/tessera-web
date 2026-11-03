@@ -1,0 +1,229 @@
+/**
+ * Route manager - dark Dashonic shell overrides.
+ * Import route_manager.css ends with a "light theme polish" block (#fff / #fbfdff).
+ */
+body[data-layout-mode="dark"] .route-manager-page {
+	--rm-surface: #032d46;
+	--rm-surface-raised: #043a5a;
+	--rm-border: rgba(3, 142, 220, 0.22);
+	--rm-text: #e8f1f6;
+	--rm-muted: #b7c9d4;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-explorer-card,
+body[data-layout-mode="dark"] .route-manager-page .route-schedule-card,
+body[data-layout-mode="dark"] .route-manager-page .route-points-card,
+body[data-layout-mode="dark"] .route-manager-page .routes-card,
+body[data-layout-mode="dark"] .route-manager-page .card:not(.modal-content) {
+	background-color: var(--rm-surface);
+	border-color: var(--rm-border);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-explorer-card .card-header,
+body[data-layout-mode="dark"] .route-manager-page .route-schedule-card .card-header,
+body[data-layout-mode="dark"] .route-manager-page .route-points-card .card-header,
+body[data-layout-mode="dark"] .route-manager-page .routes-card .card-header {
+	background-color: var(--rm-surface-raised) !important;
+	border-bottom-color: var(--rm-border);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-explorer-card .card-body,
+body[data-layout-mode="dark"] .route-manager-page .route-schedule-card .card-body,
+body[data-layout-mode="dark"] .route-manager-page .route-points-card .card-body,
+body[data-layout-mode="dark"] .route-manager-page .routes-card .card-body {
+	background-color: var(--rm-surface);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-node,
+body[data-layout-mode="dark"] .route-manager-page .schedule-trip {
+	background-color: rgba(3, 142, 220, 0.06) !important;
+	border-color: var(--rm-border);
+	box-shadow: none;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-node[open] > .route-node-head,
+body[data-layout-mode="dark"] .route-manager-page .route-node.is-active {
+	background-color: rgba(3, 142, 220, 0.1);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-node:hover,
+body[data-layout-mode="dark"] .route-manager-page .schedule-trip:hover {
+	background-color: rgba(3, 142, 220, 0.12) !important;
+	box-shadow: none;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-details-field {
+	background-color: var(--rm-surface-raised) !important;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .point-group {
+	box-shadow: none;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-explorer-heading,
+body[data-layout-mode="dark"] .route-manager-page .route-schedule-heading,
+body[data-layout-mode="dark"] .route-manager-page .route-points-heading,
+body[data-layout-mode="dark"] .route-manager-page .route-node-name,
+body[data-layout-mode="dark"] .route-manager-page .schedule-trip-bus,
+body[data-layout-mode="dark"] .route-manager-page .schedule-trip-time,
+body[data-layout-mode="dark"] .route-manager-page .route-leg-name,
+body[data-layout-mode="dark"] .route-manager-page .page-title-box h4 {
+	color: var(--rm-text);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-node-path,
+body[data-layout-mode="dark"] .route-manager-page .route-schedule-route,
+body[data-layout-mode="dark"] .route-manager-page .route-schedule-range,
+body[data-layout-mode="dark"] .route-manager-page .schedule-day-name,
+body[data-layout-mode="dark"] .route-manager-page .schedule-day-empty,
+body[data-layout-mode="dark"] .route-manager-page .route-leg-meta,
+body[data-layout-mode="dark"] .route-manager-page .point-group-empty,
+body[data-layout-mode="dark"] .route-manager-page .breadcrumb-item,
+body[data-layout-mode="dark"] .route-manager-page .breadcrumb-item a {
+	color: var(--rm-muted);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-schedule-filters .form-select,
+body[data-layout-mode="dark"] .route-manager-page .route-schedule-filters .form-control,
+body[data-layout-mode="dark"] .route-manager-page .route-schedule-filters .select2.select2-container .select2-selection,
+body[data-layout-mode="dark"] .route-manager-page .route-schedule-filters .select2.select2-container .select2-selection .select2-selection__arrow,
+body[data-layout-mode="dark"] .route-manager-page .select2-container .select2-dropdown.schedule-filter-select2,
+body[data-layout-mode="dark"] .route-manager-page .select2-container .select2-dropdown.schedule-filter-select2 .select2-results ul,
+body[data-layout-mode="dark"] .route-manager-page .select2-container .select2-dropdown.schedule-filter-select2 .select2-results__option {
+	background-color: var(--rm-surface-raised) !important;
+	border-color: var(--rm-border) !important;
+	color: var(--rm-text) !important;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .select2-container .select2-dropdown.schedule-filter-select2 .select2-search input {
+	background-color: var(--rm-surface-raised) !important;
+	color: var(--rm-text) !important;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-schedule-filters .select2.select2-container .select2-selection .select2-selection__rendered {
+	color: var(--rm-text) !important;
+}
+
+/* Map - permanent route name tooltips were default white Leaflet boxes */
+body[data-layout-mode="dark"] .route-manager-page .leaflet-tooltip.routes-map-label {
+	background: rgba(3, 45, 70, 0.94);
+	border: 1px solid rgba(3, 142, 220, 0.4);
+	color: var(--rm-text);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+	font-size: 10px;
+	font-weight: 600;
+	padding: 2px 6px;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .leaflet-tooltip.routes-map-label::before {
+	border-top-color: rgba(3, 45, 70, 0.94);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .leaflet-container {
+	background: #021a28;
+}
+
+body[data-layout-mode="dark"] .route-manager-page #routes_map {
+	border-radius: 0 0 14px 14px;
+	overflow: hidden;
+}
+
+/* Wizards / modals */
+body[data-layout-mode="dark"] .route-manager-page .modal-content {
+	background-color: var(--rm-surface);
+	border-color: var(--rm-border);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .modal-header {
+	background-color: var(--rm-surface-raised);
+	border-bottom-color: var(--rm-border);
+}
+
+body[data-layout-mode="dark"] .route-manager-page #add_route_form .form-control,
+body[data-layout-mode="dark"] .route-manager-page #add_route_form .form-select,
+body[data-layout-mode="dark"] .route-manager-page #add_sub_route_form .form-control,
+body[data-layout-mode="dark"] .route-manager-page #add_sub_route_form .form-select,
+body[data-layout-mode="dark"] .route-manager-page #schedule_modal .form-control,
+body[data-layout-mode="dark"] .route-manager-page #schedule_modal .form-select,
+body[data-layout-mode="dark"] .route-manager-page #schedule_modal .schedule-time-24 {
+	background-color: var(--rm-surface-raised);
+	border-color: var(--rm-border);
+	color: var(--rm-text);
+}
+
+body[data-layout-mode="dark"] .route-manager-page #add_route_form .form-control,
+body[data-layout-mode="dark"] .route-manager-page #add_sub_route_form .form-control,
+body[data-layout-mode="dark"] .route-manager-page #schedule_modal .select2.select2-container .select2-selection,
+body[data-layout-mode="dark"] .route-manager-page #schedule_modal .select2-container .select2-dropdown {
+	background-color: var(--rm-surface-raised) !important;
+	border-color: var(--rm-border) !important;
+	color: var(--rm-text) !important;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .requirement-check-pill {
+	border-color: var(--rm-border);
+	color: var(--rm-text);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .schedule-flatpickr.flatpickr-calendar {
+	background: var(--rm-surface-raised) !important;
+	border-color: var(--rm-border);
+	color: var(--rm-text);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .schedule-day.is-empty .schedule-day-rail {
+	opacity: 1;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .schedule-day-name,
+body[data-layout-mode="dark"] .route-manager-page .schedule-day-count,
+body[data-layout-mode="dark"] .route-manager-page .schedule-day-empty,
+body[data-layout-mode="dark"] .route-manager-page .route-stat,
+body[data-layout-mode="dark"] .route-manager-page .schedule-trip-meta {
+	color: #b7c9d4;
+	opacity: 1;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-stat-fare,
+body[data-layout-mode="dark"] .route-manager-page .route-explorer-count {
+	color: #d7efff;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-explorer-count {
+	background-color: rgba(3, 142, 220, 0.28);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .schedule-trip.is-open .schedule-trip-status {
+	color: #d8fff0;
+	background-color: rgba(15, 188, 140, 0.28);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .schedule-trip.is-filling .schedule-trip-status {
+	color: #ffe7a3;
+	background-color: rgba(247, 204, 83, 0.22);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .schedule-trip.is-full .schedule-trip-status {
+	color: #d7efff;
+	background-color: rgba(3, 142, 220, 0.28);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .schedule-trip.is-cancelled .schedule-trip-status {
+	color: #ffd0d0;
+	background-color: rgba(243, 78, 78, 0.28);
+}
+
+body[data-layout-mode="dark"] .route-manager-page .route-points-route,
+body[data-layout-mode="dark"] .route-manager-page .route-node-legs-title,
+body[data-layout-mode="dark"] .route-manager-page .point-group-title,
+body[data-layout-mode="dark"] .route-manager-page .card-title,
+body[data-layout-mode="dark"] .route-manager-page small {
+	color: #d5e4ee;
+}
+
+body[data-layout-mode="dark"] .route-manager-page .select2-selection__placeholder,
+body[data-layout-mode="dark"] .route-manager-page .form-control::placeholder {
+	color: #b7c9d4 !important;
+	opacity: 1;
+}

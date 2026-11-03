@@ -1,0 +1,41 @@
+# Railway upload ignore — keep under Cloudflare upload limit
+.git
+.gitignore
+.cursor
+.idea
+.vscode
+**/.DS_Store
+**/node_modules
+**/.dart_tool
+**/build
+**/.gradle
+**/*.apk
+**/*.log
+
+# Composer / large PHP vendor trees (NOT js/vendor — login needs jQuery)
+**/pdf/vendor
+services/cargo/vendor
+services/accounting/**/vendor
+
+# Not needed for PHP operator console
+archive
+docs
+apps/customer-mobile
+apps/admin-mobile
+services/cargo/qz-tray
+services/cargo/node_modules
+services/tickets/node_modules
+services/tickets/assets/libs/*/node_modules
+
+# Huge raw dumps — seed lives in database/seed/
+database/cargo.sql
+database/ticket.sql
+database/account.sql
+database/*.sql.bak
+deploy/railway/tmp
+
+# Local / agent noise
+*.md
+!README.md
+agent-transcripts
+database/full-sync

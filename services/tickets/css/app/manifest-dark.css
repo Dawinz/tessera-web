@@ -1,0 +1,155 @@
+/**
+ * Manifest - align import booking.css light tokens with Dashonic dark shell.
+ * booking.css hardcodes #fff / #fbfdff; scoped fixes for manifest only.
+ */
+body[data-layout-mode="dark"] .manifest-page {
+	--manifest-surface: #032d46;
+	--manifest-surface-raised: #043a5a;
+	--manifest-border: rgba(3, 142, 220, 0.22);
+	--manifest-text: #e8f1f6;
+	--manifest-muted: #b7c9d4;
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-explorer-card,
+body[data-layout-mode="dark"] .manifest-page .manifest-stat {
+	background-color: var(--manifest-surface);
+	border-color: var(--manifest-border);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-explorer-card .card-header {
+	background-color: var(--manifest-surface-raised);
+	border-bottom-color: var(--manifest-border);
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-explorer-card .card-body {
+	background-color: var(--manifest-surface);
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-explorer-heading,
+body[data-layout-mode="dark"] .manifest-page .manifest-stat-value {
+	color: var(--manifest-text);
+}
+
+body[data-layout-mode="dark"] .manifest-page .manifest-stat-label,
+body[data-layout-mode="dark"] .manifest-page .booking-filter .form-label,
+body[data-layout-mode="dark"] .manifest-page .manifest-pagination .dataTables_info,
+body[data-layout-mode="dark"] .manifest-page .manifest-pagination .ellipsis {
+	color: var(--manifest-muted);
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-filter .choices__inner,
+body[data-layout-mode="dark"] .manifest-page .booking-my-search input,
+body[data-layout-mode="dark"] .manifest-page .booking-date-field .form-control,
+body[data-layout-mode="dark"] .manifest-page .manifest-offcanvas .form-control,
+body[data-layout-mode="dark"] .manifest-page .manifest-offcanvas .form-select {
+	background-color: var(--manifest-surface-raised);
+	border-color: var(--manifest-border);
+	color: var(--manifest-text);
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-filter .choices__list--dropdown,
+body[data-layout-mode="dark"] .manifest-page .booking-filter .choices__list[aria-expanded] {
+	background-color: var(--manifest-surface-raised);
+	border-color: var(--manifest-border);
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-filter .choices__item--selectable {
+	color: var(--manifest-text);
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-filter .choices__item--selectable.is-highlighted {
+	background-color: rgba(3, 142, 220, 0.2);
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-my-table-wrap,
+body[data-layout-mode="dark"] .manifest-page .manifest-table-wrap {
+	border-color: var(--manifest-border);
+	background-color: var(--manifest-surface);
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-trip-table thead th {
+	background-color: var(--manifest-surface-raised);
+	color: var(--manifest-muted);
+	border-bottom-color: var(--manifest-border);
+}
+
+body[data-layout-mode="dark"] .manifest-page .manifest-table.dataTable tbody tr {
+	background-color: var(--manifest-surface) !important;
+}
+
+body[data-layout-mode="dark"] .manifest-page .manifest-table.dataTable tbody tr:nth-child(even) {
+	background-color: rgba(4, 58, 90, 0.45) !important;
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-trip-table tbody td {
+	background-color: transparent !important;
+	color: var(--manifest-text);
+	border-color: rgba(3, 142, 220, 0.1);
+}
+
+body[data-layout-mode="dark"] .manifest-page .manifest-table.dataTable tbody tr:hover {
+	background-color: rgba(3, 142, 220, 0.12) !important;
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-table-sub,
+body[data-layout-mode="dark"] .manifest-page .manifest-remark {
+	color: var(--manifest-muted);
+}
+
+body[data-layout-mode="dark"] .manifest-page .manifest-table-wrap .dataTables_processing {
+	background-color: var(--manifest-surface-raised);
+	color: #5fd0f3;
+	border-color: var(--manifest-border);
+}
+
+body[data-layout-mode="dark"] .manifest-page .manifest-offcanvas .offcanvas-header {
+	background-color: var(--manifest-surface-raised);
+	border-bottom-color: var(--manifest-border);
+}
+
+body[data-layout-mode="dark"] .manifest-page .manifest-offcanvas.offcanvas {
+	background-color: var(--manifest-surface);
+}
+
+body[data-layout-mode="dark"] .manifest-page .manifest-options .dropdown-menu {
+	background-color: var(--manifest-surface-raised);
+	border-color: var(--manifest-border);
+}
+
+body[data-layout-mode="dark"] .manifest-page .manifest-options .dropdown-item {
+	color: var(--manifest-text);
+}
+
+body[data-layout-mode="dark"] .manifest-page .page-title-box h4,
+body[data-layout-mode="dark"] .manifest-page .breadcrumb-item,
+body[data-layout-mode="dark"] .manifest-page .breadcrumb-item a {
+	color: var(--manifest-text);
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-flatpickr.flatpickr-calendar {
+	background: var(--manifest-surface-raised);
+	border-color: var(--manifest-border);
+}
+
+body[data-layout-mode="dark"] .manifest-page .manifest-date-rel,
+body[data-layout-mode="dark"] .manifest-page .manifest-date-rel.is-upcoming {
+	color: #d7efff;
+}
+
+body[data-layout-mode="dark"] .manifest-page .booking-explorer-count {
+	color: #d7efff;
+	background-color: rgba(3, 142, 220, 0.28);
+}
+
+body[data-layout-mode="dark"] .manifest-page .paginate_button.disabled,
+body[data-layout-mode="dark"] .manifest-page .paginate_button.previous.disabled,
+body[data-layout-mode="dark"] .manifest-page .paginate_button.next.disabled {
+	opacity: 1;
+	color: #8aa4b3 !important;
+}
+
+body[data-layout-mode="dark"] .manifest-page .form-control::placeholder {
+	color: #b7c9d4;
+	opacity: 1;
+}

@@ -1,0 +1,57 @@
+$(document).ready(function(){
+	
+	
+	$("#send").click(function(){
+			var code = $("#code").val();
+			var vehicle = $("#vehicle").text();
+			var date = $("#date").text();
+			$("#send").text("loading...");
+$("#send").prop('disabled', true);
+  $.ajax({
+				url:"check_insert.php",
+				method:"POST",
+				data:{code:code},
+				success:function(response){
+					$("#send").text("redirecting...");
+					if($.trim(response) == "yes" ){
+					window.location="checked.php?code="+code+"&vehicle="+vehicle+"&date="+date+"";
+					}else{
+swal("Warning!", "No Luggage With That Number!", "warning");
+$("#send").text("Search");
+$("#send").prop('disabled', false);
+					}
+	}
+			
+			});
+});
+$('#code').on('keyup keypress',function (e) {
+ var keyCode = e.keyCode || e.which;
+ if(keyCode== 13)  // the enter key code
+  {
+			var code = $("#code").val();
+			var vehicle = $("#vehicle").text();
+			var date = $("#date").text();
+			$("#send").text("loading...");
+$("#send").prop('disabled', true);
+
+            return false;
+  $.ajax({
+				url:"check_insert.php",
+				method:"POST",
+				data:{code:code},
+				success:function(response){
+					$("#send").text("redirecting...");
+					if($.trim(response) == "yes" ){
+					window.location="checked.php?code="+code+"&vehicle="+vehicle+"&date="+date+"";
+					}else{
+swal("Warning!", "No Luggage With That Number!", "warning");
+$("#send").text("Search");
+$("#send").prop('disabled', false);
+					}
+	}
+			
+			});
+    return false;  
+  }
+});
+});

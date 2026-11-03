@@ -1,0 +1,4 @@
+DirectoryIndex index.php
+Header set Access-Control-Allow-Origin "*"
+# Apache does not pass Authorization to PHP unless it is copied into the request env.
+SetEnvIf Authorization "(.+)" HTTP_AUTHORIZATION=$1

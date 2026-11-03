@@ -1,0 +1,13 @@
+table.dataTable th:nth-child(1) {
+  width: 40px;
+  max-width: 40px;
+  word-break: break-all;
+  white-space: pre-line;
+}
+
+table.dataTable td:nth-child(1) {
+  width: 40px;
+  max-width: 40px;
+  word-break: break-all;
+  white-space: pre-line;
+}

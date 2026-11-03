@@ -1,0 +1,71 @@
+/* Tickets home - operator dashboard */
+.sr-home-dashboard .sr-kpi-card {
+  border: 0;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 18px rgba(12, 31, 46, 0.06);
+  overflow: hidden;
+  height: 100%;
+}
+.sr-home-dashboard .sr-kpi-card .card-body {
+  padding: 1.25rem 1.35rem 0.75rem;
+}
+.sr-home-dashboard .sr-kpi-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+}
+.sr-home-dashboard .sr-kpi-icon--sales { background: rgba(3, 142, 220, 0.12); color: #038edc; }
+.sr-home-dashboard .sr-kpi-icon--seats { background: rgba(81, 210, 140, 0.14); color: #51d28c; }
+.sr-home-dashboard .sr-kpi-icon--trips { background: rgba(91, 115, 232, 0.14); color: #5b73e8; }
+.sr-home-dashboard .sr-kpi-icon--foc { background: rgba(247, 204, 83, 0.18); color: #c99a00; }
+.sr-home-dashboard .sr-kpi-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ts-navy, #03314d);
+  line-height: 1.2;
+  min-height: 2rem;
+}
+[data-layout-mode="dark"] .sr-home-dashboard .sr-kpi-value {
+  color: #f0f4f8;
+}
+[data-layout-mode="dark"] .sr-home-dashboard .sr-kpi-label,
+[data-layout-mode="dark"] .sr-home-dashboard .sr-kpi-meta {
+  color: #b7c9d4;
+}
+.sr-home-dashboard .sr-kpi-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ts-muted, #5c6b76);
+  font-weight: 600;
+}
+.sr-home-dashboard .sr-kpi-meta {
+  font-size: 0.82rem;
+  color: var(--ts-muted, #5c6b76);
+}
+.sr-home-dashboard .sr-chart-card {
+  border: 0;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 18px rgba(12, 31, 46, 0.06);
+}
+.sr-home-dashboard .sr-chart-card .card-header {
+  background: transparent;
+  border-bottom: 1px solid var(--ts-line, #e4ebf0);
+  padding: 1rem 1.25rem;
+}
+.sr-home-dashboard .sr-chart-card .card-body {
+  padding: 0.5rem 1rem 1.25rem;
+}
+.sr-home-dashboard .sr-chart-host {
+  min-height: 340px;
+}
+.sr-home-dashboard .sr-route-filter {
+  max-width: 320px;
+}
+.sr-home-dashboard .apexcharts-canvas {
+  margin: 0 auto;
+}

@@ -1,0 +1,16 @@
+<?php
+$host = 'localhost';
+$user_name = 'srclassiccoachco_sr';
+$password = 'Teccross@360';
+$db_name = 'srclassiccoachco_sr';
+$con = mysql_connect($host,$user_name,$password,$db_name);
+$sql = "select * from  contact_info";
+$result = mysqli_query($con,$sql);
+$response = array();
+
+while($row = mysql_fetch_array($result)){
+    array_push($response,array("Name"=>$row["name"],"Email"=>$row["email"]));
+}
+echo json_encode($response);
+
+?>

@@ -1,0 +1,3 @@
+SR CLASSICCOACH
+*TAARIFA YA MAKUBALIANO NA FIDIA YA MZIGO KWAKO WENYE NAMBARI 65980*
+Ndugu mteja wa sr classic coach,tunapenda kukupa pole na kkushukuru kwa subira yako.kampuni ya sr classic coach imemaliza zoezi la tathmini ya uharibifu mizigo ilo ungua kwenye basi number 4556566.tunaomba muhusika afike kwenye makao makuu yetu ya Tanzania yaliokua ilala mtaa wa lindi na iringa kwa zoezi la majadliano na fidia.kwa mara nyingine tunapenda kuchukua jukumu la kuwashukuru kwa subira yetu na kuapamoja na sisi katika kipindi hiki kigumu kwa pande zote mbili.asante an jioni njema

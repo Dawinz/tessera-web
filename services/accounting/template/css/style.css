@@ -1,0 +1,12 @@
+.dt-search{
+	
+	        float: right;
+			margin-bottom:10px;
+}
+.close {
+position:absolute;
+right:10px;
+}
+.error_class{
+	border:1px solid red;
+}

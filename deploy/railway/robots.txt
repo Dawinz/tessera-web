@@ -1,0 +1,14 @@
+# Tessera marketing apex — https://tessera.co.tz/
+User-agent: *
+Allow: /
+
+# Staff / Control / APIs — not for indexing
+Disallow: /tickets/
+Disallow: /cargo/
+Disallow: /accounts/
+Disallow: /control/
+Disallow: /settings/
+Disallow: /login/
+Disallow: /errors/
+
+Sitemap: https://tessera.co.tz/sitemap.xml

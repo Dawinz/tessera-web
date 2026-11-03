@@ -1,0 +1,1 @@
+SELECT MAX(CAST(code AS UNSIGNED)) FROM parcel_info 

@@ -1,0 +1,18 @@
+# Tessera Accounts — clean URLs (hide legacy /template/ folder)
+DirectoryIndex index.php template/index.php template/manifest.php index.html
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /accounts/
+
+	# Allow real root assets / files
+	RewriteCond %{REQUEST_FILENAME} -f [OR]
+	RewriteCond %{REQUEST_FILENAME} -d
+	RewriteRule ^ - [L]
+
+	# Do not loop on /template/*
+	RewriteRule ^template(?:/|$) - [L]
+
+	# /accounts/foo → /accounts/template/foo
+	RewriteRule ^(.*)$ template/$1 [L]
+</IfModule>

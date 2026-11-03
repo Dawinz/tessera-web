@@ -1,0 +1,15 @@
+/* Accounts SPA shell — viewport swap without full document reload */
+
+.sr-accounts-spa-shell #sr-spa-viewport {
+  min-height: calc(100vh - var(--sr-chrome-height, 120px) - 2rem);
+  transition: opacity 0.12s ease;
+}
+
+.sr-accounts-spa-shell #sr-spa-viewport.sr-spa-loading {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+#sr-spa-mount {
+  display: none;
+}

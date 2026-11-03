@@ -1,0 +1,78 @@
+ <?php
+ $users = $_GET['u'];
+ include 'connect/connect.php';
+ 
+ 
+ 
+ 	$select1450=mysqli_query($db,"
+		
+		SELECT 
+	ROW_NUMBER() OVER (
+		ORDER BY id ASC 
+	) row_num,
+    fullname
+
+
+FROM 
+	route 
+ORDER BY 
+	id ASC 
+		
+		");
+$select_num=mysqli_num_rows($select);
+if($select_num !=0){
+   	WHILE($get=mysqli_fetch_array($select)){
+    	    $fullname =$get['fullname'];
+			
+}}
+ 
+ ?>
+ <div id="accordion" class="accordion" role="tablist" aria-multiselectable="true">
+            <div class="card">
+              <div class="card-header" role="tab" id="headingOne">
+                <a data-bs-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Making a Beautiful CSS3 Button Set
+                </a>
+              </div><!-- card-header -->
+
+              <div id="collapseOne" data-bs-parent="#accordion" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                <div class="card-body">
+  <div class="">
+            <ul class="list-group">
+              <li class="list-group-item">Dar es salaam to Lubumbashi   <div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+</div></li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Morbi leo risus</li>
+              <li class="list-group-item">Porta ac consectetur ac</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+          </div>                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" role="tab" id="headingTwo">
+                <a class="collapsed" data-bs-toggle="collapse" href="#collapseTwor " aria-expanded="false" aria-controls="collapseTwor">
+                  Horizontal Navigation Menu Fold Animation
+                </a>
+              </div>
+              <div id="collapseTwor" class="collapse" data-bs-parent="#accordion" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore.
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" role="tab" id="headingThree">
+                <a class="collapsed" data-bs-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Creating CSS3 Button with Rounded Corners
+                </a>
+              </div>
+              <div id="collapseThree" class="collapse" data-bs-parent="#accordion" role="tabpanel" aria-labelledby="headingThree">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore.
+                </div>
+              </div><!-- collapse -->
+            </div><!-- card -->
+          </div>

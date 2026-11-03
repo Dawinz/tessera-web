@@ -1,0 +1,363 @@
+<?php
+
+session_start();
+
+$date_vehicle= @$_GET['date'];
+$name_vehicle= @$_GET['date3'];
+$code= @$_GET['code'];
+
+
+include '../connect.php';
+$select2=mysqli_query($db,"SELECT Name,Driver,Conductor,to_pay,paid,due,Route,remark_html  FROM  vehicle_name where date='$date_vehicle' and Name='$name_vehicle'");
+$select_num2=mysqli_num_rows($select2);
+if($select_num2 !=0){
+   	WHILE($get12=mysqli_fetch_array($select2)){
+    	    $vehicle_name =$get12['Name']; 
+			$driver =$get12['Driver']; 
+			$Conductor =$get12['Conductor']; 
+            $to_pay_vehicle =$get12['to_pay']; 
+            $paid_vehicle =$get12['paid']; 
+            $due_vehicle =$get12['due']; 
+            $route =$get12['Route']; 
+            $remark_html =$get12['remark_html']; 
+
+		
+	}
+}
+
+$username=$_SESSION['username'];
+$select222=mysqli_query($db,"SELECT *  FROM  users  where username='$username'");
+$select_num222=mysqli_num_rows($select222);
+if($select_num222 !=0){
+   	WHILE($get122=mysqli_fetch_array($select222)){
+    	    $firstname =$get122['firstname']; 
+    	    $surname =$get122['surname']; 
+
+		$fullname = "$firstname $surname";
+	}
+}
+date_default_timezone_set('Africa/Dar_es_Salaam');
+$date_insert = date('l jS \of F Y', time());
+$date_time_insert = date(' h:i A', time());
+
+require 'vendor/autoload.php';
+
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+// 1. Configure Options
+$options = new Options();
+$options->set('isRemoteEnabled', true); // Required for external URLs
+$options->set('chroot', __DIR__);      // Limit file access to current directory for security
+
+$dompdf = new Dompdf($options);
+
+
+$query = "
+		SELECT 
+	ROW_NUMBER() OVER (
+		ORDER BY id ASC 
+	) row_num,
+    username,
+    code,
+	username,
+	status,
+	checked,
+	detail,
+	to_be,
+	paid,
+    amount,
+    quantity,
+    q_left,
+    parcel_route,
+    weight_name,
+    weight_value
+
+   
+FROM 
+manifest WHERE trip_date ='$date_vehicle' and bus = '$vehicle_name'
+ORDER BY 
+	id ASC 
+		
+";
+$result = mysqli_query($db, $query);
+
+$output = '
+	<style>
+  @media print {
+  @page {
+    size: portrait;
+  }
+}
+ table {
+    width: 100% !important;
+    max-width: 100%;
+    table-layout: fixed; /* Forces cells to respect defined widths */
+    word-wrap: break-word; /* Prevents long text from pushing the width out */
+    page-break-inside: auto;
+    table-layout: fixed;
+  }
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+
+header {
+  padding: 10px 0;
+  margin-bottom: 30px;
+}
+
+#logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#logo img {
+  width: 90px;
+}
+
+h1 {
+
+  color: black;
+  font-size: 2em;
+  line-height: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  margin: 0 0 20px 0;
+  background: #CF4242;
+}
+
+#project {
+  float: left;
+}
+
+#project span {
+  color: black;
+
+  font-size: 15px;
+}
+
+#company {
+  float: right;
+  text-align: right;
+}
+
+#project div,
+#company div {
+  white-space: nowrap;        
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+ 
+}
+
+table tr:nth-child(2n-1) td {
+  background: #F5F5F5;
+}
+
+table th,
+table td {
+  text-align: center;
+}
+
+table th {
+  padding: 5px 20px;
+  color: black;
+  border-bottom: 1px solid #C1CED9;
+  white-space: nowrap;        
+  font-weight: normal;
+  font_size:14px;
+}
+
+table .service,
+table .desc {
+  text-align: left;
+}
+
+table td {
+  padding: auto;
+  text-align: right;
+  font-size:11px;
+  background-color:white;
+  color:black;
+}
+
+table td.service,
+table td.desc {
+  vertical-align: top;
+}
+
+table td.unit,
+table td.qty,
+table td.total {
+  font-size: 1.2em;
+}
+
+table td.grand {
+  border-top: 1px solid #5D6975;
+}
+
+#notices .notice {
+  color: #5D6975;
+  font-size: 14px;
+}
+
+footer {
+  color: #5D6975;
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid #C1CED9;
+  padding: 8px 0;
+  text-align: center;
+}
+#td_header{
+padding:3px;
+font-weight:bold;
+border:1px solid grey;
+}
+#td_header_span{
+    background:#1C4893;
+    color:white;
+font-size:16px;
+    border-bottom:1px solid white;
+   
+padding:6px;
+}
+body{
+      font-family: Arial, Helvetica, sans-serif;
+}
+ .box {
+  border-bottom:1px solid grey;
+}
+  #remark_lable{
+ 
+  }
+</style>
+  <body>
+  <header class="clearfix">
+      <div id="logo">
+       <img src="' . __DIR__ . '/srlogo.jpg" style="width: 100px; height: auto;">
+      </div>
+      <h1>SRCLASSICCOACH CARGO MANIFEST</h1>
+      <div id="company" class="clearfix" style="margin:10px;">
+      
+       
+     
+        
+      </div>
+  <div class="row">
+  <div class="col">
+      <div id="project"style="padding-bottom:20px;">
+
+
+        <div><span>MANIFEST ID</span> - '.base64_decode($code).'</div>
+        <div><span>VEHICLE NAME</span> - '.$name_vehicle.'</div>
+        <div><span>TRIP DATE</span>  - '. date("d/m/Y", strtotime($date_vehicle)).' </div>
+        <div><span>DRIVERS NAME</span> - '. $driver.'</div>
+        <div><span>CONDUCTORS NAME</span> - '. $Conductor.'</div>
+        <div><span>ROUTE NAME</span>  - '. $route.'</div>
+    
+      </div>
+  </div>
+  <div class="col" style="float:right" >
+<div style="color:black;"><span>DAR ES SALAAM-TANZANIA</span></div>
+<div style="color:black;">LINDI/IRINGA STREET-ILALA</div>
+<div style="color:black;">P.O. BOX 4804</div>
+<div style="color:black;">classiccoachcoltd@gmail.com</div>
+<div style="color:black;;">+255754281440/+255713540066</div>
+  </div>
+  </div>
+    </header>
+	 <main>
+      <table style="position:relative;bottom:40px;">
+        <thead>
+          <tr style="background:#1C4893;color:white;">
+            <th style="width:5%;">No</th>
+            <th style="width:13%;">Code </th>
+            <th >Route</th>
+            <th style="width:16%;" >Owner</th>
+            <th >DESCRIPTION</th>
+            <th  style="width:9%;" >Weight</th>
+
+            <th style="width:5%;">Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+       <tr>
+
+      
+       </tr>
+
+';
+
+while($row = mysqli_fetch_array($result))
+{
+	$output .= '
+		<tr>
+			<td style="widht:30px;" >'.$row["row_num"].'</td>
+			<td>'.$row["code"].'</td>
+			<td>'.$row["parcel_route"].'</td>
+			<td>'.$row["username"].'</td>
+			<td>'.base64_decode($row['detail']).'</td>
+					<td>'.$row["weight_value"].''.$row["weight_name"].'</td>
+
+			<td>'.$row['q_left'].'/'.$row['q_left'].'</td>
+		</tr>
+	';
+}
+	$output .= '
+
+		</table>
+	';
+	$output .= '
+ <div id="remark_lable"><h4>Remark<h4></div>
+<div class="box">
+'.base64_decode($remark_html).'
+</div><br>
+   <div id="notices">
+        
+        <div class="notice">This document was prepared by '.$fullname.' on '.$date_insert.' at '.$date_time_insert.'.</div>
+      </div>
+	';
+$output .= '</main></body>';
+
+
+$dompdf->loadHtml($output);
+
+//set page size and orientation
+
+$dompdf->setPaper('A4', 'landscape');
+
+//Render the HTML as PDF
+
+$dompdf->render();
+
+//Get output of generated pdf in Browser
+
+$dompdf->stream("CARGO $name_vehicle - $date_vehicle");
+//1  = Download
+//0 = Preview
+
+
+
+?>

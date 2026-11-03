@@ -1,0 +1,32 @@
+# Docker build context — lean image for operator console only
+.git
+.gitignore
+.cursor
+.idea
+.vscode
+**/.DS_Store
+**/node_modules
+**/.dart_tool
+**/build
+**/.gradle
+**/*.apk
+**/*.log
+
+archive
+docs
+apps/customer-mobile
+apps/admin-mobile
+services/cargo/qz-tray
+deploy/railway/tmp
+agent-transcripts
+
+# Raw dumps (use database/seed/ instead)
+database/cargo.sql
+database/ticket.sql
+database/account.sql
+database/*.sql.bak
+
+# Keep seed gz + sql
+# (do not blanket-ignore *.sql.gz)
+
+**/*.md
