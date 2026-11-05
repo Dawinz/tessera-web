@@ -8,7 +8,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 $ticketsRoot = null;
 foreach ([
-	dirname(__DIR__) . '/tickets',                    // Railway: /var/www/html/login → ../tickets
+	dirname(__DIR__) . '/tickets',                    // Docker image: /var/www/html/login → ../tickets
 	dirname(__DIR__, 2) . '/services/tickets',         // Monorepo: apps/operator-login → services/tickets
 	dirname(__DIR__, 2) . '/tickets',
 ] as $candidate) {

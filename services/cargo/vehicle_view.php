@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/includes/tessera_staff_boot.php';
 require_once __DIR__ . '/includes/sr_env.php';
 ob_start();
 //index.php
@@ -1315,14 +1316,15 @@ include 'dependence/all_dependency.php';
 
 
 
-        $('.selectpicker').select2({
-        });
-        $('.dateselect').datepicker({
-            todayHighlight: true,
-            format: "yyyy-mm-dd",
-
-            //container: console.log($(this).datepicker())
-        });
+        if ($.fn.select2) {
+            $('.selectpicker').select2({});
+        }
+        if ($.fn.datepicker) {
+            $('.dateselect').datepicker({
+                todayHighlight: true,
+                format: "yyyy-mm-dd",
+            });
+        }
 
         route_name_select = "<?php echo $route_name_fullname; ?>";
         /* Lean API + date_sort index keep unfiltered first page fast - do not hide rows with a surprise date cut-off. */

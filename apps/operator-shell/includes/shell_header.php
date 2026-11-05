@@ -23,7 +23,7 @@ include $ticketsRoot . '/includes/tessera_states_boot.php';
 echo tessera_brand_css_vars();
 echo tessera_support_banner_html();
 
-$sr_profile_home = '/' . ($sr_active_module === 'accounts' ? 'accounts' : $sr_active_module) . '/profile.php?u=' . urlencode($username);
+$sr_profile_home = '/settings/profile.php';
 $sr_logout_href = '/' . ($sr_active_module === 'accounts' ? 'accounts' : $sr_active_module) . '/log_out.php';
 
 /* Chrome assets stay on Tickets paths - not affected by per-module <base> for viewport. */

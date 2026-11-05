@@ -1,7 +1,7 @@
 <?php
 /**
  * Tessera Control config (platform owners only).
- * Override via environment on Railway; defaults are for local XAMPP.
+ * Override via environment on the server; defaults are for local XAMPP.
  */
 function control_config(): array {
 	$email = strtolower(trim((string) (getenv('PLATFORM_OWNER_EMAIL') ?: 'owner@tessera.co.tz')));

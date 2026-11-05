@@ -69,11 +69,17 @@
   var currentModule = cfg.module || (cfg.initial && cfg.initial.module) || 'tickets';
   var lastTopnavModule = null;
   var currentViewKey = '';
-  /** Soft cache so revisiting a page paints instantly (no spinner / PHP round-trip). */
-  var VIEW_CACHE_TTL_MS = 120000;
-  var VIEW_CACHE_MAX = 16;
+  /**
+   * Soft cache: paint instantly on revisit.
+   * Fresh = serve only from cache. Stale = paint now, refresh in background.
+   * List/booking data still refreshes via each page's own AJAX after paint.
+   */
+  var VIEW_CACHE_TTL_MS = 5 * 60 * 1000;
+  var VIEW_CACHE_STALE_MS = 30 * 60 * 1000;
+  var VIEW_CACHE_MAX = 28;
   var viewCache = Object.create(null);
   var viewCacheOrder = [];
+  var prefetchInflight = Object.create(null);
 
   function viewCacheKey(module, page, query) {
     var parts = [module || '', page || ''];
@@ -86,15 +92,22 @@
     return parts.join('|');
   }
 
-  function viewCacheGet(key) {
+  function viewCacheGet(key, allowStale) {
     var hit = viewCache[key];
     if (!hit) return null;
-    if (Date.now() - hit.at > VIEW_CACHE_TTL_MS) {
+    var age = Date.now() - hit.at;
+    if (age > VIEW_CACHE_STALE_MS) {
       delete viewCache[key];
       viewCacheOrder = viewCacheOrder.filter(function (k) { return k !== key; });
       return null;
     }
+    if (!allowStale && age > VIEW_CACHE_TTL_MS) return null;
     return hit.payload;
+  }
+
+  function viewCacheAge(key) {
+    var hit = viewCache[key];
+    return hit ? Date.now() - hit.at : Infinity;
   }
 
   function viewCacheSet(key, payload) {
@@ -116,6 +129,85 @@
     viewCache[key] = { at: Date.now(), payload: copy };
   }
 
+  function fetchSpaPayload(module, page, query, signal) {
+    return fetch(spaFetchUrl(module, page, query), {
+      credentials: 'same-origin',
+      redirect: 'manual',
+      headers: { 'X-Tessera-Operator-Spa': '1', Accept: 'application/json' },
+      signal: signal
+    }).then(function (r) {
+      /* Do not follow login redirects — that can Set-Cookie a fresh empty SID and wipe the staff session. */
+      if (r.type === 'opaqueredirect' || r.status === 301 || r.status === 302 || r.status === 303 || r.status === 307 || r.status === 308) {
+        throw new Error('auth_redirect');
+      }
+      if (r.status === 401 || r.status === 403) {
+        throw new Error('auth');
+      }
+      return r.text().then(function (text) {
+        var payload = null;
+        try {
+          payload = text ? JSON.parse(text) : null;
+        } catch (e) {
+          payload = null;
+        }
+        if (!r.ok) {
+          var detail =
+            (payload && (payload.detail || payload.error || payload.message)) ||
+            ('SPA load failed (' + r.status + ')');
+          throw new Error(String(detail));
+        }
+        if (!payload) throw new Error('SPA load returned invalid JSON.');
+        if (payload.error) throw new Error(payload.detail || payload.error);
+        return payload;
+      });
+    });
+  }
+
+  function isDangerousPrefetchPage(page) {
+    var p = String(page || '').toLowerCase();
+    return (
+      p.indexOf('log_out') !== -1 ||
+      p.indexOf('logout') !== -1 ||
+      p.indexOf('login') !== -1 ||
+      p.indexOf('auth.php') !== -1
+    );
+  }
+
+  function prefetchView(module, page, query) {
+    if (!module || !page) return;
+    /* Never SPA-prefetch logout — capturing log_out.php destroys the staff session cookie. */
+    if (isDangerousPrefetchPage(page)) return;
+    var q = query || {};
+    var key = viewCacheKey(module, page, q);
+    if (viewCacheGet(key, true) || prefetchInflight[key] || loading) return;
+    prefetchInflight[key] = true;
+    fetchSpaPayload(module, page, q)
+      .then(function (payload) {
+        viewCacheSet(key, payload);
+      })
+      .catch(function () { /* ignore prefetch errors */ })
+      .finally(function () {
+        delete prefetchInflight[key];
+      });
+  }
+
+  function refreshViewInBackground(module, page, query, key) {
+    if (prefetchInflight[key]) return;
+    prefetchInflight[key] = true;
+    fetchSpaPayload(module, page, query)
+      .then(function (payload) {
+        viewCacheSet(key, payload);
+        /* Quietly refresh only if user is still on this view. */
+        if (currentViewKey === key && !loading) {
+          applyPayload(payload, false);
+        }
+      })
+      .catch(function () { /* ignore */ })
+      .finally(function () {
+        delete prefetchInflight[key];
+      });
+  }
+
   /** Shell already ships Dashonic core CSS - do not re-inject duplicates. */
   function isShellCoreStylesheet(href) {
     if (!href) return true;
@@ -127,6 +219,13 @@
    * Previous bug: dumping <link> tags inside <style id="sr-spa-page-styles"> - browsers ignore them,
    * so Dashonic page CSS (home-dashboard, schedule, datatables, ...) never applied.
    */
+  var modulePrefixes = {
+    tickets: '/tickets/',
+    cargo: '/cargo/',
+    accounts: '/accounts/'
+  };
+  var activeModulePrefix = modulePrefixes[currentModule] || '/tickets/';
+
   function applyPageStyles(html) {
     document.querySelectorAll('[data-sr-spa-style]').forEach(function (el) {
       el.parentNode && el.parentNode.removeChild(el);
@@ -138,6 +237,11 @@
       if (node.tagName === 'LINK') {
         var href = node.getAttribute('href') || '';
         if (isShellCoreStylesheet(href)) return;
+        // Relative legacy hrefs must resolve under /tickets|/cargo|/accounts — not /operator/.
+        if (href && !/^(https?:|\/\/|\/|#|data:)/i.test(href)) {
+          href = activeModulePrefix + href.replace(/^\.\//, '');
+          node.setAttribute('href', href);
+        }
         var abs = href;
         try {
           abs = new URL(href, window.location.origin).href;
@@ -154,13 +258,6 @@
       document.head.appendChild(node);
     });
   }
-
-  var modulePrefixes = {
-    tickets: '/tickets/',
-    cargo: '/cargo/',
-    accounts: '/accounts/'
-  };
-  var activeModulePrefix = modulePrefixes[currentModule] || '/tickets/';
 
   /** Rewrite only same-origin legacy PHP paths; never strip CDN hosts or /operator assets. */
   function rewriteLegacyUrl(raw) {
@@ -415,7 +512,7 @@
     }
   }
 
-  function applyPayload(payload, pushUrl) {
+  function applyPayload(payload, pushUrl, query) {
     if (!viewport || !payload) return Promise.resolve();
 
     var nextModule = payload.module || currentModule;
@@ -474,6 +571,11 @@
         if (payload.main_page) {
           u.searchParams.set('main_page', payload.main_page);
         }
+        Object.keys(query || {}).forEach(function (k) {
+          if (k === 'module' || k === 'page' || k === 'spa' || k === 'full' || k === 'main_page') return;
+          if (query[k] == null || String(query[k]) === '') return;
+          u.searchParams.set(k, String(query[k]));
+        });
         history.pushState(
           { spa: true, module: currentModule, page: payload.path },
           '',
@@ -506,8 +608,8 @@
     if (!page) page = defaultPage(module);
     var q = query || {};
     var key = viewCacheKey(module, page, q);
-    /* Warm revisit: paint cached shell immediately (no spinner, no PHP wait). */
-    var cached = viewCacheGet(key);
+    /* Stale-while-revalidate: paint any usable cache immediately, refresh quietly. */
+    var cached = viewCacheGet(key, true);
     if (cached) {
       if (loading) {
         pendingNav = { module: module, page: page, query: q, push: push };
@@ -519,7 +621,11 @@
       currentViewKey = key;
       viewport.classList.remove('sr-spa-loading');
       viewport.removeAttribute('aria-busy');
-      return applyPayload(cached, push);
+      var painted = applyPayload(cached, push, q);
+      if (viewCacheAge(key) > VIEW_CACHE_TTL_MS / 2) {
+        refreshViewInBackground(module, page, q, key);
+      }
+      return painted;
     }
 
     /* If a navigation is already in flight, queue the latest request instead of
@@ -539,24 +645,11 @@
     navAbort = typeof AbortController !== 'undefined' ? new AbortController() : null;
     viewport.classList.add('sr-spa-loading');
     viewport.setAttribute('aria-busy', 'true');
-    return fetch(spaFetchUrl(module, page, q), {
-      credentials: 'same-origin',
-      headers: { 'X-Tessera-Operator-Spa': '1', Accept: 'application/json' },
-      signal: navAbort ? navAbort.signal : undefined
-    })
-      .then(function (r) {
-        if (r.status === 401 || r.status === 403) {
-          window.location.href = (modulePrefixes[module] || '/tickets/') + 'index.php';
-          throw new Error('auth');
-        }
-        if (!r.ok) throw new Error('SPA load failed (' + r.status + ')');
-        return r.json();
-      })
+    return fetchSpaPayload(module, page, q, navAbort ? navAbort.signal : undefined)
       .then(function (payload) {
-        if (payload.error) throw new Error(payload.detail || payload.error);
         viewCacheSet(key, payload);
         if (currentViewKey !== key) return;
-        return applyPayload(payload, push);
+        return applyPayload(payload, push, q);
       })
       .catch(function (err) {
         if (err && err.name === 'AbortError') return;
@@ -599,10 +692,47 @@
 
   document.addEventListener('click', onLinkClick, true);
 
+  /* Warm likely next pages on hover so the click feels instant. */
+  document.addEventListener(
+    'pointerenter',
+    function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a) return;
+      var href = a.getAttribute('href');
+      if (!href || href.charAt(0) === '#' || a.target === '_blank') return;
+      var parsed = parseOperatorTarget(a.href);
+      if (!parsed || !parsed.page) return;
+      prefetchView(parsed.module, parsed.page, parsed.query);
+    },
+    true
+  );
+
   window.addEventListener('popstate', function (ev) {
     if (!ev.state || !ev.state.page) return;
     loadView(ev.state.module || currentModule, ev.state.page, {}, false);
   });
+
+  function warmSiblingNav() {
+    try {
+      var roots = [
+        document.getElementById('topnav-menu-content'),
+        document.querySelector('#page-topbar .sr-module-pills'),
+        document.querySelector('#page-topbar')
+      ];
+      var seen = Object.create(null);
+      roots.forEach(function (root) {
+        if (!root) return;
+        Array.prototype.forEach.call(root.querySelectorAll('a[href]'), function (a) {
+          var parsed = parseOperatorTarget(a.href);
+          if (!parsed || !parsed.page) return;
+          var k = viewCacheKey(parsed.module, parsed.page, parsed.query);
+          if (seen[k]) return;
+          seen[k] = 1;
+          prefetchView(parsed.module, parsed.page, parsed.query);
+        });
+      });
+    } catch (e) { /* ignore */ }
+  }
 
   document.addEventListener('DOMContentLoaded', function () {
     if (cfg.initial) {
@@ -622,6 +752,14 @@
       if (cfg.initial.scripts && cfg.initial.scripts.length) {
         runScripts(cfg.initial.scripts);
       }
+    }
+    var warm = function () {
+      warmSiblingNav();
+    };
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(warm, { timeout: 2500 });
+    } else {
+      setTimeout(warm, 1200);
     }
   });
 })();

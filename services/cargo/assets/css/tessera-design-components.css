@@ -1,0 +1,806 @@
+/**
+ * Tessera Operator Design System — COMPONENT RECIPES
+ * Built only on tokens from tessera-design-tokens.css
+ * Class prefix: tds-
+ */
+
+/* ── Page scaffold (inside shell viewport) ──────────────────── */
+.tds-page {
+  font-family: var(--tds-font-ui);
+  color: var(--tds-ink);
+}
+
+.tds-page-title-box {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--tds-space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--tds-space-4);
+}
+
+.tds-page-title {
+  margin: 0;
+  font-size: var(--tds-fs-2xl);
+  font-weight: var(--tds-fw-semibold);
+  line-height: var(--tds-lh-tight);
+  color: var(--tds-ink);
+}
+
+.tds-page-lead {
+  margin: var(--tds-space-1) 0 0;
+  font-size: var(--tds-fs-md);
+  color: var(--tds-ink-muted);
+  max-width: 42rem;
+}
+
+/* Page titles sit on the dark Dashonic canvas, not on a light card. */
+[data-layout-mode="dark"] .tds-page-title {
+  color: var(--tds-chrome-ink);
+}
+
+[data-layout-mode="dark"] .tds-page-lead,
+[data-layout-mode="dark"] .tds-breadcrumb {
+  color: var(--tds-chrome-ink-muted);
+}
+
+.tds-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tds-space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--tds-space-2);
+  font-size: var(--tds-fs-sm);
+  color: var(--tds-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tds-breadcrumb a {
+  color: var(--tds-accent);
+  text-decoration: none;
+}
+
+/* ── Cards ──────────────────────────────────────────────────── */
+.tds-card {
+  background: var(--tds-surface);
+  border: 1px solid var(--tds-line-strong);
+  border-radius: var(--tds-radius-md);
+  box-shadow: var(--tds-shadow-sm);
+}
+
+.tds-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tds-space-3);
+  padding: var(--tds-space-4) var(--tds-space-5);
+  border-bottom: 1px solid var(--tds-line);
+  background: var(--tds-surface);
+}
+
+.tds-card-body {
+  padding: var(--tds-space-5);
+}
+
+.tds-card-title {
+  margin: 0;
+  font-size: var(--tds-fs-lg);
+  font-weight: var(--tds-fw-semibold);
+  color: var(--tds-ink);
+}
+
+/* ── Filter / toolbar panel ─────────────────────────────────── */
+.tds-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--tds-space-3);
+  padding: var(--tds-space-4);
+  margin-bottom: var(--tds-space-4);
+  background: var(--tds-surface);
+  border: 1px solid var(--tds-line-strong);
+  border-radius: var(--tds-radius-md);
+}
+
+.tds-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tds-space-1);
+  min-width: 10rem;
+}
+
+.tds-label {
+  font-size: var(--tds-fs-xs);
+  font-weight: var(--tds-fw-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--tds-ink-secondary);
+}
+
+.tds-input,
+.tds-select,
+.tds-search {
+  height: var(--tds-control-h);
+  padding: 0 var(--tds-space-3);
+  border: 1px solid var(--tds-line-strong);
+  border-radius: var(--tds-radius-sm);
+  font: inherit;
+  font-size: var(--tds-fs-md);
+  color: var(--tds-ink);
+  background: var(--tds-surface);
+}
+
+.tds-input:focus,
+.tds-select:focus,
+.tds-search:focus {
+  outline: none;
+  border-color: var(--tds-accent);
+  box-shadow: var(--tds-focus-ring);
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.tds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tds-space-2);
+  height: var(--tds-control-h);
+  padding: 0 var(--tds-space-4);
+  border: 1px solid transparent;
+  border-radius: var(--tds-radius-sm);
+  font-family: var(--tds-font-ui);
+  font-size: var(--tds-fs-md);
+  font-weight: var(--tds-fw-semibold);
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--tds-duration) var(--tds-ease),
+    border-color var(--tds-duration) var(--tds-ease),
+    color var(--tds-duration) var(--tds-ease),
+    transform var(--tds-duration-fast) var(--tds-ease);
+}
+
+.tds-btn:active {
+  transform: translateY(1px);
+}
+
+.tds-btn:disabled,
+.tds-btn[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.tds-btn-primary {
+  background: var(--tds-chrome);
+  color: var(--tds-ink-inverse);
+}
+
+.tds-btn-primary:hover:not(:disabled) {
+  background: var(--tds-chrome-deep);
+  color: var(--tds-ink-inverse);
+}
+
+.tds-btn-accent {
+  background: var(--tds-accent);
+  color: var(--tds-ink-inverse);
+}
+
+.tds-btn-accent:hover:not(:disabled) {
+  background: var(--tds-accent-hover);
+  color: var(--tds-ink-inverse);
+}
+
+.tds-btn-secondary {
+  background: var(--tds-surface);
+  border-color: var(--tds-line-strong);
+  color: var(--tds-ink-secondary);
+}
+
+.tds-btn-secondary:hover:not(:disabled) {
+  background: var(--tds-accent-soft);
+  border-color: var(--tds-accent-border);
+  color: var(--tds-accent);
+}
+
+.tds-btn-ghost {
+  background: transparent;
+  color: var(--tds-accent);
+}
+
+.tds-btn-danger {
+  background: var(--tds-danger);
+  color: var(--tds-ink-inverse);
+}
+
+.tds-btn-sm {
+  height: var(--tds-control-h-sm);
+  padding: 0 var(--tds-space-3);
+  font-size: var(--tds-fs-sm);
+}
+
+/* ── Badges / chips ─────────────────────────────────────────── */
+.tds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tds-space-1);
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--tds-radius-pill);
+  font-size: var(--tds-fs-xs);
+  font-weight: var(--tds-fw-semibold);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.tds-badge-paid {
+  background: var(--tds-paid-bg);
+  color: var(--tds-paid-ink);
+}
+
+.tds-badge-due {
+  background: var(--tds-due-bg);
+  color: var(--tds-due-ink);
+}
+
+.tds-badge-warn {
+  background: var(--tds-warning-bg);
+  color: var(--tds-warning);
+}
+
+.tds-badge-info {
+  background: var(--tds-info-bg);
+  color: var(--tds-info);
+}
+
+.tds-badge-neutral {
+  background: var(--tds-surface-sunken);
+  color: var(--tds-ink-secondary);
+}
+
+/* ── Alerts ─────────────────────────────────────────────────── */
+.tds-alert {
+  display: flex;
+  gap: var(--tds-space-3);
+  padding: var(--tds-space-3) var(--tds-space-4);
+  border-radius: var(--tds-radius-md);
+  border: 1px solid transparent;
+  font-size: var(--tds-fs-md);
+}
+
+.tds-alert-info {
+  background: var(--tds-info-bg);
+  border-color: color-mix(in srgb, var(--tds-info) 25%, transparent);
+  color: var(--tds-info);
+}
+
+.tds-alert-warning {
+  background: var(--tds-warning-bg);
+  border-color: color-mix(in srgb, var(--tds-warning) 25%, transparent);
+  color: var(--tds-warning);
+}
+
+.tds-alert-danger {
+  background: var(--tds-danger-bg);
+  border-color: color-mix(in srgb, var(--tds-danger) 25%, transparent);
+  color: var(--tds-danger);
+}
+
+.tds-alert-success {
+  background: var(--tds-success-bg);
+  border-color: color-mix(in srgb, var(--tds-success) 25%, transparent);
+  color: var(--tds-success);
+}
+
+/* ── Tables (Book-list style baseline) ──────────────────────── */
+.tds-table-panel {
+  background: var(--tds-surface);
+  border: 1px solid var(--tds-line-strong);
+  border-radius: var(--tds-radius-md);
+  overflow: hidden;
+}
+
+.tds-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: var(--tds-fs-md);
+}
+
+.tds-table thead th {
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  font-size: var(--tds-fs-xs);
+  font-weight: var(--tds-fw-semibold);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--tds-ink-secondary);
+  background: var(--tds-surface-raised);
+  border-bottom: 1px solid var(--tds-line-strong);
+  white-space: nowrap;
+}
+
+.tds-table tbody td {
+  padding: 0.55rem 0.75rem;
+  vertical-align: middle;
+  color: var(--tds-ink);
+  border-bottom: 1px solid var(--tds-line);
+  background: var(--tds-surface);
+}
+
+.tds-table tbody tr:hover > td {
+  background: var(--tds-accent-soft);
+}
+
+.tds-table tbody tr:last-child > td {
+  border-bottom: 0;
+}
+
+.tds-table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tds-space-2);
+  align-items: center;
+}
+
+.tds-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tds-space-2);
+  align-items: center;
+}
+
+.tds-chip {
+  appearance: none;
+  border: 1px solid var(--tds-line-strong);
+  background: var(--tds-surface);
+  color: var(--tds-ink-secondary);
+  border-radius: var(--tds-radius-pill);
+  padding: 0.35rem 0.85rem;
+  font-size: var(--tds-fs-sm);
+  font-weight: var(--tds-fw-semibold);
+  cursor: pointer;
+  line-height: 1.3;
+}
+
+.tds-chip:hover {
+  background: var(--tds-accent-soft);
+  color: var(--tds-ink);
+}
+
+.tds-chip.is-active {
+  background: var(--tds-accent);
+  border-color: var(--tds-accent);
+  color: var(--tds-ink-inverse);
+}
+
+.tds-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tds-space-3);
+  padding: var(--tds-space-3) var(--tds-space-4);
+  border-top: 1px solid var(--tds-line);
+  background: var(--tds-surface-raised);
+}
+
+.tds-pager-meta {
+  font-size: var(--tds-fs-sm);
+  color: var(--tds-ink-muted);
+}
+
+/* ── KPI / summary cards ────────────────────────────────────── */
+.tds-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--tds-space-4);
+  margin-bottom: var(--tds-space-5);
+}
+
+.tds-kpi {
+  padding: var(--tds-space-4) var(--tds-space-5);
+  background: var(--tds-surface);
+  border: 1px solid var(--tds-line-strong);
+  border-radius: var(--tds-radius-md);
+  box-shadow: var(--tds-shadow-sm);
+}
+
+.tds-kpi-label {
+  margin: 0 0 var(--tds-space-1);
+  font-size: var(--tds-fs-xs);
+  font-weight: var(--tds-fw-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--tds-ink-muted);
+}
+
+.tds-kpi-value {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: var(--tds-fw-bold);
+  line-height: var(--tds-lh-tight);
+  color: var(--tds-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.tds-kpi-hint {
+  margin: var(--tds-space-1) 0 0;
+  font-size: var(--tds-fs-sm);
+  color: var(--tds-ink-muted);
+}
+
+/* ── Empty / loading placeholders (pair with tessera-states) ── */
+.tds-empty {
+  text-align: center;
+  padding: var(--tds-space-10) var(--tds-space-6);
+  color: var(--tds-ink-muted);
+}
+
+.tds-empty-title {
+  margin: 0 0 var(--tds-space-2);
+  font-size: var(--tds-fs-xl);
+  font-weight: var(--tds-fw-semibold);
+  color: var(--tds-ink-secondary);
+}
+
+.tds-skeleton {
+  display: block;
+  height: 0.85rem;
+  border-radius: var(--tds-radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--tds-surface-sunken) 0%,
+    #f5f6f8 50%,
+    var(--tds-surface-sunken) 100%
+  );
+  background-size: 200% 100%;
+  animation: tds-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes tds-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* ── Utility ────────────────────────────────────────────────── */
+.tds-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tds-space-4);
+}
+
+.tds-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--tds-space-3);
+}
+
+.tds-mono {
+  font-family: var(--tds-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tds-muted {
+  color: var(--tds-ink-muted);
+}
+
+.tds-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Date range (paired fields inside toolbar) ──────────────── */
+.tds-date-range {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--tds-space-3);
+}
+
+.tds-date-range .tds-field {
+  min-width: 9.5rem;
+}
+
+.tds-date-range-sep {
+  align-self: center;
+  padding-bottom: 0.35rem;
+  color: var(--tds-ink-muted);
+  font-size: var(--tds-fs-sm);
+}
+
+/* ── Calendar host (Schedule) ───────────────────────────────── */
+.tds-calendar-card .tds-card-body {
+  padding: var(--tds-space-4);
+}
+
+.tds-calendar-host {
+  min-height: 28rem;
+}
+
+.tds-calendar-host .fc {
+  font-family: var(--tds-font-ui);
+  color: var(--tds-ink);
+}
+
+.tds-calendar-host .fc .fc-toolbar-title {
+  font-size: var(--tds-fs-xl);
+  font-weight: var(--tds-fw-semibold);
+}
+
+.tds-calendar-host .fc .fc-button {
+  background: var(--tds-surface);
+  border: 1px solid var(--tds-line-strong);
+  color: var(--tds-ink);
+  text-transform: none;
+  box-shadow: none;
+  border-radius: var(--tds-radius-sm);
+}
+
+.tds-calendar-host .fc .fc-button-primary:not(:disabled).fc-button-active,
+.tds-calendar-host .fc .fc-button-primary:not(:disabled):active {
+  background: var(--tds-accent);
+  border-color: var(--tds-accent);
+  color: var(--tds-ink-inverse);
+}
+
+.tds-cal-event {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.15rem 0.25rem;
+  font-size: var(--tds-fs-xs);
+  line-height: 1.25;
+  overflow: hidden;
+}
+
+.tds-cal-event__time {
+  font-weight: var(--tds-fw-semibold);
+}
+
+.tds-cal-event__route {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tds-cal-event__meta {
+  display: flex;
+  gap: 0.35rem;
+  opacity: 0.92;
+}
+
+.tds-cal-event--full {
+  outline: 1px solid var(--tds-danger);
+}
+
+/* ── Seat chart chrome (Book trip / vehicle layout) ─────────── */
+.tds-seat-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tds-space-3);
+  padding: var(--tds-space-4);
+  background: var(--tds-surface-raised);
+  border: 1px solid var(--tds-line-strong);
+  border-radius: var(--tds-radius-md);
+}
+
+.tds-seat-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tds-space-3);
+  font-size: var(--tds-fs-sm);
+  color: var(--tds-ink-secondary);
+}
+
+.tds-seat-chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tds-space-2);
+}
+
+.tds-seat {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--tds-radius-sm);
+  border: 1px solid var(--tds-line-strong);
+  background: var(--tds-surface);
+  color: var(--tds-ink);
+  font-size: var(--tds-fs-xs);
+  font-weight: var(--tds-fw-semibold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.tds-seat:hover:not(:disabled):not(.tds-seat-taken):not(.tds-seat-blocked) {
+  border-color: var(--tds-accent);
+  box-shadow: 0 0 0 2px var(--tds-accent-soft);
+}
+
+.tds-seat-available {
+  background: var(--tds-surface);
+}
+
+.tds-seat-selected {
+  background: var(--tds-accent);
+  border-color: var(--tds-accent);
+  color: var(--tds-ink-inverse);
+}
+
+.tds-seat-taken {
+  background: var(--tds-danger-bg);
+  border-color: color-mix(in srgb, var(--tds-danger) 35%, #fff);
+  color: var(--tds-danger);
+  cursor: not-allowed;
+}
+
+.tds-seat-blocked {
+  background: var(--tds-surface-sunken);
+  color: var(--tds-ink-muted);
+  cursor: not-allowed;
+}
+
+.tds-seat-grid {
+  display: grid;
+  gap: var(--tds-space-2);
+  justify-content: start;
+}
+
+/* ── Vehicle manager fleet + layout editor ──────────────────── */
+.tds-fleet-shell {
+  display: grid;
+  grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
+  gap: var(--tds-space-4);
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .tds-fleet-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tds-fleet-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.tds-fleet-item {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-bottom: 1px solid var(--tds-line);
+  background: var(--tds-surface);
+  color: var(--tds-ink);
+  padding: var(--tds-space-3) var(--tds-space-4);
+  cursor: pointer;
+}
+
+.tds-fleet-item:hover {
+  background: var(--tds-accent-soft);
+}
+
+.tds-fleet-item.is-active {
+  background: var(--tds-accent-soft);
+  box-shadow: inset 3px 0 0 var(--tds-accent);
+}
+
+.tds-fleet-item__name {
+  display: block;
+  font-weight: var(--tds-fw-semibold);
+}
+
+.tds-fleet-item__meta {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: var(--tds-fs-sm);
+  color: var(--tds-ink-muted);
+}
+
+.tds-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tds-space-2);
+  border-bottom: 1px solid var(--tds-line-strong);
+  margin-bottom: var(--tds-space-4);
+}
+
+.tds-tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--tds-ink-secondary);
+  padding: 0.65rem 0.9rem;
+  font-size: var(--tds-fs-sm);
+  font-weight: var(--tds-fw-semibold);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tds-tab.is-active {
+  color: var(--tds-accent);
+  border-bottom-color: var(--tds-accent);
+}
+
+.tds-layout-row {
+  display: flex;
+  align-items: center;
+  gap: var(--tds-space-2);
+  margin-bottom: var(--tds-space-2);
+}
+
+.tds-layout-cells {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tds-space-2);
+  flex: 1;
+}
+
+.tds-layout-cell {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: var(--tds-radius-sm);
+  border: 1px solid var(--tds-line-strong);
+  background: var(--tds-surface-sunken);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--tds-fs-xs);
+  cursor: pointer;
+  color: var(--tds-ink-muted);
+}
+
+.tds-layout-cell--seat {
+  background: var(--tds-accent-soft);
+  color: var(--tds-accent);
+  border-color: color-mix(in srgb, var(--tds-accent) 35%, #fff);
+}
+
+.tds-layout-cell--aisle {
+  background: transparent;
+  border-style: dashed;
+  color: var(--tds-ink-muted);
+}
+
+.tds-layout-preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tds-space-2);
+}
+
+.tds-layout-preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.tds-layout-preview-seat {
+  min-width: 2rem;
+  padding: 0.2rem 0.35rem;
+  border-radius: var(--tds-radius-sm);
+  background: var(--tds-accent-soft);
+  color: var(--tds-accent);
+  font-size: var(--tds-fs-xs);
+  font-weight: var(--tds-fw-semibold);
+  text-align: center;
+}
+
+.tds-layout-preview-aisle {
+  width: 0.75rem;
+}

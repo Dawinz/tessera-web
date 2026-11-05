@@ -1,0 +1,6 @@
+# Tessera Control alert cron (Wave I5)
+# Deploy as a cron container: image curlimages/curl, startCommand runs this script pattern.
+FROM curlimages/curl:8.11.1
+COPY control-cron.sh /control-cron.sh
+# Env injects CONTROL_CRON_TOKEN; schedule set via serviceInstanceUpdate cronSchedule
+ENTRYPOINT ["/bin/sh", "/control-cron.sh"]

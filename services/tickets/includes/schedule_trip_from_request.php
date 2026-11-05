@@ -29,7 +29,8 @@ function schedule_trip_from_request(mysqli $db): ?array
 	$tenantSql = tessera_sql_tenant_eq('rd');
 	$q = mysqli_query(
 		$db,
-		"SELECT rd.*, r.fullname, r.route_name, r.start_route, r.end_route, r.fare_price, r.currency_symbol, r.route_id AS main_route_id
+		"SELECT rd.*, r.fullname, r.route_name, r.start_route, r.end_route, r.fare_price, r.currency_symbol,
+		        r.id AS routes_pk, r.route_id AS main_route_id
 		 FROM route_day rd
 		 INNER JOIN routes r ON (r.id = rd.route_id OR r.route_id = rd.route_id) AND " . tessera_sql_tenant_eq('r') . "
 		 WHERE rd.id=" . (int) $routeDayId . " AND " . $tenantSql . " LIMIT 1"
@@ -68,6 +69,8 @@ function schedule_trip_from_request(mysqli $db): ?array
 		'trip_date_display' => date('m/d/Y', strtotime($tripDate)),
 		'route_id' => $routeId,
 		'route_id_main' => $routeId,
+		'routes_pk' => (int) ($rd['routes_pk'] ?? 0),
+		'main_route_id' => (string) ($rd['main_route_id'] ?? $routeId),
 		'bus' => $bus,
 		'fare_price' => (float) ($rd['fare_price'] ?? 0),
 		'currency_symbol' => (string) ($rd['currency_symbol'] ?? ''),

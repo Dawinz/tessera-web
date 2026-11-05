@@ -104,8 +104,12 @@ if($select_num2 !=0){
 				continue;
 			}
 
-			/* Tickets | Cargo | Accounts pills already switch modules - skip duplicate cross-module links. */
-			if (preg_match('#(?:^|/|\.\./)(?:cargo|tickets?|accounts?)/#i', (string) $link)) {
+			/* Module pills already switch products — never show Cargo/Accounts (or legacy sr_up) here. */
+			if (preg_match('/^(cargo|accounts?|tickets?)$/i', trim((string) $role_name))) {
+				continue;
+			}
+			if (preg_match('#(?:^|/|\.\./)(?:cargo|tickets?|accounts?|sr_up)(/|$|\.php)#i', (string) $link)
+				|| preg_match('#https?://localhost/#i', (string) $link)) {
 				continue;
 			}
 

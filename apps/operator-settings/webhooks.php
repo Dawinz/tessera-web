@@ -1,85 +1,77 @@
 <?php
+/**
+ * S-06 Webhooks — TDS create / list / disable.
+ */
 require_once __DIR__ . '/includes/boot.php';
-require_once $ticketsRoot . '/includes/tessera_operator_api.php';
 tessera_require_capability($db, $username, 'api_keys');
 
-$msg = null;
-$err = null;
-$newSecret = null;
-$allEvents = [
-	'booking.confirmed', 'booking.paid', 'booking.cancelled',
-	'cargo.status_changed', 'payout.sent',
-];
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$action = (string) ($_POST['action'] ?? '');
-	if ($action === 'create') {
-		$ev = array_values(array_filter((array) ($_POST['events'] ?? [])));
-		$created = tessera_webhook_create($db, $tenantId, (string) ($_POST['url'] ?? ''), $ev ?: ['*'], $username);
-		if ($created) {
-			$newSecret = $created['secret'];
-			$msg = 'Webhook registered. Copy the signing secret once.';
-		} else {
-			$err = 'Invalid HTTPS URL or migration 014 missing.';
-		}
-	} elseif ($action === 'disable') {
-		tessera_webhook_disable($db, $tenantId, (int) ($_POST['id'] ?? 0));
-		$msg = 'Webhook disabled.';
-	}
-}
-$hooks = tessera_webhook_list($db, $tenantId);
 $settings_page_title = 'Webhooks';
 $settings_crumb = 'Webhooks';
 $settings_nav_active = 'webhooks';
+$settings_extra_css = [
+	'/operator/css/tessera-design-tokens.css',
+	'/operator/css/tessera-design-components.css',
+];
 require_once __DIR__ . '/includes/layout.php';
+
+$jsV = @filemtime(__DIR__ . '/webhooks.js') ?: time();
 ?>
-<div class="card">
-	<div class="card-header"><h4 class="card-title mb-0"><i class="uil uil-link me-1"></i> Outbound webhooks</h4></div>
-	<div class="card-body">
-		<p class="text-muted">Tessera POSTs signed JSON to your HTTPS endpoint. Verify <code>X-Tessera-Signature: sha256=…</code> with your secret.</p>
-		<?php if ($msg): ?><div class="alert alert-success"><?php echo settings_h($msg); ?></div><?php endif; ?>
-		<?php if ($err): ?><div class="alert alert-danger"><?php echo settings_h($err); ?></div><?php endif; ?>
-		<?php if ($newSecret): ?><div class="alert alert-warning"><strong>Signing secret (copy once):</strong><br><code><?php echo settings_h($newSecret); ?></code></div><?php endif; ?>
-		<form method="post" class="vstack gap-3 mb-4">
-			<input type="hidden" name="action" value="create">
-			<div>
-				<label class="form-label">HTTPS URL</label>
-				<input type="url" class="form-control" name="url" placeholder="https://yoursite.example/hooks/tessera" required>
+<div class="tds-page" id="tds-settings-webhooks-root" data-ui-slice="S-06" style="padding:0">
+	<div class="tds-page-title-box" style="margin-bottom:var(--tds-space-4)">
+		<div>
+			<p class="tds-breadcrumb"><span>Settings</span><span>·</span><span>Webhooks</span></p>
+			<h1 class="tds-page-title">Webhooks</h1>
+			<p class="tds-page-lead">Tessera POSTs signed JSON to your HTTPS endpoint. Verify <code id="tds-webhooks-sig-hint">X-Tessera-Signature: sha256=…</code> with your secret.</p>
+		</div>
+	</div>
+
+	<div class="tds-alert tds-alert-danger" id="tds-settings-webhooks-error" hidden role="alert"></div>
+	<div class="tds-alert tds-alert-success" id="tds-settings-webhooks-success" hidden role="status"></div>
+	<div class="tds-alert tds-alert-warning" id="tds-settings-webhooks-secret" hidden role="status">
+		<strong>Signing secret (copy once):</strong>
+		<code id="tds-settings-webhooks-secret-value" style="display:block;margin-top:var(--tds-space-2);word-break:break-all"></code>
+	</div>
+
+	<div class="tds-table-panel" style="margin-bottom:var(--tds-space-4)">
+		<div class="tds-toolbar"><strong>Add webhook</strong></div>
+		<form id="tds-settings-webhooks-create" class="tds-dialog-body" style="padding:var(--tds-space-4)">
+			<div class="tds-field">
+				<label class="tds-label" for="tds-webhooks-url">HTTPS URL</label>
+				<input class="tds-input" type="url" id="tds-webhooks-url" name="url" placeholder="https://yoursite.example/hooks/tessera" required autocomplete="off">
+				<p class="tds-muted" style="margin:var(--tds-space-2) 0 0">Localhost HTTP is allowed for development only.</p>
 			</div>
-			<div>
-				<label class="form-label">Events</label>
-				<div class="d-flex flex-wrap gap-2">
-					<?php foreach ($allEvents as $ev): ?>
-						<label class="font-size-12 mb-0"><input type="checkbox" name="events[]" value="<?php echo $ev; ?>" checked> <?php echo $ev; ?></label>
-					<?php endforeach; ?>
-				</div>
+			<div class="tds-field" style="margin-top:var(--tds-space-3)">
+				<label class="tds-label">Events</label>
+				<div class="tds-row" id="tds-webhooks-events" style="gap:var(--tds-space-3);flex-wrap:wrap;padding-top:var(--tds-space-2)"></div>
 			</div>
-			<button class="btn btn-primary align-self-start">Add webhook</button>
+			<div class="tds-row" style="justify-content:flex-end;margin-top:var(--tds-space-4)">
+				<button type="submit" class="tds-btn tds-btn-primary" id="tds-webhooks-create-btn">Add webhook</button>
+			</div>
 		</form>
+	</div>
+
+	<div class="tds-table-panel">
+		<div class="tds-toolbar"><strong>Endpoints</strong></div>
 		<div class="table-responsive">
-			<table class="table table-centered table-nowrap mb-0">
-				<thead class="table-light"><tr><th>URL</th><th>Events</th><th>Status</th><th></th></tr></thead>
-				<tbody>
-				<?php if (empty($hooks)): ?>
-					<tr><td colspan="4" class="text-muted">None yet.</td></tr>
-				<?php else: foreach ($hooks as $h): ?>
+			<table class="tds-table">
+				<thead>
 					<tr>
-						<td class="font-size-12"><?php echo settings_h($h['url']); ?></td>
-						<td class="font-size-12"><?php echo settings_h(implode(', ', $h['events'] ?? [])); ?></td>
-						<td><?php echo settings_h($h['status']); ?></td>
-						<td>
-							<?php if ($h['status'] === 'active'): ?>
-								<form method="post" class="d-inline">
-									<input type="hidden" name="action" value="disable">
-									<input type="hidden" name="id" value="<?php echo (int) $h['id']; ?>">
-									<button class="btn btn-sm btn-soft-secondary">Disable</button>
-								</form>
-							<?php endif; ?>
-						</td>
+						<th>URL</th>
+						<th>Events</th>
+						<th>Secret</th>
+						<th>Status</th>
+						<th></th>
 					</tr>
-				<?php endforeach; endif; ?>
+				</thead>
+				<tbody id="tds-webhooks-tbody">
+					<tr><td colspan="5" class="tds-muted">Loading…</td></tr>
 				</tbody>
 			</table>
 		</div>
+		<p class="tds-muted" style="padding:var(--tds-space-3) var(--tds-space-4);margin:0">
+			Need credentials? Manage <a href="/settings/api.php">API keys</a>.
+		</p>
 	</div>
 </div>
+<script src="/settings/webhooks.js?v=<?php echo (int) $jsV; ?>"></script>
 <?php settings_layout_end(); ?>

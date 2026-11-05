@@ -14,9 +14,10 @@ if (!function_exists('tessera_is_apex_host')) {
 	function tessera_is_apex_host(?string $host = null): bool {
 		$host = strtolower((string) ($host ?? ($_SERVER['HTTP_HOST'] ?? '')));
 		$host = preg_replace('/:\\d+$/', '', $host) ?? '';
+		/* Apex marketing is on Vercel; app.* is the shared operator console host on Hetzner. */
 		return $host === 'tessera.co.tz' || $host === 'www.tessera.co.tz'
+			|| $host === 'app.tessera.co.tz'
 			|| $host === 'console.tessera.co.tz'
-			|| str_ends_with($host, '.up.railway.app')
 			|| $host === 'localhost' || $host === '127.0.0.1';
 	}
 }
@@ -26,7 +27,7 @@ if (!function_exists('tessera_resolve_tenant_slug')) {
 		$host = strtolower((string) ($_SERVER['HTTP_HOST'] ?? ''));
 		$host = preg_replace('/:\\d+$/', '', $host) ?? '';
 
-		/* Apex / Control / Railway preview / local -> flagship slug */
+		/* Apex / Control / preview / local -> flagship slug */
 		if (tessera_is_apex_host($host)) {
 			return 'sr-classic';
 		}

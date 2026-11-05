@@ -123,7 +123,7 @@ $date_now = date("Y-m-d", strtotime($date_today));
                     </div> 
 					 <div  style="display:none;" id ="start_location_select"><?php $start_location_name = @$_GET['start_location'];
 $select14=mysqli_query($db,"SELECT * FROM assigned_routes WHERE route_name ='$start_location_name'  and username='$username' ");
-$select_num14=mysqli_num_rows($select14);
+$select_num14=(($select14 instanceof mysqli_result) ? mysqli_num_rows($select14) : 0);
 if($select_num14 !=0){
 WHILE($get14=mysqli_fetch_array($select14)){
 	$route_id =$get14['route_id'];	
@@ -136,33 +136,25 @@ WHILE($get14=mysqli_fetch_array($select14)){
 					
 					
 					 <div  style="display:none;" id ="start_date_select"><?php
-					 $start_date= $_GET['start_date'];
-					 $start_date = date("m/d/Y", strtotime($start_date));
-					 echo $start_date;
+					 $start_date_raw = $_GET['start_date'] ?? $date_now;
+					 $start_ts = strtotime((string) $start_date_raw) ?: time();
+					 $start_date = date('m/d/Y', $start_ts);
+					 echo htmlspecialchars($start_date, ENT_QUOTES, 'UTF-8');
 					 ?>
 					 </div>
-					 <div  style="display:none;" id ="end_date_select"><?php 
-					 
-					$end_date =  $_GET['end_date'];
-					 	 $end_date = date("m/d/Y", strtotime($end_date));
-					 echo $end_date;
-					 
-					 ?></div>	
-					 <div  style="display:none;" id ="end_year_select"><?php 
-					 
-					$end_year =  $_GET['end_date'];
-					 	 $end_year = date("Y", strtotime($end_date));
-					 echo $end_year;
-					 
+					 <div  style="display:none;" id ="end_date_select"><?php
+					 $end_date_raw = $_GET['end_date'] ?? $date_now;
+					 $end_ts = strtotime((string) $end_date_raw) ?: time();
+					 $end_date = date('m/d/Y', $end_ts);
+					 echo htmlspecialchars($end_date, ENT_QUOTES, 'UTF-8');
 					 ?></div>
-					 
-					 
-					 	 <div  style="display:none;" id ="start_year_select"><?php 
-					 
-					$start_date_year =  $_GET['start_date'];
-					 	 $start_date_year = date("Y", strtotime($start_date_year));
-					 echo $start_date_year;
-					 
+					 <div  style="display:none;" id ="end_year_select"><?php
+					 $end_year = date('Y', $end_ts);
+					 echo htmlspecialchars($end_year, ENT_QUOTES, 'UTF-8');
+					 ?></div>
+					 	 <div  style="display:none;" id ="start_year_select"><?php
+					 $start_date_year = date('Y', $start_ts);
+					 echo htmlspecialchars($start_date_year, ENT_QUOTES, 'UTF-8');
 					 ?></div>
 					 
 					        <div class="btn-toolbar p-3" role="toolbar">
@@ -227,13 +219,13 @@ WHILE($get14=mysqli_fetch_array($select14)){
 						  <tbody>
 <?php 
 $select146=mysqli_query($db,"SELECT * FROM booking  WHERE " . tessera_sql_tenant_eq() . " AND (trip_date >='$start_date' and year='$start_date_year' and trip_date <='$end_date' and year='$end_year' and cost !='0') group by booker ");
-$select_num146=mysqli_num_rows($select146);
+$select_num146=(($select146 instanceof mysqli_result) ? mysqli_num_rows($select146) : 0);
 if($select_num146 !=0){
 WHILE($get146=mysqli_fetch_array($select146)){
 	$booker =$get146['booker'];
 	
 	$select2=mysqli_query($db,"SELECT *  FROM  users  where username='$booker'");
-$select_num2=mysqli_num_rows($select2);
+$select_num2=(($select2 instanceof mysqli_result) ? mysqli_num_rows($select2) : 0);
 if($select_num2 !=0){
    	WHILE($get12=mysqli_fetch_array($select2)){
     	    $firstname =$get12['firstname'];  
@@ -247,7 +239,7 @@ if($select_num2 !=0){
 	
 	
 	$select1463=mysqli_query($db,"SELECT * FROM booking  WHERE " . tessera_sql_tenant_eq() . " AND (trip_date >='$start_date' and year='$start_date_year' and trip_date <='$end_date' and year='$end_year' and cost !='0' and booker='$booker') group by route_id");
-$select_num1463=mysqli_num_rows($select1463);
+$select_num1463=(($select1463 instanceof mysqli_result) ? mysqli_num_rows($select1463) : 0);
 if($select_num1463 !=0){
 WHILE($get1463=mysqli_fetch_array($select1463)){
 
@@ -277,7 +269,7 @@ WHILE($get1463=mysqli_fetch_array($select1463)){
 	
 	
 		$select14=mysqli_query($db,"SELECT *  FROM  routes WHERE route_id='$route_id'  ");
-$select_num14=mysqli_num_rows($select14);
+$select_num14=(($select14 instanceof mysqli_result) ? mysqli_num_rows($select14) : 0);
 if($select_num14 !=0){
    	WHILE($get134=mysqli_fetch_array($select14)){
 

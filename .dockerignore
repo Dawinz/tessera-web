@@ -7,7 +7,10 @@
 **/.DS_Store
 **/node_modules
 **/.dart_tool
-**/build
+# Do NOT ignore **/build — that also drops vendor assets like
+# services/*/assets/libs/alertifyjs/build/*.css|js (MIME text/html 404s in browser).
+apps/customer-mobile/**/build
+apps/admin-mobile/**/build
 **/.gradle
 **/*.apk
 **/*.log
@@ -17,7 +20,7 @@ docs
 apps/customer-mobile
 apps/admin-mobile
 services/cargo/qz-tray
-deploy/railway/tmp
+deploy/docker/tmp
 agent-transcripts
 
 # Raw dumps (use database/seed/ instead)

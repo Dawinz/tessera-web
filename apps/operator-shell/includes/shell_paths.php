@@ -1,8 +1,8 @@
 <?php
 /**
- * Resolve Tickets / Accounts / Cargo roots for monorepo vs Railway / XAMPP web root.
+ * Resolve Tickets / Accounts / Cargo roots for monorepo vs Docker / XAMPP web root.
  *
- * Railway / XAMPP: DOCUMENT_ROOT has /tickets, /cargo, /accounts
+ * Docker / XAMPP: DOCUMENT_ROOT has /tickets, /cargo, /accounts
  * Monorepo checkout: apps/operator-shell → ../../services/{tickets,cargo,accounting}
  */
 if (!function_exists('tessera_operator_module_roots')) {

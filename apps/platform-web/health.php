@@ -80,7 +80,7 @@ $checks = [
 	['name' => 'Platform admins', 'detail' => $adminsOk ? ($adminCount . ' active admins') : 'Run migration 003', 'status' => $adminsOk ? 'Ready' : 'Missing table', 'tone' => $adminsOk ? 'success' : 'danger'],
 	['name' => 'Payment vault', 'detail' => $paymentsOk ? ($payOkCount . ' tenant(s) OK') : 'Run migration 003', 'status' => $paymentsOk ? 'Ready' : 'Missing table', 'tone' => $paymentsOk ? 'success' : 'danger'],
 	['name' => 'Latest backup', 'detail' => $latestBackup ? ('Last @ ' . $latestBackup) : 'No backup files', 'status' => $latestBackup ? 'Present' : 'None', 'tone' => $latestBackup ? 'success' : 'warning'],
-	['name' => 'Deploy posture', 'detail' => $deployNote !== '' ? $deployNote : 'Manual Railway status', 'status' => $deployStatus, 'tone' => $deployTone],
+	['name' => 'Deploy posture', 'detail' => $deployNote !== '' ? $deployNote : 'Manual deploy status', 'status' => $deployStatus, 'tone' => $deployTone],
 ];
 
 $overdueTenants = 0;

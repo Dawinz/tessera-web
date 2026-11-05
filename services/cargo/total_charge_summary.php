@@ -175,7 +175,7 @@ echo '<option value="vehicle">'.$route.'</option>';
 			
 		}		   
 									   $select12=mysqli_query($db,"SELECT *  FROM  assigned_routes where username='$username' and preference='1' order by id desc");
-$select_num12=mysqli_num_rows($select12);
+$select_num12=(($select12 instanceof mysqli_result) ? mysqli_num_rows($select12) : 0);
 if($select_num12 ==0){
 
 }else if($select_num12 ==1){
@@ -269,7 +269,7 @@ echo $date_today;
 								
 								include 'connect.php';
 				$select1=mysqli_query($db,"SELECT date_insert,location,username  FROM  daily_charges WHERE location='$route'  and   date_insert between  '$firstday'  and  '$lastday' group by date_insert ");
-$select_num1=mysqli_num_rows($select1);
+$select_num1=(($select1 instanceof mysqli_result) ? mysqli_num_rows($select1) : 0);
 if($select_num1 !=0){
 	   	WHILE($get12=mysqli_fetch_array($select1)){
 			$date_insert_day =$get12['date_insert']; 
@@ -289,7 +289,7 @@ if($select_num1 !=0){
             </tr>
 <?php
 	$select_username=mysqli_query($db,"SELECT username  FROM  daily_charges WHERE location='$route'  and   date_insert = '$date_insert_day'   ");
-$select_num_username=mysqli_num_rows($select_username);
+$select_num_username=(($select_username instanceof mysqli_result) ? mysqli_num_rows($select_username) : 0);
 if($select_num_username !=0){
 	   	WHILE($get_username=mysqli_fetch_array($select_username)){
 $username_charge =$get_username['username'];
@@ -307,7 +307,7 @@ $sum_paid = 0;
 		$sum_to_be = 0;
 		$sum_total_paid =0;			
 $select23=mysqli_query($db,"SELECT paid,to_be   FROM parcel_info  where account='$route' and  username='$username_charge' and  date_insert = '$date_insert_day' and open !='yes'");
-$select_num23=mysqli_num_rows($select23);
+$select_num23=(($select23 instanceof mysqli_result) ? mysqli_num_rows($select23) : 0);
 if($select_num23 !=0){
    	WHILE($get123=mysqli_fetch_array($select23)){
 		$to_be=$get123['to_be'];

@@ -1,102 +1,80 @@
 <?php
+/**
+ * S-01 Company profile — TDS form inside settings shell.
+ */
 require_once __DIR__ . '/includes/boot.php';
 tessera_require_capability($db, $username, 'settings');
-
-$msg = null;
-$err = null;
-$reg = function_exists('tessera_registry_mysqli') ? tessera_registry_mysqli() : $db;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $reg instanceof mysqli) {
-	$display = trim((string) ($_POST['display_name'] ?? ''));
-	$legal = trim((string) ($_POST['legal_name'] ?? ''));
-	$color = trim((string) ($_POST['primary_color'] ?? ''));
-	$logo = trim((string) ($_POST['logo_url'] ?? ''));
-	if ($display === '' || $legal === '') {
-		$err = 'Display name and legal name are required.';
-	} else {
-		if ($color !== '' && !preg_match('/^#[0-9A-Fa-f]{6}$/', $color)) {
-			$err = 'Primary colour must be a hex value like #E53E3E.';
-		} else {
-			$tid = (int) $tenantId;
-			$d = $reg->real_escape_string($display);
-			$l = $reg->real_escape_string($legal);
-			$c = $reg->real_escape_string($color);
-			$g = $reg->real_escape_string($logo);
-			$ok = @$reg->query(
-				"UPDATE tessera_tenants SET
-					display_name='{$d}',
-					legal_name='{$l}',
-					primary_color=" . ($color === '' ? 'NULL' : "'{$c}'") . ",
-					logo_url=" . ($logo === '' ? 'NULL' : "'{$g}'") . "
-				 WHERE id={$tid} LIMIT 1"
-			);
-			$msg = $ok ? 'Company profile saved.' : null;
-			$err = $ok ? null : 'Could not save company profile.';
-		}
-	}
-}
-
-$tenant = function_exists('tessera_tenant_row') ? (tessera_tenant_row() ?: []) : [];
-/* Re-read after save */
-if ($msg && $reg instanceof mysqli) {
-	$q = @$reg->query('SELECT * FROM tessera_tenants WHERE id=' . (int) $tenantId . ' LIMIT 1');
-	$row = $q ? $q->fetch_assoc() : null;
-	if ($row) {
-		$tenant = $row;
-	}
-}
 
 $settings_page_title = 'Company profile';
 $settings_crumb = 'Company';
 $settings_nav_active = 'company';
+$settings_extra_css = [
+	'/operator/css/tessera-design-tokens.css',
+	'/operator/css/tessera-design-components.css',
+];
 require_once __DIR__ . '/includes/layout.php';
+
+$jsV = @filemtime(__DIR__ . '/company.js') ?: time();
 ?>
-<div class="card">
-	<div class="card-header">
-		<h4 class="card-title mb-0"><i class="uil uil-building me-1"></i> Company profile</h4>
+<div class="tds-page" id="tds-settings-company-root" data-ui-slice="S-01" style="padding:0">
+	<div class="tds-page-title-box" style="margin-bottom:var(--tds-space-4)">
+		<div>
+			<p class="tds-breadcrumb"><span>Settings</span><span>·</span><span>Company</span></p>
+			<h1 class="tds-page-title">Company profile</h1>
+			<p class="tds-page-lead">How your bus company appears in the operator console. Domain and plan are managed by Tessera Control.</p>
+		</div>
 	</div>
-	<div class="card-body">
-		<p class="text-muted">How your bus company appears in the operator console. Domain and plan are managed by Tessera Control.</p>
-		<?php if ($msg): ?><div class="alert alert-success"><?php echo settings_h($msg); ?></div><?php endif; ?>
-		<?php if ($err): ?><div class="alert alert-danger"><?php echo settings_h($err); ?></div><?php endif; ?>
-		<form method="post" class="row g-3">
-			<div class="col-md-6">
-				<label class="form-label">Display name</label>
-				<input class="form-control" name="display_name" required value="<?php echo settings_h($tenant['display_name'] ?? ''); ?>">
+
+	<div class="tds-alert tds-alert-danger" id="tds-settings-company-error" hidden role="alert"></div>
+	<div class="tds-alert tds-alert-success" id="tds-settings-company-success" hidden role="status"></div>
+
+	<div class="tds-table-panel">
+		<div class="tds-toolbar"><strong>Brand</strong></div>
+		<form id="tds-settings-company-form" class="tds-dialog-body" style="padding:var(--tds-space-4)">
+			<div class="tds-row" style="gap:var(--tds-space-4);flex-wrap:wrap">
+				<div class="tds-field" style="flex:1 1 14rem;min-width:12rem">
+					<label class="tds-label" for="tds-settings-company-display">Display name</label>
+					<input class="tds-input" id="tds-settings-company-display" name="display_name" required>
+				</div>
+				<div class="tds-field" style="flex:1 1 14rem;min-width:12rem">
+					<label class="tds-label" for="tds-settings-company-legal">Legal name</label>
+					<input class="tds-input" id="tds-settings-company-legal" name="legal_name" required>
+				</div>
 			</div>
-			<div class="col-md-6">
-				<label class="form-label">Legal name</label>
-				<input class="form-control" name="legal_name" required value="<?php echo settings_h($tenant['legal_name'] ?? ''); ?>">
+			<div class="tds-row" style="gap:var(--tds-space-4);flex-wrap:wrap;margin-top:var(--tds-space-3)">
+				<div class="tds-field" style="flex:1 1 8rem">
+					<label class="tds-label" for="tds-settings-company-slug">Slug</label>
+					<input class="tds-input" id="tds-settings-company-slug" disabled>
+				</div>
+				<div class="tds-field" style="flex:1 1 8rem">
+					<label class="tds-label" for="tds-settings-company-status">Status</label>
+					<input class="tds-input" id="tds-settings-company-status" disabled>
+				</div>
+				<div class="tds-field" style="flex:1 1 8rem">
+					<label class="tds-label" for="tds-settings-company-plan">Plan</label>
+					<input class="tds-input" id="tds-settings-company-plan" disabled>
+				</div>
 			</div>
-			<div class="col-md-4">
-				<label class="form-label">Slug</label>
-				<input class="form-control" value="<?php echo settings_h($tenant['slug'] ?? ''); ?>" disabled>
+			<div class="tds-row" style="gap:var(--tds-space-4);flex-wrap:wrap;margin-top:var(--tds-space-3)">
+				<div class="tds-field" style="flex:0 0 10rem">
+					<label class="tds-label" for="tds-settings-company-color">Primary colour</label>
+					<input class="tds-input" id="tds-settings-company-color" name="primary_color" placeholder="#E53E3E">
+				</div>
+				<div class="tds-field" style="flex:1 1 16rem">
+					<label class="tds-label" for="tds-settings-company-logo">Logo URL</label>
+					<input class="tds-input" id="tds-settings-company-logo" name="logo_url" placeholder="https://…">
+				</div>
 			</div>
-			<div class="col-md-4">
-				<label class="form-label">Status</label>
-				<input class="form-control" value="<?php echo settings_h($tenant['status'] ?? ''); ?>" disabled>
+			<div class="tds-field" style="margin-top:var(--tds-space-3)">
+				<label class="tds-label" for="tds-settings-company-domain">Primary domain</label>
+				<input class="tds-input" id="tds-settings-company-domain" disabled>
+				<p class="tds-muted" style="margin:var(--tds-space-2) 0 0">DNS and custom domains are set in Tessera Control.</p>
 			</div>
-			<div class="col-md-4">
-				<label class="form-label">Plan</label>
-				<input class="form-control" value="<?php echo settings_h($tenant['plan'] ?? ''); ?>" disabled>
-			</div>
-			<div class="col-md-4">
-				<label class="form-label">Primary colour</label>
-				<input class="form-control" name="primary_color" placeholder="#E53E3E" value="<?php echo settings_h($tenant['primary_color'] ?? ''); ?>">
-			</div>
-			<div class="col-md-8">
-				<label class="form-label">Logo URL</label>
-				<input class="form-control" name="logo_url" placeholder="https://…" value="<?php echo settings_h($tenant['logo_url'] ?? ''); ?>">
-			</div>
-			<div class="col-md-12">
-				<label class="form-label">Primary domain</label>
-				<input class="form-control" value="<?php echo settings_h($tenant['primary_domain'] ?? ''); ?>" disabled>
-				<div class="form-text">DNS and custom domains are set in Tessera Control.</div>
-			</div>
-			<div class="col-12">
-				<button class="btn btn-primary"><i class="uil uil-save me-1"></i> Save company profile</button>
+			<div class="tds-row" style="justify-content:flex-end;gap:var(--tds-space-2);margin-top:var(--tds-space-4)">
+				<button type="submit" class="tds-btn tds-btn-primary" id="tds-settings-company-save">Save company profile</button>
 			</div>
 		</form>
 	</div>
 </div>
+<script src="/settings/company.js?v=<?php echo (int) $jsV; ?>"></script>
 <?php settings_layout_end(); ?>

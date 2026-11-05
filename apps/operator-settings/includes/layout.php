@@ -21,6 +21,7 @@ if (!is_dir($ticketsIncludes)) {
 
 $settings_nav_all = [
 	'home' => ['Overview', $SETTINGS_BASE . '/', 'uil-estate', null],
+	'profile' => ['My profile', $SETTINGS_BASE . '/profile.php', 'uil-user-circle', null],
 	'payouts' => ['Payouts', $SETTINGS_BASE . '/payouts.php', 'uil-money-withdraw', 'payouts'],
 	'notifications' => ['Notifications', $SETTINGS_BASE . '/notifications.php', 'uil-bell', 'notifications'],
 	'staff' => ['Staff & roles', $SETTINGS_BASE . '/staff.php', 'uil-users-alt', 'staff'],
@@ -56,7 +57,6 @@ $SETTINGS_SIDEBAR_W = 255;
 	$sr_shell_file = dirname($ticketsIncludes) . '/assets/css/sr-platform-shell.css';
 	$sr_shell_v = is_file($sr_shell_file) ? filemtime($sr_shell_file) : time();
 	?>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
 	<link rel="stylesheet" href="<?php echo settings_h($sr_shell_href); ?>?v=<?php echo (int) $sr_shell_v; ?>&sr=10">
 	<?php
 	if (!empty($settings_extra_css)) {
@@ -275,7 +275,7 @@ $SETTINGS_SIDEBAR_W = 255;
 			}
 			$sr_settings_href = $SETTINGS_BASE . '/';
 			$sr_logout_href = $TICKETS_WEB . '/log_out.php';
-			$sr_profile_home = $TICKETS_WEB . '/profile.php';
+			$sr_profile_home = $SETTINGS_BASE . '/profile.php';
 			$sr_avatar_src = $TICKETS_WEB . '/assets/images/users/user.png';
 			$img = isset($image) ? trim((string) $image) : '';
 			if ($img !== '' && is_file(dirname($ticketsIncludes) . '/uploads/' . $img)) {

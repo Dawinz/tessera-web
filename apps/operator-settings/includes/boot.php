@@ -8,7 +8,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 $ticketsRoot = null;
 foreach ([
-	dirname(__DIR__, 2) . '/tickets',                 // Railway: /var/www/html/tickets
+	dirname(__DIR__, 2) . '/tickets',                 // Docker image: /var/www/html/tickets
 	dirname(__DIR__, 3) . '/services/tickets',         // Monorepo: services/tickets
 ] as $candidate) {
 	if (is_file($candidate . '/connect.php')) {
