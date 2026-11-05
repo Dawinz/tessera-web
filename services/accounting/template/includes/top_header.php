@@ -104,8 +104,12 @@ include __DIR__ . '/tessera_states_boot.php';
 								$role_name = $get12['name'];
 								$link = $get12['link'];
 
-								/* Tickets | Cargo | Accounts pills already switch modules - skip duplicate cross-module links. */
-								if (preg_match('#(?:^|/|\.\./)(?:cargo|tickets?|accounts?)/#i', (string) $link)) {
+								/* Module pills already switch products — never show Tickets/Cargo leftovers here. */
+								if (preg_match('/^(cargo|accounts?|tickets?)$/i', trim((string) $role_name))) {
+									continue;
+								}
+								if (preg_match('#(?:^|/|\.\./)(?:cargo|tickets?|accounts?|sr_up|ticket)(/|$|\.php)#i', (string) $link)
+									|| preg_match('#https?://localhost/#i', (string) $link)) {
 									continue;
 								}
 

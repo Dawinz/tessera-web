@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply naming corrections via mysql CLI. Idempotent. Works local + Railway."""
+"""Apply naming corrections via mysql CLI. Idempotent. Works local + production."""
 from __future__ import annotations
 
 import os

@@ -33,9 +33,6 @@ $brandAttr = htmlspecialchars($brand, ENT_QUOTES, 'UTF-8');
   ?></title>
   <?php echo tessera_favicon_link_tags('/tickets/assets/images'); ?>
   <meta name="description" content="Sign in to Tessera — Tickets, Cargo, and Accounts.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: #0c1f2e;
@@ -49,11 +46,13 @@ $brandAttr = htmlspecialchars($brand, ENT_QUOTES, 'UTF-8');
       --line: rgba(3,49,77,.12);
       --danger: #9b1c1c;
       --danger-bg: #fdecec;
+      --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-body: Georgia, "Times New Roman", Times, serif;
     }
     * { box-sizing: border-box; }
     html, body { height: 100%; margin: 0; }
     body {
-      font-family: "Source Serif 4", Georgia, serif;
+      font-family: var(--font-body);
       color: var(--ink);
       background:
         radial-gradient(1200px 600px at 10% -10%, rgba(31,122,108,.28), transparent 55%),
@@ -79,7 +78,7 @@ $brandAttr = htmlspecialchars($brand, ENT_QUOTES, 'UTF-8');
       margin-bottom: 1.5rem;
     }
     .brand-block .product {
-      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-family: var(--font-ui);
       font-weight: 800;
       font-size: clamp(2rem, 5vw, 2.6rem);
       letter-spacing: .12em;
@@ -95,7 +94,7 @@ $brandAttr = htmlspecialchars($brand, ENT_QUOTES, 'UTF-8');
     }
     .brand-block .modules {
       margin: .85rem 0 0;
-      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-family: var(--font-ui);
       font-size: .78rem;
       letter-spacing: .08em;
       text-transform: uppercase;
@@ -110,7 +109,7 @@ $brandAttr = htmlspecialchars($brand, ENT_QUOTES, 'UTF-8');
       backdrop-filter: blur(10px);
     }
     .panel h1 {
-      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-family: var(--font-ui);
       font-size: 1.35rem;
       font-weight: 700;
       margin: 0 0 .35rem;
@@ -123,7 +122,7 @@ $brandAttr = htmlspecialchars($brand, ENT_QUOTES, 'UTF-8');
     }
     label {
       display: block;
-      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-family: var(--font-ui);
       font-size: .78rem;
       font-weight: 600;
       letter-spacing: .04em;
@@ -158,7 +157,7 @@ $brandAttr = htmlspecialchars($brand, ENT_QUOTES, 'UTF-8');
       border-radius: .55rem;
       background: var(--navy);
       color: #fff;
-      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-family: var(--font-ui);
       font-size: 1rem;
       font-weight: 700;
       letter-spacing: .02em;

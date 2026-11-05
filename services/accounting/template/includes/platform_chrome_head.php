@@ -23,14 +23,16 @@ if (
 }
 $sr_shell_v = is_file($sr_shell_file) ? filemtime($sr_shell_file) : time();
 ?>
-<!-- sr-platform-chrome v15 -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+<!-- sr-platform-chrome v16 — system fonts only (no fonts.googleapis.com) -->
 <link rel="stylesheet" href="<?php echo htmlspecialchars($sr_shell_href, ENT_QUOTES, 'UTF-8'); ?>?v=<?php echo $sr_shell_v; ?>&sr=12">
 <style id="sr-platform-chrome-critical">
-:root { --sr-chrome-height: 120px; }
-#page-topbar { font-family: Roboto, sans-serif !important; }
+:root {
+  --sr-chrome-height: 120px;
+  --sr-ui-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+#page-topbar { font-family: var(--sr-ui-font) !important; }
 #page-topbar *:not(i):not(svg):not(.fa):not(.fas):not(.far):not(.bx):not(.mdi):not([class^="bx"]):not([class*=" bx"]):not([class^="mdi"]):not([class*=" mdi"]) {
-  font-family: Roboto, sans-serif !important;
+  font-family: var(--sr-ui-font) !important;
 }
 /* Keep icon fonts working (Roboto override was blanking the hamburger) */
 #page-topbar i.fa,

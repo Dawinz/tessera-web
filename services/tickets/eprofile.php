@@ -131,13 +131,12 @@ $sql = $db->query("SELECT SUM(cost) AS  cost FROM booking  WHERE " . tessera_sql
                                    
                                         </div>
                                         <div class="avatar-xl mx-auto mb-4">
-                                            <img style="width:100px"src="<?php 
-											if($image==""){
-										echo "assets/images/users/user.png";
-
-												
-											}else{
-												echo "uploads/$image";
+                                            <img style="width:100px"src="<?php
+											$imgFile = trim((string) ($image ?? ''));
+											if ($imgFile === '' || $imgFile === 'user.png') {
+												echo 'assets/images/users/user.png';
+											} else {
+												echo 'uploads/' . rawurlencode($imgFile);
 											}
 											?>" alt="" class="rounded-circle img-thumbnail" id="preImg">
                                         </div>

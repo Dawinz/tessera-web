@@ -1,11 +1,11 @@
 <?php
 /**
- * Shared DB env resolution - works on XAMPP (defaults) and Railway (MYSQL* / SR_*).
+ * Shared DB env resolution - works on XAMPP (defaults) and production (MYSQL* / SR_*).
  */
 if (!function_exists('tessera_apply_local_env')) {
-	/** Load config/local.php on a developer machine. No-op on Railway. */
+	/** Load config/local.php on a developer machine. No-op in containers. */
 	function tessera_apply_local_env(): void {
-		if (getenv('RAILWAY_ENVIRONMENT') || getenv('RAILWAY_SERVICE_NAME')) {
+		if (getenv('MYSQLHOST') || getenv('SR_MANAGED_HOST') === '1') {
 			return;
 		}
 		$dir = __DIR__;
@@ -26,9 +26,9 @@ if (!function_exists('tessera_apply_local_env')) {
 tessera_apply_local_env();
 
 if (!function_exists('sr_is_managed_host')) {
-	/** True on Railway / when remote DB env is explicitly set. */
+	/** True when remote DB env is explicitly set. */
 	function sr_is_managed_host() {
-		if (getenv('RAILWAY_ENVIRONMENT') || getenv('RAILWAY_SERVICE_NAME') || getenv('MYSQLHOST')) {
+		if (getenv('MYSQLHOST') || getenv('SR_MANAGED_HOST') === '1') {
 			return true;
 		}
 		$host = getenv('SR_DB_HOST');
@@ -165,7 +165,7 @@ if (!function_exists('sr_mysqli_platform')) {
 
 if (!function_exists('sr_mysqli')) {
 	/**
-	 * Env-aware mysqli connection (XAMPP defaults / Railway MYSQL* / SR_*).
+	 * Env-aware mysqli connection (XAMPP defaults / MYSQL* / SR_*).
 	 * Routes to the current host’s dedicated operator DB when provisioned.
 	 * @return mysqli|false
 	 */
@@ -183,7 +183,7 @@ if (!function_exists('sr_mysqli')) {
 
 if (!function_exists('sr_public_base_url')) {
 	function sr_public_base_url() {
-		/* Prefer the host the browser is on (custom domain or Railway URL). */
+		/* Prefer the host the browser is on (custom domain or public URL). */
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			$host = strtolower((string) $_SERVER['HTTP_HOST']);
 			$hostNoPort = preg_replace('/:\d+$/', '', $host);

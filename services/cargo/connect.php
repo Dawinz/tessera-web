@@ -8,7 +8,8 @@ require_once __DIR__ . '/includes/tessera_legacy_request.php';
 $cfg = sr_db_config('cargo');
 $host = $cfg['host'];
 $port = $cfg['port'];
-$username = $cfg['user'];
+/* Never use $username — it clobbers staff session vars after include. */
+$dbUser = $cfg['user'];
 $pass = $cfg['pass'];
 $dbname = $cfg['name'];
 
@@ -17,7 +18,7 @@ mysqli_report(MYSQLI_REPORT_OFF);
 $db = mysqli_init();
 if ($db) {
 	@$db->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);
-	@$db->real_connect($host, $username, $pass, $dbname, $port);
+	@$db->real_connect($host, $dbUser, $pass, $dbname, $port);
 }
 
 if (!$db || $db->connect_error) {
@@ -30,7 +31,7 @@ if (!$db || $db->connect_error) {
 
 if (!$db || $db->connect_error) {
 	http_response_code(503);
-	die('Database unavailable. Check MariaDB / Railway MySQL, then refresh.');
+	die('Database unavailable. Check MariaDB / production MySQL, then refresh.');
 }
 
 $db->set_charset('utf8mb4');

@@ -1,132 +1,132 @@
 <?php
+/**
+ * S-03 Notifications — TDS channels + event matrix.
+ */
 require_once __DIR__ . '/includes/boot.php';
-require_once $ticketsRoot . '/includes/tessera_messaging.php';
 tessera_require_capability($db, $username, 'notifications');
 
-$msg = null;
-$err = null;
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$events = tessera_messaging_default_events();
-	foreach ($events as $code => $chs) {
-		foreach (array_keys($chs) as $ch) {
-			$events[$code][$ch] = !empty($_POST['ev'][$code][$ch]);
-		}
-	}
-	$ok = tessera_messaging_save($db, $tenantId, [
-		'sms_enabled' => !empty($_POST['sms_enabled']),
-		'sms_provider' => $_POST['sms_provider'] ?? '',
-		'sms_sender_id' => $_POST['sms_sender_id'] ?? '',
-		'sms_username' => $_POST['sms_username'] ?? '',
-		'sms_api_key' => $_POST['sms_api_key'] ?? '',
-		'whatsapp_enabled' => !empty($_POST['whatsapp_enabled']),
-		'whatsapp_provider' => $_POST['whatsapp_provider'] ?? '',
-		'whatsapp_instance' => $_POST['whatsapp_instance'] ?? '',
-		'whatsapp_api_key' => $_POST['whatsapp_api_key'] ?? '',
-		'push_enabled' => !empty($_POST['push_enabled']),
-		'push_service_url' => $_POST['push_service_url'] ?? '',
-		'push_api_key' => $_POST['push_api_key'] ?? '',
-		'events' => $events,
-	], $username);
-	$msg = $ok ? 'Notification settings saved.' : null;
-	$err = $ok ? null : 'Save failed (run migration 013).';
-}
-$cfg = tessera_messaging_get($db, $tenantId);
 $settings_page_title = 'Notifications';
 $settings_crumb = 'Notifications';
 $settings_nav_active = 'notifications';
+$settings_extra_css = [
+	'/operator/css/tessera-design-tokens.css',
+	'/operator/css/tessera-design-components.css',
+];
 require_once __DIR__ . '/includes/layout.php';
+
+$jsV = @filemtime(__DIR__ . '/notifications.js') ?: time();
 ?>
-<div class="card">
-	<div class="card-header"><h4 class="card-title mb-0"><i class="uil uil-bell me-1"></i> Channels</h4></div>
-	<div class="card-body">
-		<p class="text-muted">Use your own SMS / WhatsApp credentials. Push applies if you ship a customer app. Secrets are encrypted at rest.</p>
-		<?php if ($msg): ?><div class="alert alert-success"><?php echo settings_h($msg); ?></div><?php endif; ?>
-		<?php if ($err): ?><div class="alert alert-danger"><?php echo settings_h($err); ?></div><?php endif; ?>
-		<form method="post" class="vstack gap-4" autocomplete="off">
-			<section>
-				<div class="form-check form-switch mb-2">
-					<input class="form-check-input" type="checkbox" name="sms_enabled" value="1" id="sms_enabled" <?php echo !empty($cfg['sms_enabled']) ? 'checked' : ''; ?>>
-					<label class="form-check-label" for="sms_enabled"><strong>SMS</strong></label>
-				</div>
-				<div class="row g-2">
-					<div class="col-md-4">
-						<label class="form-label">Provider</label>
-						<select name="sms_provider" class="form-select">
-							<?php foreach (['nextsms' => 'NextSMS', 'mshastra' => 'Mshastra', 'other' => 'Other'] as $k => $lab): ?>
-								<option value="<?php echo $k; ?>" <?php echo ($cfg['sms_provider'] ?? '') === $k ? 'selected' : ''; ?>><?php echo $lab; ?></option>
-							<?php endforeach; ?>
-						</select>
-					</div>
-					<div class="col-md-4">
-						<label class="form-label">Sender ID</label>
-						<input class="form-control" name="sms_sender_id" value="<?php echo settings_h($cfg['sms_sender_id'] ?? ''); ?>">
-					</div>
-					<div class="col-md-4">
-						<label class="form-label">API username</label>
-						<input class="form-control" name="sms_username" value="<?php echo settings_h($cfg['sms_username'] ?? ''); ?>">
-					</div>
-					<div class="col-md-6">
-						<label class="form-label">API key <?php echo !empty($cfg['sms_api_key_last4']) ? '(ends …' . settings_h($cfg['sms_api_key_last4']) . ')' : ''; ?></label>
-						<input type="password" class="form-control" name="sms_api_key" placeholder="Leave blank to keep">
-					</div>
-				</div>
-			</section>
-			<section>
-				<div class="form-check form-switch mb-2">
-					<input class="form-check-input" type="checkbox" name="whatsapp_enabled" value="1" id="wa_enabled" <?php echo !empty($cfg['whatsapp_enabled']) ? 'checked' : ''; ?>>
-					<label class="form-check-label" for="wa_enabled"><strong>WhatsApp</strong> (when enabled)</label>
-				</div>
-				<div class="row g-2">
-					<div class="col-md-4">
-						<label class="form-label">Provider</label>
-						<input class="form-control" name="whatsapp_provider" value="<?php echo settings_h($cfg['whatsapp_provider'] ?? ''); ?>" placeholder="ultramsg / other">
-					</div>
-					<div class="col-md-4">
-						<label class="form-label">Instance</label>
-						<input class="form-control" name="whatsapp_instance" value="<?php echo settings_h($cfg['whatsapp_instance'] ?? ''); ?>">
-					</div>
-					<div class="col-md-4">
-						<label class="form-label">API token</label>
-						<input type="password" class="form-control" name="whatsapp_api_key" placeholder="Leave blank to keep">
-					</div>
-				</div>
-			</section>
-			<section>
-				<div class="form-check form-switch mb-2">
-					<input class="form-check-input" type="checkbox" name="push_enabled" value="1" id="push_enabled" <?php echo !empty($cfg['push_enabled']) ? 'checked' : ''; ?>>
-					<label class="form-check-label" for="push_enabled"><strong>App push</strong></label>
-				</div>
-				<div class="row g-2">
-					<div class="col-md-8">
-						<label class="form-label">Push service URL</label>
-						<input class="form-control" name="push_service_url" value="<?php echo settings_h($cfg['push_service_url'] ?? ''); ?>">
-					</div>
-					<div class="col-md-4">
-						<label class="form-label">Push API key</label>
-						<input type="password" class="form-control" name="push_api_key" placeholder="Leave blank to keep">
-					</div>
-				</div>
-			</section>
-			<section>
-				<h5 class="font-size-14 mb-2">Events</h5>
-				<div class="table-responsive">
-					<table class="table table-sm table-nowrap mb-0">
-						<thead class="table-light"><tr><th>Event</th><th>SMS</th><th>WhatsApp</th><th>Push</th></tr></thead>
-						<tbody>
-						<?php foreach (($cfg['events'] ?? tessera_messaging_default_events()) as $code => $chs): ?>
-							<tr>
-								<td><code><?php echo settings_h($code); ?></code></td>
-								<?php foreach (['sms','whatsapp','push'] as $ch): ?>
-									<td><input type="checkbox" class="form-check-input" name="ev[<?php echo settings_h($code); ?>][<?php echo $ch; ?>]" value="1" <?php echo !empty($chs[$ch]) ? 'checked' : ''; ?>></td>
-								<?php endforeach; ?>
-							</tr>
-						<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-			</section>
-			<button class="btn btn-primary align-self-start"><i class="uil uil-save me-1"></i> Save notifications</button>
-		</form>
+<div class="tds-page" id="tds-settings-notifications-root" data-ui-slice="S-03" style="padding:0">
+	<div class="tds-page-title-box" style="margin-bottom:var(--tds-space-4)">
+		<div>
+			<p class="tds-breadcrumb"><span>Settings</span><span>·</span><span>Notifications</span></p>
+			<h1 class="tds-page-title">Notifications</h1>
+			<p class="tds-page-lead">Use your own SMS / WhatsApp credentials. Push applies if you ship a customer app. Secrets are encrypted at rest — leave API key fields blank to keep the current value.</p>
+		</div>
 	</div>
+
+	<div class="tds-alert tds-alert-danger" id="tds-settings-notifications-error" hidden role="alert"></div>
+	<div class="tds-alert tds-alert-success" id="tds-settings-notifications-success" hidden role="status"></div>
+
+	<form id="tds-settings-notifications-form">
+		<div class="tds-table-panel" style="margin-bottom:var(--tds-space-4)">
+			<div class="tds-toolbar"><strong>SMS</strong>
+				<label class="tds-row" style="gap:var(--tds-space-2);align-items:center;margin-left:auto">
+					<input type="checkbox" id="tds-notif-sms-enabled">
+					<span class="tds-muted">Enabled</span>
+				</label>
+			</div>
+			<div class="tds-dialog-body" style="padding:var(--tds-space-4)">
+				<div class="tds-row" style="gap:var(--tds-space-3);flex-wrap:wrap">
+					<div class="tds-field" style="flex:1 1 10rem">
+						<label class="tds-label" for="tds-notif-sms-provider">Provider</label>
+						<select class="tds-input" id="tds-notif-sms-provider"></select>
+					</div>
+					<div class="tds-field" style="flex:1 1 10rem">
+						<label class="tds-label" for="tds-notif-sms-sender">Sender ID</label>
+						<input class="tds-input" id="tds-notif-sms-sender" autocomplete="off">
+					</div>
+					<div class="tds-field" style="flex:1 1 10rem">
+						<label class="tds-label" for="tds-notif-sms-user">API username</label>
+						<input class="tds-input" id="tds-notif-sms-user" autocomplete="off">
+					</div>
+					<div class="tds-field" style="flex:1 1 14rem">
+						<label class="tds-label" for="tds-notif-sms-key">API key <span class="tds-muted" id="tds-notif-sms-key-hint"></span></label>
+						<input class="tds-input" type="password" id="tds-notif-sms-key" placeholder="Leave blank to keep" autocomplete="new-password">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="tds-table-panel" style="margin-bottom:var(--tds-space-4)">
+			<div class="tds-toolbar"><strong>WhatsApp</strong>
+				<label class="tds-row" style="gap:var(--tds-space-2);align-items:center;margin-left:auto">
+					<input type="checkbox" id="tds-notif-wa-enabled">
+					<span class="tds-muted">Enabled</span>
+				</label>
+			</div>
+			<div class="tds-dialog-body" style="padding:var(--tds-space-4)">
+				<div class="tds-row" style="gap:var(--tds-space-3);flex-wrap:wrap">
+					<div class="tds-field" style="flex:1 1 10rem">
+						<label class="tds-label" for="tds-notif-wa-provider">Provider</label>
+						<input class="tds-input" id="tds-notif-wa-provider" placeholder="ultramsg / other" autocomplete="off">
+					</div>
+					<div class="tds-field" style="flex:1 1 10rem">
+						<label class="tds-label" for="tds-notif-wa-instance">Instance</label>
+						<input class="tds-input" id="tds-notif-wa-instance" autocomplete="off">
+					</div>
+					<div class="tds-field" style="flex:1 1 14rem">
+						<label class="tds-label" for="tds-notif-wa-key">API token <span class="tds-muted" id="tds-notif-wa-key-hint"></span></label>
+						<input class="tds-input" type="password" id="tds-notif-wa-key" placeholder="Leave blank to keep" autocomplete="new-password">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="tds-table-panel" style="margin-bottom:var(--tds-space-4)">
+			<div class="tds-toolbar"><strong>App push</strong>
+				<label class="tds-row" style="gap:var(--tds-space-2);align-items:center;margin-left:auto">
+					<input type="checkbox" id="tds-notif-push-enabled">
+					<span class="tds-muted">Enabled</span>
+				</label>
+			</div>
+			<div class="tds-dialog-body" style="padding:var(--tds-space-4)">
+				<div class="tds-row" style="gap:var(--tds-space-3);flex-wrap:wrap">
+					<div class="tds-field" style="flex:2 1 16rem">
+						<label class="tds-label" for="tds-notif-push-url">Push service URL</label>
+						<input class="tds-input" id="tds-notif-push-url" autocomplete="off">
+					</div>
+					<div class="tds-field" style="flex:1 1 12rem">
+						<label class="tds-label" for="tds-notif-push-key">Push API key</label>
+						<input class="tds-input" type="password" id="tds-notif-push-key" placeholder="Leave blank to keep" autocomplete="new-password">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="tds-table-panel" style="margin-bottom:var(--tds-space-4)">
+			<div class="tds-toolbar"><strong>Events</strong></div>
+			<div class="table-responsive">
+				<table class="tds-table">
+					<thead>
+						<tr>
+							<th>Event</th>
+							<th>SMS</th>
+							<th>WhatsApp</th>
+							<th>Push</th>
+						</tr>
+					</thead>
+					<tbody id="tds-notif-events-tbody">
+						<tr><td colspan="4" class="tds-muted">Loading…</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="tds-row" style="justify-content:flex-end;gap:var(--tds-space-2)">
+			<button type="submit" class="tds-btn tds-btn-primary" id="tds-notif-save">Save notifications</button>
+		</div>
+	</form>
 </div>
+<script src="/settings/notifications.js?v=<?php echo (int) $jsV; ?>"></script>
 <?php settings_layout_end(); ?>

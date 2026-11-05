@@ -3,13 +3,21 @@ require_once __DIR__ . '/includes/schedule_boot.php';
 require_once __DIR__ . '/includes/schedule_trip_from_request.php';
 
 if (!$isScheduleAdmin) {
-	header('Location: schedule.php');
+	if (!empty($GLOBALS['tessera_operator_spa_embed'])) {
+		require __DIR__ . '/schedule.php';
+		return;
+	}
+	header('Location: /tickets/schedule.php', true, 302);
 	exit;
 }
 
 $scheduleTrip = schedule_trip_from_request($db);
 if ($scheduleTrip === null) {
-	header('Location: schedule.php');
+	if (!empty($GLOBALS['tessera_operator_spa_embed'])) {
+		require __DIR__ . '/schedule.php';
+		return;
+	}
+	header('Location: /tickets/schedule.php', true, 302);
 	exit;
 }
 

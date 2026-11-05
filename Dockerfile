@@ -1,11 +1,11 @@
-# Tessera — PHP 8.2 + Apache for Railway (operator console)
+# Tessera — PHP 8.2 + Apache for Docker/Hetzner (operator console)
 FROM php:8.2-apache-bookworm
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libzip-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
         unzip curl default-mysql-client python3 \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install mysqli pdo pdo_mysql gd \
+    && docker-php-ext-install mysqli pdo pdo_mysql gd opcache \
     && rm -rf /var/lib/apt/lists/*
 
 # Prefer mpm_prefork only (PHP requirement); avoid "More than one MPM loaded"
@@ -25,18 +25,18 @@ COPY apps/operator-login/ /var/www/html/login/
 COPY apps/operator-shell/ /var/www/html/operator/
 COPY database/seed/ /opt/sr-seed/
 COPY database/migrations/ /opt/sr-seed/migrations/
-COPY deploy/railway/index.php /var/www/html/index.php
-COPY deploy/railway/signup.php /var/www/html/signup.php
-COPY deploy/railway/robots.txt /var/www/html/robots.txt
-COPY deploy/railway/sitemap.xml /var/www/html/sitemap.xml
-COPY deploy/railway/errors/ /var/www/html/errors/
-COPY deploy/railway/apache.conf /etc/apache2/sites-available/000-default.conf
-COPY deploy/railway/entrypoint.sh /entrypoint.sh
-COPY deploy/railway/import-dbs.sh /opt/sr-seed/import-dbs.sh
-COPY deploy/railway/apply-migrations.sh /opt/sr-seed/apply-migrations.sh
-COPY deploy/railway/patch-db-hosts.py /opt/sr-seed/patch-db-hosts.py
-COPY deploy/railway/sr_auto_prepend.php /var/www/html/sr_auto_prepend.php
-COPY deploy/railway/sr_auto_prepend.php /opt/sr-seed/sr_auto_prepend.php
+COPY deploy/docker/index.php /var/www/html/index.php
+COPY deploy/docker/signup.php /var/www/html/signup.php
+COPY deploy/docker/robots.txt /var/www/html/robots.txt
+COPY deploy/docker/sitemap.xml /var/www/html/sitemap.xml
+COPY deploy/docker/errors/ /var/www/html/errors/
+COPY deploy/docker/apache.conf /etc/apache2/sites-available/000-default.conf
+COPY deploy/docker/entrypoint.sh /entrypoint.sh
+COPY deploy/docker/import-dbs.sh /opt/sr-seed/import-dbs.sh
+COPY deploy/docker/apply-migrations.sh /opt/sr-seed/apply-migrations.sh
+COPY deploy/docker/patch-db-hosts.py /opt/sr-seed/patch-db-hosts.py
+COPY deploy/docker/sr_auto_prepend.php /var/www/html/sr_auto_prepend.php
+COPY deploy/docker/sr_auto_prepend.php /opt/sr-seed/sr_auto_prepend.php
 
 RUN chmod +x /entrypoint.sh /opt/sr-seed/import-dbs.sh /opt/sr-seed/apply-migrations.sh \
     && chown -R www-data:www-data /var/www/html \

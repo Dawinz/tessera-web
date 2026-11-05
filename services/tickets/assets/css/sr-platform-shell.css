@@ -815,7 +815,7 @@ body[data-layout-mode="dark"] {
   --bs-gray-400: #b7c9d4;
 }
 
-body[data-layout-mode="dark"] label,
+body[data-layout-mode="dark"] label:not(.tds-label),
 body[data-layout-mode="dark"] .dt-search,
 body[data-layout-mode="dark"] .dataTables_filter,
 body[data-layout-mode="dark"] #sidebar-menu .menu-title,
@@ -1151,7 +1151,7 @@ body[data-layout-mode="dark"] .text-success {
   color: #b8f0d0 !important;
 }
 
-body[data-layout-mode="dark"] button:not(.btn):not(.dt-paging-button) {
+body[data-layout-mode="dark"] button:not(.btn):not(.dt-paging-button):not(.tds-btn) {
   color: #e8f1f6;
 }
 

@@ -284,8 +284,12 @@ include __DIR__ . '/includes/tessera_states_boot.php';
 									continue;
 								}
 
-								/* Tickets | Cargo | Accounts pills already switch modules - skip duplicate cross-module links. */
-								if (preg_match('#(?:^|/|\.\./)(?:cargo|tickets?|accounts?)/#i', (string) $link)) {
+								/* Module pills already switch products — never show Ticket/Accounts leftovers here. */
+								if (preg_match('/^(cargo|accounts?|tickets?|accounts report)$/i', trim((string) $role_name))) {
+									continue;
+								}
+								if (preg_match('#(?:^|/|\.\./)(?:cargo|tickets?|accounts?|sr_up|ticket)(/|$|\.php)#i', (string) $link)
+									|| preg_match('#https?://localhost/#i', (string) $link)) {
 									continue;
 								}
 

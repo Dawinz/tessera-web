@@ -1,0 +1,51 @@
+# Thin Docker build — clone public deploy tree inside the builder (avoids CLI 524 upload limits)
+FROM php:8.2-apache-bookworm
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libzip-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
+        unzip curl default-mysql-client python3 git ca-certificates \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install mysqli pdo pdo_mysql gd \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN a2dismod mpm_event || true; \
+    a2dismod mpm_worker || true; \
+    a2enmod mpm_prefork; \
+    a2enmod rewrite headers
+
+ARG TESSERA_REPO=https://github.com/Dawinz/tessera-web.git
+ARG TESSERA_REF=main
+ARG TESSERA_CACHE_BUST=1793713625
+RUN echo "cache-bust=${TESSERA_CACHE_BUST}" \
+ && git clone --depth 1 --branch "${TESSERA_REF}" "${TESSERA_REPO}" /tmp/tessera-src \
+ && cp -a /tmp/tessera-src/services/tickets /var/www/html/tickets \
+ && cp -a /tmp/tessera-src/services/cargo /var/www/html/cargo \
+ && cp -a /tmp/tessera-src/services/accounting /var/www/html/accounts \
+ && cp -a /tmp/tessera-src/apps/platform-web /var/www/html/control \
+ && cp -a /tmp/tessera-src/apps/operator-settings /var/www/html/settings \
+ && cp -a /tmp/tessera-src/apps/operator-login /var/www/html/login \
+ && cp -a /tmp/tessera-src/apps/operator-shell /var/www/html/operator \
+ && mkdir -p /opt/sr-seed/migrations \
+ && cp -a /tmp/tessera-src/database/seed/. /opt/sr-seed/ \
+ && cp -a /tmp/tessera-src/database/migrations/. /opt/sr-seed/migrations/ \
+ && cp /tmp/tessera-src/deploy/docker/index.php /var/www/html/index.php \
+ && cp /tmp/tessera-src/deploy/docker/signup.php /var/www/html/signup.php \
+ && cp /tmp/tessera-src/deploy/docker/robots.txt /var/www/html/robots.txt \
+ && cp /tmp/tessera-src/deploy/docker/sitemap.xml /var/www/html/sitemap.xml \
+ && cp -a /tmp/tessera-src/deploy/docker/errors /var/www/html/errors \
+ && cp /tmp/tessera-src/deploy/docker/apache.conf /etc/apache2/sites-available/000-default.conf \
+ && cp /tmp/tessera-src/deploy/docker/entrypoint.sh /entrypoint.sh \
+ && cp /tmp/tessera-src/deploy/docker/import-dbs.sh /opt/sr-seed/import-dbs.sh \
+ && cp /tmp/tessera-src/deploy/docker/apply-migrations.sh /opt/sr-seed/apply-migrations.sh \
+ && cp /tmp/tessera-src/deploy/docker/patch-db-hosts.py /opt/sr-seed/patch-db-hosts.py \
+ && cp /tmp/tessera-src/deploy/docker/sr_auto_prepend.php /var/www/html/sr_auto_prepend.php \
+ && cp /tmp/tessera-src/deploy/docker/sr_auto_prepend.php /opt/sr-seed/sr_auto_prepend.php \
+ && rm -rf /tmp/tessera-src \
+ && chmod +x /entrypoint.sh /opt/sr-seed/import-dbs.sh /opt/sr-seed/apply-migrations.sh \
+ && chown -R www-data:www-data /var/www/html \
+ && find /var/www/html -type d -exec chmod 755 {} \;
+
+ENV APACHE_DOCUMENT_ROOT=/var/www/html
+EXPOSE 80
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["apache2-foreground"]

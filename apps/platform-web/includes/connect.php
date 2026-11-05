@@ -5,7 +5,7 @@
 $srEnvCandidates = [
 	__DIR__ . '/sr_env.php',
 	dirname(__DIR__, 2) . '/services/tickets/includes/sr_env.php', /* local monorepo */
-	'/var/www/html/tickets/includes/sr_env.php', /* Railway image */
+	'/var/www/html/tickets/includes/sr_env.php', /* Docker image */
 ];
 $srEnvLoaded = false;
 foreach ($srEnvCandidates as $srEnv) {

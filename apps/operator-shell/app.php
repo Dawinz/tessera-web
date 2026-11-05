@@ -47,6 +47,8 @@ $tessera_page_module = $module === 'accounts' ? 'Accounts' : ($module === 'cargo
 	$dashonicHead = $__roots['accounts'] . '/template/includes/dashonic_head.php';
 	include $dashonicHead;
 	?>
+	<link href="/operator/css/tessera-design-tokens.css?v=<?php echo @filemtime(__DIR__ . '/css/tessera-design-tokens.css') ?: time(); ?>" rel="stylesheet">
+	<link href="/operator/css/tessera-design-components.css?v=<?php echo @filemtime(__DIR__ . '/css/tessera-design-components.css') ?: time(); ?>" rel="stylesheet">
 	<link href="/operator/css/tessera-operator-shell.css?v=<?php echo @filemtime(__DIR__ . '/css/tessera-operator-shell.css') ?: time(); ?>" rel="stylesheet">
 	<?php if ($module === 'tickets' || $module === 'cargo'): ?>
 	<link href="/tickets/vendors/select2/select2.min.css" rel="stylesheet">
