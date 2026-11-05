@@ -37,7 +37,7 @@ if ($query === []) {
 		}
 		$spaCacheFile = $cacheDir . '/' . hash(
 			'sha256',
-			'tessera_spa_v1|' . $hostKey . '|' . $userKey . '|' . $module . '|' . $page
+			'tessera_spa_v2|' . $hostKey . '|' . $userKey . '|' . $module . '|' . $page
 		) . '.json';
 		if (is_file($spaCacheFile) && (time() - (int) filemtime($spaCacheFile)) < $spaCacheTtl) {
 			$cachedJson = @file_get_contents($spaCacheFile);
