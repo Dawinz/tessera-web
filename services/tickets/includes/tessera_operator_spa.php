@@ -239,6 +239,135 @@ if (!function_exists('tessera_operator_spa_enabled')) {
 	}
 
 	/**
+	 * Build the ops topnav (Home / Schedule / …) from category + roles_assigned.
+	 * Modern TDS pages do not include classic top_header, so SPA must inject this.
+	 */
+	function tessera_operator_spa_ops_topnav_html(string $module, string $page): string
+	{
+		$module = strtolower($module);
+		$page = basename((string) $page);
+		$username = (string) ($_SESSION['username'] ?? '');
+		$level = (string) ($GLOBALS['level'] ?? '');
+		if ($username === '' || $level === '') {
+			return '';
+		}
+
+		$navDb = null;
+		if ($module === 'tickets') {
+			global $db;
+			$navDb = (isset($db) && $db instanceof mysqli) ? $db : null;
+		} elseif (function_exists('sr_mysqli')) {
+			$logical = $module === 'accounts' ? 'account' : $module;
+			try {
+				$navDb = @sr_mysqli($logical);
+			} catch (Throwable $e) {
+				$navDb = null;
+			}
+		}
+		if (!($navDb instanceof mysqli) || $navDb->connect_error) {
+			return '';
+		}
+
+		$levelEsc = mysqli_real_escape_string($navDb, $level);
+		$userEsc = mysqli_real_escape_string($navDb, $username);
+		$pageEsc = mysqli_real_escape_string($navDb, $page);
+		$cats = mysqli_query($navDb, "SELECT * FROM category WHERE category='$levelEsc' ORDER BY arrangement ASC");
+		if (!$cats) {
+			return '';
+		}
+
+		$items = '';
+		while ($cat = mysqli_fetch_assoc($cats)) {
+			$roleName = (string) ($cat['name'] ?? '');
+			$link = (string) ($cat['link'] ?? '');
+			$image = (string) ($cat['image'] ?? 'file-text');
+			$roleTrim = trim($roleName);
+
+			if ($module === 'tickets' && strcasecmp($roleTrim, 'Reports') === 0) {
+				continue;
+			}
+			if ($module === 'cargo' && strcasecmp($roleTrim, 'Accounts Report') === 0) {
+				continue;
+			}
+			if (preg_match('/^(cargo|accounts?|tickets?|accounts report)$/i', $roleTrim)) {
+				continue;
+			}
+			if (preg_match('#(?:^|/|\.\./)(?:cargo|tickets?|accounts?|sr_up|ticket)(/|$|\.php)#i', $link)
+				|| preg_match('#https?://localhost/#i', $link)) {
+				continue;
+			}
+
+			$catEsc = mysqli_real_escape_string($navDb, $roleName);
+			$assigned = mysqli_query(
+				$navDb,
+				"SELECT name, file, arrangement FROM roles_assigned WHERE username='$userEsc' AND category='$catEsc' ORDER BY arrangement ASC"
+			);
+			$assignedCount = $assigned ? (int) mysqli_num_rows($assigned) : 0;
+			if ($assignedCount < 1) {
+				continue;
+			}
+			/* Cargo Home is a single destination — never a dropdown. */
+			if ($module === 'cargo' && strcasecmp($roleTrim, 'Home') === 0 && $assignedCount > 1) {
+				$assignedCount = 1;
+			}
+
+			$linkBase = $link !== '' ? basename(parse_url($link, PHP_URL_PATH) ?: $link) : '';
+			$activeOnPage = mysqli_query(
+				$navDb,
+				"SELECT id FROM roles_assigned WHERE file='$pageEsc' AND category='$catEsc' LIMIT 1"
+			);
+			$isActive = ($linkBase !== '' && $linkBase === $page)
+				|| ($activeOnPage && mysqli_num_rows($activeOnPage) > 0);
+
+			$navId = 'ops-' . preg_replace('/\W+/', '-', strtolower($roleName));
+			$isDropdown = $assignedCount > 1;
+			$liClass = 'nav-item' . ($isDropdown ? ' dropdown' : '') . ($isActive ? ' active sr-nav-current' : '');
+			$aClass = 'nav-link' . ($isDropdown ? ' dropdown-toggle arrow-none' : '') . ($isActive ? ' active' : '');
+			$href = $isDropdown ? '#' : htmlspecialchars($link !== '' ? $link : $page, ENT_QUOTES, 'UTF-8');
+			$feather = htmlspecialchars(preg_replace('/[^a-z0-9-]/', '', strtolower($image)) ?: 'file-text', ENT_QUOTES, 'UTF-8');
+			$label = htmlspecialchars($roleName, ENT_QUOTES, 'UTF-8');
+			$idAttr = htmlspecialchars($navId, ENT_QUOTES, 'UTF-8');
+
+			$items .= '<li class="' . $liClass . '">';
+			$items .= '<a class="' . $aClass . '" href="' . $href . '" id="' . $idAttr . '"';
+			if ($isDropdown) {
+				$items .= ' role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false"';
+			}
+			$items .= '><i class="icon nav-icon" data-feather="' . $feather . '"></i>';
+			$items .= '<span data-key="t-horizontal">' . $label . '</span></a>';
+
+			if ($isDropdown && $assigned) {
+				$items .= '<div class="dropdown-menu" aria-labelledby="' . $idAttr . '">';
+				mysqli_data_seek($assigned, 0);
+				while ($row = mysqli_fetch_assoc($assigned)) {
+					$file = (string) ($row['file'] ?? '');
+					$name = (string) ($row['name'] ?? '');
+					if ($file === '' || $name === '') {
+						continue;
+					}
+					$fileHref = $file;
+					if ($module === 'accounts') {
+						$fileHref .= '?main_page=' . rawurlencode($roleName);
+					}
+					$itemActive = ($file === $page) ? ' active' : '';
+					$items .= '<a href="' . htmlspecialchars($fileHref, ENT_QUOTES, 'UTF-8') . '" class="dropdown-item' . $itemActive . '">';
+					$items .= htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . '</a>';
+				}
+				$items .= '</div>';
+			}
+			$items .= '</li>';
+		}
+
+		if ($items === '') {
+			return '';
+		}
+
+		$html = '<ul class="navbar-nav">' . $items . '</ul>';
+		$html = tessera_operator_spa_rewrite_relative_hrefs($html, $module);
+		return $html;
+	}
+
+	/**
 	 * Capture a modern /operator/ui screen when ui flag is new.
 	 *
 	 * @param array<string,string|int> $spaQuery
@@ -479,6 +608,10 @@ if (!function_exists('tessera_operator_spa_enabled')) {
 		$parsed['module'] = $module;
 		$parsed['ui'] = 'new';
 		$parsed['ui_slice'] = strtoupper(substr($module, 0, 1)) . '-P0-' . $screenKey;
+		/* Modern TDS screens have no classic top_header — inject ops menu. */
+		if (trim((string) ($parsed['topnav_html'] ?? '')) === '') {
+			$parsed['topnav_html'] = tessera_operator_spa_ops_topnav_html($module, $page);
+		}
 		return $parsed;
 	}
 
